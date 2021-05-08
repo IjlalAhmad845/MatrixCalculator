@@ -1,0 +1,1010 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MatrixInput">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/rowdown"
+        android:layout_width="50dp"
+        android:layout_height="60dp"
+        android:elevation="50dp"
+        android:onClick="controlmatrixsize"
+        android:text="-"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:cornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias=".45"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/coldown"
+        android:layout_width="50dp"
+        android:layout_height="60dp"
+        android:elevation="50dp"
+        android:onClick="controlmatrixsize"
+        android:text="-"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias=".45"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rowdown"
+        app:layout_constraintVertical_bias=".02" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/rowup"
+        android:layout_width="50dp"
+        android:layout_height="60dp"
+        android:elevation="50dp"
+        android:onClick="controlmatrixsize"
+        android:text="+"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:cornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias=".90"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/colup"
+        android:layout_width="50dp"
+        android:layout_height="60dp"
+        android:elevation="50dp"
+        android:onClick="controlmatrixsize"
+        android:text="+"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias=".90"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rowup"
+        app:layout_constraintVertical_bias=".02" />
+
+    <EditText
+        android:id="@+id/text"
+        android:layout_width="84dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rows"
+        app:layout_constraintEnd_toStartOf="@+id/rowup"
+        app:layout_constraintStart_toEndOf="@+id/rowdown"
+        app:layout_constraintTop_toTopOf="@+id/rowup" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Columns"
+        app:layout_constraintEnd_toStartOf="@+id/colup"
+        app:layout_constraintStart_toEndOf="@+id/coldown"
+        app:layout_constraintTop_toTopOf="@+id/coldown" />
+
+    <TextView
+        android:id="@+id/rowtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/rowup"
+        app:layout_constraintHorizontal_bias=".5"
+        app:layout_constraintStart_toEndOf="@+id/rowdown"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/coltext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="3"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/colup"
+        app:layout_constraintHorizontal_bias=".5"
+        app:layout_constraintStart_toEndOf="@+id/coldown"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:onClick="back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_back_arrow" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:onClick="addCard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_check" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="370dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.128">
+
+        <LinearLayout
+            android:id="@+id/LL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:id="@+id/L00"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="11">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et00"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:hint="0"
+                        android:inputType="numberDecimal"
+                        android:minEms="2"
+                        android:textSize="22dp"
+
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:id="@+id/L01"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="21">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:hint="0"
+                        android:inputType="numberDecimal"
+                        android:minEms="2"
+                        android:textSize="22dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:id="@+id/L02"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="31">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et20"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:hint="0"
+                        android:inputType="numberDecimal"
+                        android:minEms="2"
+                        android:textSize="22dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:id="@+id/L03"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="41">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et30"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:hint="0"
+                        android:inputType="numberDecimal"
+                        android:minEms="2"
+                        android:textSize="22dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:id="@+id/L04"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="51">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et40"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:hint="0"
+                        android:inputType="numberDecimal"
+                        android:minEms="2"
+                        android:textSize="22dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/L10"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="12">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et01"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:hint="0"
+                        android:inputType="numberDecimal"
+                        android:minEms="2"
+                        android:textSize="22dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:id="@+id/L11"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="22">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:hint="0"
+                        android:inputType="numberDecimal"
+                        android:minEms="2"
+                        android:textSize="22dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:id="@+id/L12"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="32">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et21"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:hint="0"
+                        android:inputType="numberDecimal"
+                        android:minEms="2"
+                        android:textSize="22dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+                >
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:id="@+id/L13"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="42">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et31"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:hint="0"
+                        android:inputType="numberDecimal"
+                        android:minEms="2"
+                        android:textSize="22dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:id="@+id/L14"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="52">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et41"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:hint="0"
+                        android:inputType="numberDecimal"
+                        android:minEms="2"
+                        android:textSize="22dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:id="@+id/L20"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="13">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et02"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:hint="0"
+                        android:inputType="numberDecimal"
+                        android:minEms="2"
+                        android:textSize="22dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:id="@+id/L21"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="23">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:hint="0"
+                        android:inputType="numberDecimal"
+                        android:minEms="2"
+                        android:textSize="22dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:id="@+id/L22"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="33">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:hint="0"
+                        android:inputType="numberDecimal"
+                        android:minEms="2"
+                        android:textSize="22dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+                >
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:id="@+id/L23"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="43">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et32"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:hint="0"
+                        android:inputType="numberDecimal"
+                        android:minEms="2"
+                        android:textSize="22dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:id="@+id/L24"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="53">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et42"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:hint="0"
+                        android:inputType="numberDecimal"
+                        android:minEms="2"
+                        android:textSize="22dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:id="@+id/L30"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="14">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et03"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:hint="0"
+                        android:inputType="numberDecimal"
+                        android:minEms="2"
+                        android:textSize="22dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:id="@+id/L31"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="24">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:hint="0"
+                        android:inputType="numberDecimal"
+                        android:minEms="2"
+                        android:textSize="22dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:id="@+id/L32"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="34">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:hint="0"
+                        android:inputType="numberDecimal"
+                        android:minEms="2"
+                        android:textSize="22dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+                >
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:id="@+id/L33"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="44">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et33"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:hint="0"
+                        android:inputType="numberDecimal"
+                        android:minEms="2"
+                        android:textSize="22dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:id="@+id/L34"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="54">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et43"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:hint="0"
+                        android:inputType="numberDecimal"
+                        android:minEms="2"
+                        android:textSize="22dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:id="@+id/L40"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="15">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et04"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:hint="0"
+                        android:inputType="numberDecimal"
+                        android:minEms="2"
+                        android:textSize="22dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:id="@+id/L41"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="25">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:hint="0"
+                        android:inputType="numberDecimal"
+                        android:minEms="2"
+                        android:textSize="22dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:id="@+id/L42"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="35">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:hint="0"
+                        android:inputType="numberDecimal"
+                        android:minEms="2"
+                        android:textSize="22dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:id="@+id/L43"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="45">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et34"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:hint="0"
+                        android:inputType="numberDecimal"
+                        android:minEms="2"
+                        android:textSize="22dp" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:id="@+id/L44"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="55">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et44"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:hint="0"
+                        android:inputType="numberDecimal"
+                        android:minEms="2"
+                        android:textSize="22dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageButton
+        android:id="@+id/keyboardbutton"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="8dp"
+        android:background="#E3F2FD"
+        android:onClick="showhidekeyboard"
+        app:layout_constraintBottom_toTopOf="@+id/keyboardcard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_keyboard" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/menu"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="110dp"
+        android:layout_height="55dp"
+        android:background="@android:color/transparent"
+        android:hint="Name"
+
+        app:layout_constraintBottom_toTopOf="@+id/coldown"
+        app:layout_constraintEnd_toStartOf="@+id/rowdown"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:errorEnabled="true"
+        app:layout_constraintStart_toStartOf="@+id/keyboardbutton">
+
+        <AutoCompleteTextView
+            android:id="@+id/textfield"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="none"
+            android:textSize="12dp"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/keyboardcard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:elevation="20dp"
+        app:cardCornerRadius="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btn1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginEnd="2dp"
+                            android:layout_weight="1"
+                            android:onClick="numpad"
+                            android:text="1" />
+
+                        <Button
+                            android:id="@+id/btn2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginEnd="2dp"
+                            android:layout_weight="1"
+                            android:onClick="numpad"
+                            android:text="2" />
+
+                        <Button
+                            android:id="@+id/btn3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginEnd="2dp"
+                            android:layout_weight="1"
+                            android:onClick="numpad"
+                            android:text="3" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btn4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginEnd="2dp"
+                            android:layout_weight="1"
+                            android:onClick="numpad"
+                            android:text="4" />
+
+                        <Button
+                            android:id="@+id/btn5"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginEnd="2dp"
+                            android:layout_weight="1"
+                            android:onClick="numpad"
+                            android:text="5" />
+
+                        <Button
+                            android:id="@+id/btn6"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginEnd="2dp"
+                            android:layout_weight="1"
+                            android:onClick="numpad"
+                            android:text="6" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btn7"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginEnd="2dp"
+                            android:layout_weight="1"
+                            android:onClick="numpad"
+                            android:text="7" />
+
+                        <Button
+                            android:id="@+id/btn8"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginEnd="2dp"
+                            android:layout_weight="1"
+                            android:onClick="numpad"
+                            android:text="8" />
+
+                        <Button
+                            android:id="@+id/btn9"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginEnd="2dp"
+                            android:layout_weight="1"
+                            android:onClick="numpad"
+                            android:text="9" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btndot"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginEnd="2dp"
+                            android:layout_weight="1"
+                            android:onClick="numpad"
+                            android:text="." />
+
+                        <Button
+                            android:id="@+id/btn0"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginEnd="2dp"
+                            android:layout_weight="1"
+                            android:onClick="numpad"
+                            android:text="0" />
+
+                        <ImageButton
+                            android:id="@+id/backspace"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginEnd="2dp"
+                            android:layout_weight="1"
+                            android:onClick="numpad"
+                            app:srcCompat="@drawable/ic_backspace" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.2"
+                        android:orientation="horizontal">
+
+                        <ImageButton
+                            android:id="@+id/up"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:onClick="movefocus"
+                            app:srcCompat="@drawable/ic_up" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <ImageButton
+                            android:id="@+id/left"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:onClick="movefocus"
+                            app:srcCompat="@drawable/ic_left" />
+
+                        <ImageButton
+                            android:id="@+id/right"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:layout_weight="1"
+                            android:onClick="movefocus"
+                            app:srcCompat="@drawable/ic_right" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.2"
+                        android:orientation="horizontal">
+
+                        <ImageButton
+                            android:id="@+id/down"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:onClick="movefocus"
+                            app:srcCompat="@drawable/ic_down" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
