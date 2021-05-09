@@ -31,8 +31,10 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -57,8 +59,9 @@ public class MainActivity extends AppCompatActivity {
     ActionBarDrawerToggle toggle;
     DrawerLayout drawerLayout;
 
-    LinearLayout linearLayout;
+    LinearLayout linearLayout,verticalLL;
     HorizontalScrollView scrollView;
+    ScrollView scrollView2;
     int counter=0;
 
 
@@ -67,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Integer> IDlist=new ArrayList<>();
     ArrayList<CardView> cardlist=new ArrayList<>();
     ArrayList<ConstraintLayout> ClLlist=new ArrayList<>();
+    ArrayList<EditText> editTextList=new ArrayList<>();
 
 
     @Override
@@ -78,10 +82,10 @@ public class MainActivity extends AppCompatActivity {
         linearLayout=findViewById(R.id.linearLayout);
         scrollView=findViewById(R.id.scrollview);
 
-
+        verticalLL=findViewById(R.id.VerticalLL);
+        scrollView2=findViewById(R.id.scrollView2);
 
         initdrawer();
-
 
     }
 
@@ -96,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
     public static MainActivity getInstance() {
         return instance;
     }
+
     public void addcard(View v){
 
         ConstraintLayout Cl=new ConstraintLayout(this);
@@ -197,6 +202,30 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void addtextfield(View v){
+        CardView cardView = new CardView(this);
+        final float scale = cardView.getContext().getResources().getDisplayMetrics().density;
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+               ViewGroup.LayoutParams.MATCH_PARENT,
+                (int) (160 * scale + 0.5f)
+        );
+        params.setMargins((int) (10 * scale + 0.5f), (int) (20 * scale + 0.5f), (int) (10 * scale + 0.5f), (int) (0 * scale + 0.5f));
+
+        cardView.setElevation(20f);
+        cardView.setRadius(20f);
+
+        EditText editText=new EditText(this);
+        editText.setShowSoftInputOnFocus(false);
+
+        cardView.addView(editText);
+
+        verticalLL.addView(cardView,verticalLL.getChildCount()-1,params);
+
+
+
+
+    }
     public void initdrawer(){
 
         Toolbar toolbar=findViewById(R.id.toolbar);
