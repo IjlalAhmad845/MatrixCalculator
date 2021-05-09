@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
 
     LinearLayout linearLayout;
-    TextView matrixcount;
     HorizontalScrollView scrollView;
     int counter=0;
 
@@ -77,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
         instance=this;
 
         linearLayout=findViewById(R.id.linearLayout);
-        matrixcount=findViewById(R.id.matrixcount);
         scrollView=findViewById(R.id.scrollview);
 
 
@@ -188,7 +186,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         linearLayout.removeView(cardView);
-                        matrixcount.setText("Total Matrices : "+(linearLayout.getChildCount()-1));
 
                         Cl.removeAllViews();
 
@@ -197,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
-        matrixcount.setText("Total Matrices : "+(linearLayout.getChildCount()-1));
+
     }
 
     public void initdrawer(){
