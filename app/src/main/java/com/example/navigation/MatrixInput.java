@@ -2,30 +2,17 @@ package com.example.navigation;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.app.Instrumentation;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -72,7 +59,7 @@ public class MatrixInput extends AppCompatActivity {
 
         //matrixField=findViewById(R.id.filledTextField);
         initializewidgets();
-        keyboardcard=findViewById(R.id.keyboardcard);
+        keyboardcard=findViewById(R.id.numpadCard);
 
         til=findViewById(R.id.menu);
 

@@ -14,6 +14,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button[] buttons =new Button[12];
     ImageButton[] imgbtns=new ImageButton[3];
+    CardView keyboardCard;
 
 
     ArrayList<TextView> textlist=new ArrayList<>();
@@ -67,6 +69,18 @@ public class MainActivity extends AppCompatActivity {
 
         verticalLL=findViewById(R.id.VerticalLL);
         scrollView2=findViewById(R.id.scrollView2);
+
+        keyboardCard =findViewById(R.id.KeyboardCard);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            scrollView2.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+                @Override
+                public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                    if(verticalLL.getChildCount()>2)
+                        keyboardCard.setVisibility(View.GONE);
+                }
+            });
+        }
 
         initializeWidgets();
 
@@ -186,37 +200,57 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addtextfield(){
-        CardView cardView = new CardView(this);
-        final float scale = cardView.getContext().getResources().getDisplayMetrics().density;
-
-        LinearLayout.LayoutParams cardparams = new LinearLayout.LayoutParams(
-               ViewGroup.LayoutParams.MATCH_PARENT,
-                (int) (160 * scale + 0.5f)
-        );
-        cardparams.setMargins((int) (10 * scale + 0.5f), (int) (20 * scale + 0.5f), (int) (10 * scale + 0.5f), (int) (0 * scale + 0.5f));
-
-        LinearLayout.LayoutParams editTextparams = new LinearLayout.LayoutParams(
-               ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-        );
-        editTextparams.setMargins((int) (10 * scale + 0.5f), (int) (10 * scale + 0.5f), (int) (150 * scale + 0.5f), (int) (0 * scale + 0.5f));
-
-        cardView.setElevation(20f);
-        cardView.setRadius(10f);
 
 
         EditText editText=new EditText(this);
         editText.setShowSoftInputOnFocus(false);
         editTextList.add(editText);
-       // editText.setText(String.valueOf(counter++));
+        editText.setText(String.valueOf(counter++));
+
+        final float scale1 = editText.getContext().getResources().getDisplayMetrics().density;
+        LinearLayout.LayoutParams editTextparams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        );
+        editTextparams.setMargins((int) (10 * scale1 + 0.5f), (int) (10 * scale1 + 0.5f), (int) (150 * scale1 + 0.5f), (int) (0 * scale1 + 0.5f));
+
+        CardView cardView = new CardView(this);
+        final float scale2= cardView.getContext().getResources().getDisplayMetrics().density;
+
+        LinearLayout.LayoutParams cardparams = new LinearLayout.LayoutParams(
+               ViewGroup.LayoutParams.MATCH_PARENT,
+                (int) (160 * scale2 + 0.5f)
+        );
+        cardparams.setMargins((int) (10 * scale2 + 0.5f), (int) (20 * scale2 + 0.5f), (int) (10 * scale2 + 0.5f), (int) (0 * scale2 + 0.5f));
+
+
+
+        cardView.setElevation(20f);
+        cardView.setRadius(10f);
+
+
+
 
 
         cardView.addView(editText,editTextparams);
-
+        cardView.setAlpha(0f);
         verticalLL.addView(cardView,verticalLL.getChildCount()-2,cardparams);
         cardView.animate().alpha(1.0f).setDuration(200).setListener(null);
-       scrollView2.fullScroll(View.FOCUS_DOWN);
+        scrollView2.fullScroll(View.FOCUS_DOWN);
 
+       editText.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               keyboardCard.setVisibility(View.VISIBLE);
+           }
+       });
+
+       editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+           @Override
+           public void onFocusChange(View v, boolean hasFocus) {
+               keyboardCard.setVisibility(View.VISIBLE);
+           }
+       });
 
 
     }
