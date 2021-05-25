@@ -201,18 +201,51 @@ public class MainActivity extends AppCompatActivity {
 
     public void addtextfield(){
 
+        ConstraintLayout Cl=new ConstraintLayout(this);
+        ImageButton imageButton=new ImageButton(this);
+        imageButton.setId(View.generateViewId());
+        imageButton.setImageResource(R.drawable.ic_trash);
+        imageButton.setBackgroundColor(Color.TRANSPARENT);
+
 
         EditText editText=new EditText(this);
         editText.setShowSoftInputOnFocus(false);
-        editTextList.add(editText);
+        editText.setId(View.generateViewId());
         editText.setText(String.valueOf(counter++));
 
         final float scale1 = editText.getContext().getResources().getDisplayMetrics().density;
         LinearLayout.LayoutParams editTextparams = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
+                verticalLL.getWidth()-(int) (150 * scale1 + 0.5f),
                 ViewGroup.LayoutParams.WRAP_CONTENT
         );
-        editTextparams.setMargins((int) (10 * scale1 + 0.5f), (int) (10 * scale1 + 0.5f), (int) (150 * scale1 + 0.5f), (int) (0 * scale1 + 0.5f));
+        //editTextparams.setMargins((int) (10 * scale1 + 0.5f), (int) (10 * scale1 + 0.5f), (int) (150 * scale1 + 0.5f), (int) (0 * scale1 + 0.5f));
+
+
+
+
+        //ripple effect
+        TypedValue outValue = new TypedValue();
+        this.getTheme().resolveAttribute(android.R.attr.selectableItemBackgroundBorderless,outValue, true);
+
+        imageButton.setBackgroundResource(outValue.resourceId);
+
+
+        Cl.addView(imageButton);
+        Cl.addView(editText,editTextparams);
+        editTextList.add(editText);
+
+        ConstraintSet set=new ConstraintSet();
+        set.clone(Cl);
+        set.connect(imageButton.getId(),ConstraintSet.LEFT,ConstraintSet.PARENT_ID,ConstraintSet.LEFT,16);
+        set.connect(imageButton.getId(),ConstraintSet.BOTTOM,ConstraintSet.PARENT_ID,ConstraintSet.BOTTOM,20);
+
+        set.connect(editText.getId(),ConstraintSet.LEFT,ConstraintSet.PARENT_ID,ConstraintSet.LEFT,16);
+        set.connect(editText.getId(),ConstraintSet.TOP,ConstraintSet.PARENT_ID,ConstraintSet.TOP,12);
+        //set.connect(editText.getId(),ConstraintSet.RIGHT,imageButton.getId(),ConstraintSet.LEFT,20);
+
+        set.applyTo(Cl);
+
+
 
         CardView cardView = new CardView(this);
         final float scale2= cardView.getContext().getResources().getDisplayMetrics().density;
@@ -229,11 +262,9 @@ public class MainActivity extends AppCompatActivity {
         cardView.setRadius(10f);
 
 
-
-
-
-        cardView.addView(editText,editTextparams);
+        cardView.addView(Cl);
         cardView.setAlpha(0f);
+
         verticalLL.addView(cardView,verticalLL.getChildCount()-2,cardparams);
         cardView.animate().alpha(1.0f).setDuration(200).setListener(null);
         scrollView2.fullScroll(View.FOCUS_DOWN);
@@ -252,7 +283,21 @@ public class MainActivity extends AppCompatActivity {
            }
        });
 
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cardView.animate().alpha(0f).setDuration(200).setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        verticalLL.removeView(cardView);
 
+                        Cl.removeAllViews();
+
+                        super.onAnimationEnd(animation);
+                    }
+                });
+            }
+        });
     }
 
     public void KeyboardInput(View v){
