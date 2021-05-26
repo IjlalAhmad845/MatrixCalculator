@@ -50,8 +50,8 @@ public class MatrixInput extends AppCompatActivity {
 
     TextView rowText,colText;
 
+    ArrayList<ArrayList<String>> matrixList=new ArrayList<>();
 
-    ArrayList<String> stringArrayList=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,12 +78,14 @@ public class MatrixInput extends AppCompatActivity {
         });
 
 
-        ArrayList<String> object = getIntent().getStringArrayListExtra("com.example.navigation.String_list");
-        index=getIntent().getIntExtra("com.example.navigation.index",-1);
+        Bundle bundle=getIntent().getExtras();
+        ArrayList<String> object = (ArrayList<String>) bundle.getSerializable("com.example.navigation.counter");
+        index= (int) bundle.getSerializable("com.example.navigation.index");
 
+        matrixList= (ArrayList<ArrayList<String>>) bundle.getSerializable("com.example.navigation.String_list");
         editText.setText(object.get(index));
 
-
+        writeMatrix(matrixList);
     }
 
     public void controlmatrixsize(View v){
@@ -244,6 +246,12 @@ public class MatrixInput extends AppCompatActivity {
 
     }
 
+    /**==================================== WRITING DATA TO MATRIX ============================================================**/
+    public void writeMatrix(ArrayList<ArrayList<String>> matrixList){
+        for(int i=0;i<3;i++)
+            for(int j=0;j<3;j++)
+                matrixFields[i][j].setText(matrixList.get(i).get(j));
+    }
     public void initializewidgets(){
         editText=findViewById(R.id.text);
         rowUp=findViewById(R.id.rowup);
@@ -373,9 +381,14 @@ public class MatrixInput extends AppCompatActivity {
 
     }
 
-    public void addCard(View v){
+    /**============================================ SENDING MATRIX DATA BACK TO HOME PAGE==================================**/
+    public void sendData(View v){
 
-        MainActivity.getInstance().inittextviews(index,editText.getText().toString());
+        for(int i=0;i<3;i++)
+            for(int j=0;j<3;j++)
+                matrixList.get(i).set(j,matrixFields[i][j].getText().toString());
+
+        MainActivity.getInstance().inittextviews(index,editText.getText().toString(),matrixList);
         if(act.getText().toString().length()==0){
             til.setError("blah blah blah this line is for only showing red colored box");
             Toast.makeText(this, "Matrix name field required", Toast.LENGTH_SHORT).show();
