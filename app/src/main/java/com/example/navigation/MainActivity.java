@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<TextView> textlist=new ArrayList<>();
     ArrayList<String> stringlist=new ArrayList<>();
     ArrayList<Integer> IDlist=new ArrayList<>();
+
+    ArrayList<String[][]> matrixPreviewList=new ArrayList<String[][]>();
     ArrayList<CardView> cardlist=new ArrayList<>();
     ArrayList<ConstraintLayout> ClLlist=new ArrayList<>();
     ArrayList<EditText> editTextList=new ArrayList<>();
@@ -98,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
         return instance;
     }
 
+    /**=================================================== DYNAMIC MATRIX PREVIEW CARDS =======================================================**/
     public void addcard(View v){
 
         ConstraintLayout Cl=new ConstraintLayout(this);
@@ -111,7 +114,45 @@ public class MainActivity extends AppCompatActivity {
         textView.setId(View.generateViewId());
 
 
+        LinearLayout matrixPreviewContainerLL=new LinearLayout(this);
+        matrixPreviewContainerLL.setOrientation(LinearLayout.HORIZONTAL);
+        matrixPreviewContainerLL.setLayoutParams(new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        matrixPreviewContainerLL.setId(View.generateViewId());
+        //matrixPreviewContainerLL.addView(matrixPreviewStringArray[0][0]);
+        //LinearLayout[] matrixPreviewLLArray=new LinearLayout[5];
 
+        for(int i=0;i<5;i++){
+            LinearLayout matrixPreviewLLArray=new LinearLayout(this);
+            matrixPreviewLLArray.setOrientation(LinearLayout.VERTICAL);
+            matrixPreviewLLArray.setGravity(Gravity.CENTER);
+            matrixPreviewLLArray.setId(View.generateViewId());
+
+
+            LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+            );
+
+
+            for(int j=0;j<5;j++){
+                TextView matrixPreviewStringArray=new TextView(this);
+                final float scale = matrixPreviewStringArray.getContext().getResources().getDisplayMetrics().density;
+
+                LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT
+                );
+                params2.setMargins((int) (4 * scale + 0.5f), (int) (0 * scale + 0.5f), (int) (4 * scale + 0.5f), (int) (0 * scale + 0.5f));
+
+                matrixPreviewStringArray.setTextSize(15f);
+
+                matrixPreviewStringArray.setText("0");
+                matrixPreviewStringArray.setId(View.generateViewId());
+                matrixPreviewLLArray.addView(matrixPreviewStringArray,params2);
+            }
+
+            matrixPreviewContainerLL.addView(matrixPreviewLLArray);
+        }
 
 
 
@@ -124,6 +165,7 @@ public class MainActivity extends AppCompatActivity {
 
         Cl.addView(imageButton);
         Cl.addView(textView);
+        Cl.addView(matrixPreviewContainerLL);
 
         textlist.add(textView);
         stringlist.add(textView.getText().toString());
@@ -136,9 +178,13 @@ public class MainActivity extends AppCompatActivity {
 
         set.connect(textView.getId(),ConstraintSet.RIGHT,ConstraintSet.PARENT_ID,ConstraintSet.RIGHT,0);
         set.connect(textView.getId(),ConstraintSet.LEFT,ConstraintSet.PARENT_ID,ConstraintSet.LEFT,0);
-        set.connect(textView.getId(),ConstraintSet.TOP,imageButton.getId(),ConstraintSet.BOTTOM,0);
+        set.connect(textView.getId(),ConstraintSet.BOTTOM,imageButton.getId(),ConstraintSet.BOTTOM,0);
 
-     
+        set.connect(matrixPreviewContainerLL.getId(),ConstraintSet.LEFT,ConstraintSet.PARENT_ID,ConstraintSet.LEFT,0);
+        set.connect(matrixPreviewContainerLL.getId(),ConstraintSet.RIGHT,ConstraintSet.PARENT_ID,ConstraintSet.RIGHT,0);
+        set.connect(matrixPreviewContainerLL.getId(),ConstraintSet.BOTTOM,ConstraintSet.PARENT_ID,ConstraintSet.BOTTOM,80);
+      //  set.connect(matrixPreviewContainerLL.getId(),ConstraintSet.TOP,ConstraintSet.PARENT_ID,ConstraintSet.TOP,0);
+
 
 
         set.applyTo(Cl);
@@ -198,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
+/**=================================================== DYNAMIC TEXT FIELDS =======================================================**/
     public void addtextfield(){
 
         ConstraintLayout Cl=new ConstraintLayout(this);
@@ -236,8 +282,8 @@ public class MainActivity extends AppCompatActivity {
 
         ConstraintSet set=new ConstraintSet();
         set.clone(Cl);
-        set.connect(imageButton.getId(),ConstraintSet.LEFT,ConstraintSet.PARENT_ID,ConstraintSet.LEFT,16);
-        set.connect(imageButton.getId(),ConstraintSet.BOTTOM,ConstraintSet.PARENT_ID,ConstraintSet.BOTTOM,20);
+        set.connect(imageButton.getId(),ConstraintSet.TOP,ConstraintSet.PARENT_ID,ConstraintSet.TOP,0);
+        set.connect(imageButton.getId(),ConstraintSet.RIGHT,ConstraintSet.PARENT_ID,ConstraintSet.RIGHT,16);
 
         set.connect(editText.getId(),ConstraintSet.LEFT,ConstraintSet.PARENT_ID,ConstraintSet.LEFT,16);
         set.connect(editText.getId(),ConstraintSet.TOP,ConstraintSet.PARENT_ID,ConstraintSet.TOP,12);
