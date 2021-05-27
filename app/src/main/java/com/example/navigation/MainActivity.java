@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static MainActivity instance;
 
+    int rows=5,cols=5;
     NavigationView nav;
     ActionBarDrawerToggle toggle;
     DrawerLayout drawerLayout;
@@ -91,14 +92,24 @@ public class MainActivity extends AppCompatActivity {
         initializeWidgets();
 
     }
-
+    /**=================================================== REVERTING BACK TO MATRIX PREVIEW CARDS =======================================================**/
     public void inittextviews(int index,String s,ArrayList<ArrayList<String>> s1){
 
             textlist.get(index).setText(s);
 
-        for(int i=0;i<3;i++)
-            for(int j=0;j<3;j++)
-            matrixPreviewTextviewList.get(index).get(i).get(j).setText(s1.get(i).get(j));
+        for(int i=0;i<5;i++)
+            for(int j=0;j<5;j++)
+                matrixPreviewTextviewList.get(index).get(i).get(j).setVisibility(View.GONE);
+
+        for(int i=0;i<s1.size();i++)
+            for(int j=0;j<s1.get(0).size();j++){
+                matrixPreviewTextviewList.get(index).get(i).get(j).setText(s1.get(i).get(j));
+                matrixPreviewTextviewList.get(index).get(i).get(j).setVisibility(View.VISIBLE);
+            }
+
+        cols=s1.size();
+            rows=s1.get(0).size();
+
     }
 
     public static MainActivity getInstance() {
@@ -128,7 +139,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         //loop for adding Vertical Linear layouts in above Container
-        for(int i=0;i<3;i++){
+        //Columns
+        for(int i=0;i<5;i++){
             LinearLayout matrixPreviewLLArray=new LinearLayout(this);
             matrixPreviewLLArray.setOrientation(LinearLayout.VERTICAL);
             matrixPreviewLLArray.setGravity(Gravity.CENTER);
@@ -145,7 +157,8 @@ public class MainActivity extends AppCompatActivity {
 
 
             //loop for adding TextViews in Vertical Linear layouts in container LL
-            for(int j=0;j<3;j++){
+            //rows
+            for(int j=0;j<5;j++){
                 TextView matrixPreviewStringArray=new TextView(this);
                 final float scale = matrixPreviewStringArray.getContext().getResources().getDisplayMetrics().density;
 
@@ -157,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
 
                 matrixPreviewStringArray.setTextSize(15f);
                 matrixPreviewStringArray.setLayoutParams(params2);
-                matrixPreviewStringArray.setText("1");
+                matrixPreviewStringArray.setText("0");
                 matrixPreviewStringArray.setId(View.generateViewId());
                 matrixPreviewLLArray.addView(matrixPreviewStringArray);
 
@@ -228,9 +241,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onClick(View v) {
         //ArrayList<TextView> object = new ArrayList<>();
-        for(int i=0;i<3;i++){
+        matrixPreviewStringList.clear();
+        for(int i=0;i<cols;i++){
             matrixPreviewStringList.add(new ArrayList<>());
-            for(int j=0;j<3;j++)
+            for(int j=0;j<rows;j++)
                 matrixPreviewStringList.get(i).add(matrixPreviewTextviewList.get(IDlist.indexOf(textView.getId())).get(i).get(j).getText().toString());
         }
 
@@ -239,6 +253,8 @@ public class MainActivity extends AppCompatActivity {
         bundle.putSerializable("com.example.navigation.index",IDlist.indexOf(textView.getId()));
         bundle.putSerializable("com.example.navigation.counter", stringlist);
         bundle.putSerializable("com.example.navigation.String_list",matrixPreviewStringList);
+        bundle.putSerializable("com.example.navigation.columns",matrixPreviewStringList.get(0).size());
+        bundle.putSerializable("com.example.navigation.rows",matrixPreviewStringList.size());
         intent.putExtras(bundle);
         startActivity(intent);
 
