@@ -56,27 +56,12 @@ public class MatrixInput extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matrix_input);
 
-        //matrixField=findViewById(R.id.filledTextField);
 
         keyboardcard=findViewById(R.id.numpadCard);
-
         til=findViewById(R.id.menu);
-
         act=findViewById(R.id.textfield);
-        Name.add("A");Name.add("B");Name.add("C");Name.add("D");
 
-        adt=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_activated_1,Name);
-        act.setAdapter(adt);
-        act.setThreshold(1);
-        act.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                til.setErrorEnabled(false);
-                //til.setBoxStrokeColor(Color.GREEN);
-            }
-        });
-
-
+        //Taking Input from Intent through a large bundle
         Bundle bundle=getIntent().getExtras();
         index= (int) bundle.getSerializable("com.example.navigation.index");
 
@@ -85,9 +70,11 @@ public class MatrixInput extends AppCompatActivity {
         row= (int) bundle.getSerializable("com.example.navigation.rows")-1;
         col= (int) bundle.getSerializable("com.example.navigation.columns")-1;
 
+        String name = (String) bundle.getSerializable("com.example.navigation.matrixNames");
+
         initializewidgets();
 
-        writeMatrix(matrixList);
+        writeMatrix(matrixList,name);
 
     }
 
@@ -252,11 +239,28 @@ public class MatrixInput extends AppCompatActivity {
     }
 
     /**==================================== WRITING DATA TO MATRIX ============================================================**/
-    public void writeMatrix(ArrayList<ArrayList<String>> matrixList){
+    public void writeMatrix(ArrayList<ArrayList<String>> matrixList,String name){
         for(int i=0;i<=row;i++)
             for(int j=0;j<=col;j++)
                 if(Integer.parseInt(matrixList.get(i).get(j).toString())!=0)
                 matrixFields[j][i].setText(matrixList.get(i).get(j));
+
+
+        Name.add("A");Name.add("B");Name.add("C");Name.add("D");Name.add("E");Name.add("F");Name.add("G");Name.add("H");Name.add("I");Name.add("J");Name.add("K");Name.add("L");
+        Name.add("M");Name.add("N");Name.add("O");Name.add("P");Name.add("Q");Name.add("R");Name.add("S");Name.add("T");Name.add("U");Name.add("V");Name.add("W");Name.add("X");
+        Name.add("Y");Name.add("Z");
+
+        adt=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_activated_1,Name);
+        act.setText(name);
+        act.setAdapter(adt);
+        act.setThreshold(1);
+        act.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                til.setErrorEnabled(false);
+                //til.setBoxStrokeColor(Color.GREEN);
+            }
+        });
     }
 
     public void initializewidgets(){

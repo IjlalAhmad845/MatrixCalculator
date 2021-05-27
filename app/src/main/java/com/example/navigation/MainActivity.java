@@ -16,6 +16,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -34,6 +35,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Observable;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout linearLayout,verticalLL;
     HorizontalScrollView scrollView;
     ScrollView scrollView2;
-    int counter=0;
+    int counter1=0,counter2=0;
 
     Button[] buttons =new Button[12];
     ImageButton[] imgbtns=new ImageButton[3];
@@ -62,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<ArrayList<String>> matrixPreviewStringList= new ArrayList<>();
     ArrayList<Integer> matrixRows=new ArrayList<>();
     ArrayList<Integer> matrixCols=new ArrayList<>();
+    ArrayList<String> matrixNamesList=new ArrayList<>();
+
+    String[] alphabets={"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
 
     ArrayList<CardView> cardlist=new ArrayList<>();
     ArrayList<ConstraintLayout> ClLlist=new ArrayList<>();
@@ -128,10 +133,23 @@ public class MainActivity extends AppCompatActivity {
     public void addcard(View v){
 
         ConstraintLayout Cl=new ConstraintLayout(this);
-        ImageButton imageButton=new ImageButton(this);
-        imageButton.setId(View.generateViewId());
-        imageButton.setImageResource(R.drawable.ic_trash);
-        imageButton.setBackgroundColor(Color.TRANSPARENT);
+        ImageButton removeButton=new ImageButton(this);
+        removeButton.setId(View.generateViewId());
+        removeButton.setImageResource(R.drawable.ic_trash);
+        removeButton.setBackgroundColor(Color.TRANSPARENT);
+
+        TextView matrixName=new TextView(this);
+
+        //recycler name mechanism that recycles deleted names to new matrices
+        for(int i=0;i<26;i++){
+            if(!matrixNamesList.contains(alphabets[i])){
+                matrixName.setText(alphabets[i]);
+                matrixNamesList.add(alphabets[i]);
+                break;
+            }
+        }
+
+        matrixName.setId(View.generateViewId());
 
 
         //Setting dimensions of each matrix
@@ -161,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
                     ViewGroup.LayoutParams.WRAP_CONTENT
             );
 
-            matrixPreviewTextviewList.get(counter).add(new ArrayList<>());
+            matrixPreviewTextviewList.get(counter1).add(new ArrayList<>());
 
 
 
@@ -182,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
                 matrixPreviewTextviewArray.setText("0");
                 matrixPreviewLLArray.addView(matrixPreviewTextviewArray);
 
-                matrixPreviewTextviewList.get(counter).get(i).add(matrixPreviewTextviewArray);
+                matrixPreviewTextviewList.get(counter1).get(i).add(matrixPreviewTextviewArray);
 
             }
 
@@ -195,10 +213,11 @@ public class MainActivity extends AppCompatActivity {
         TypedValue outValue = new TypedValue();
         this.getTheme().resolveAttribute(android.R.attr.selectableItemBackgroundBorderless,outValue, true);
 
-        imageButton.setBackgroundResource(outValue.resourceId);
+        removeButton.setBackgroundResource(outValue.resourceId);
 
 
-        Cl.addView(imageButton);
+        Cl.addView(removeButton);
+        Cl.addView(matrixName);
         Cl.addView(matrixPreviewContainerLL);
 
 
@@ -206,12 +225,16 @@ public class MainActivity extends AppCompatActivity {
 
         ConstraintSet set=new ConstraintSet();
         set.clone(Cl);
-        set.connect(imageButton.getId(),ConstraintSet.RIGHT,ConstraintSet.PARENT_ID,ConstraintSet.RIGHT,16);
-        set.connect(imageButton.getId(),ConstraintSet.TOP,ConstraintSet.PARENT_ID,ConstraintSet.TOP,0);
+        set.connect(removeButton.getId(),ConstraintSet.RIGHT,ConstraintSet.PARENT_ID,ConstraintSet.RIGHT,12);
+        set.connect(removeButton.getId(),ConstraintSet.TOP,ConstraintSet.PARENT_ID,ConstraintSet.TOP,0);
+
+        set.connect(matrixName.getId(),ConstraintSet.RIGHT,ConstraintSet.PARENT_ID,ConstraintSet.RIGHT,24);
+        set.connect(matrixName.getId(),ConstraintSet.LEFT,ConstraintSet.PARENT_ID,ConstraintSet.LEFT,0);
+        set.connect(matrixName.getId(),ConstraintSet.TOP,ConstraintSet.PARENT_ID,ConstraintSet.TOP,20);
 
 
         set.connect(matrixPreviewContainerLL.getId(),ConstraintSet.LEFT,ConstraintSet.PARENT_ID,ConstraintSet.LEFT,0);
-        set.connect(matrixPreviewContainerLL.getId(),ConstraintSet.RIGHT,ConstraintSet.PARENT_ID,ConstraintSet.RIGHT,0);
+        set.connect(matrixPreviewContainerLL.getId(),ConstraintSet.RIGHT,ConstraintSet.PARENT_ID,ConstraintSet.RIGHT,24);
         set.connect(matrixPreviewContainerLL.getId(),ConstraintSet.BOTTOM,ConstraintSet.PARENT_ID,ConstraintSet.BOTTOM,0);
         set.connect(matrixPreviewContainerLL.getId(),ConstraintSet.TOP,ConstraintSet.PARENT_ID,ConstraintSet.TOP,0);
 
@@ -257,26 +280,40 @@ public class MainActivity extends AppCompatActivity {
         bundle.putSerializable("com.example.navigation.String_list",matrixPreviewStringList);
         bundle.putSerializable("com.example.navigation.columns",matrixPreviewStringList.get(0).size());
         bundle.putSerializable("com.example.navigation.rows",matrixPreviewStringList.size());
+        bundle.putSerializable("com.example.navigation.matrixNames",matrixNamesList.get(IDlist.indexOf(matrixPreviewContainerLL.getId())));
         intent.putExtras(bundle);
         startActivity(intent);
 
 
     }
-});counter++;
+});counter1++;
         linearLayout.addView(cardView,linearLayout.getChildCount()-1,params);
         cardView.animate().alpha(1.0f).setDuration(200).setListener(null);
         scrollView.fullScroll(View.FOCUS_RIGHT);
 
-        imageButton.setOnClickListener(new View.OnClickListener() {
+        removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 cardView.animate().alpha(0f).setDuration(200).setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
+
+                        //removing by index retrieved by Ids of container LL
+                        matrixPreviewTextviewList.remove(IDlist.indexOf(matrixPreviewContainerLL.getId()));
+                        matrixRows.remove(IDlist.indexOf(matrixPreviewContainerLL.getId()));
+                        matrixCols.remove(IDlist.indexOf(matrixPreviewContainerLL.getId()));
+
+                        //removing by item of current linked to card
+                        matrixNamesList.remove(matrixName.getText().toString());
+                        IDlist.remove((Integer) matrixPreviewContainerLL.getId());
+
+                        //removing all children from Cl
+                        Cl.removeAllViews();
+                        //finally removing card
                         linearLayout.removeView(cardView);
 
-                        Cl.removeAllViews();
-
+                        //rollback counter by 1
+                        counter1--;
 
                         super.onAnimationEnd(animation);
                     }
@@ -298,7 +335,7 @@ public class MainActivity extends AppCompatActivity {
         EditText editText=new EditText(this);
         editText.setShowSoftInputOnFocus(false);
         editText.setId(View.generateViewId());
-        editText.setText(String.valueOf(counter++));
+        editText.setText(String.valueOf(counter2++));
 
         final float scale1 = editText.getContext().getResources().getDisplayMetrics().density;
         LinearLayout.LayoutParams editTextparams = new LinearLayout.LayoutParams(
