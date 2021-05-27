@@ -24,7 +24,6 @@ import java.util.ArrayList;
 
 public class MatrixInput extends AppCompatActivity {
 
-    public EditText editText;
     int index;
     int row=2,col=2,focusX=0,focusY=0;
     int p=0;
@@ -79,7 +78,6 @@ public class MatrixInput extends AppCompatActivity {
 
 
         Bundle bundle=getIntent().getExtras();
-        ArrayList<String> object = (ArrayList<String>) bundle.getSerializable("com.example.navigation.counter");
         index= (int) bundle.getSerializable("com.example.navigation.index");
 
         matrixList= (ArrayList<ArrayList<String>>) bundle.getSerializable("com.example.navigation.String_list");
@@ -88,8 +86,6 @@ public class MatrixInput extends AppCompatActivity {
         col= (int) bundle.getSerializable("com.example.navigation.columns")-1;
 
         initializewidgets();
-
-        editText.setText(object.get(index));
 
         writeMatrix(matrixList);
 
@@ -135,6 +131,8 @@ public class MatrixInput extends AppCompatActivity {
             for(int j=0;j<=col;j++)
                 textInputLayouts[i][j].setVisibility(View.VISIBLE);
 
+        rowText.setText(String.valueOf(row+1));
+        colText.setText(String.valueOf(col+1));
 
     }
 
@@ -257,10 +255,11 @@ public class MatrixInput extends AppCompatActivity {
     public void writeMatrix(ArrayList<ArrayList<String>> matrixList){
         for(int i=0;i<=row;i++)
             for(int j=0;j<=col;j++)
+                if(Integer.parseInt(matrixList.get(i).get(j).toString())!=0)
                 matrixFields[j][i].setText(matrixList.get(i).get(j));
     }
+
     public void initializewidgets(){
-        editText=findViewById(R.id.text);
         rowUp=findViewById(R.id.rowup);
         rowDown=findViewById(R.id.rowdown);
         colUp=findViewById(R.id.colup);
@@ -402,7 +401,7 @@ public class MatrixInput extends AppCompatActivity {
 
         }
 
-        MainActivity.getInstance().inittextviews(index,editText.getText().toString(),matrixList);
+        MainActivity.getInstance().inittextviews(index,matrixList);
 
         if(act.getText().toString().length()==0){
             til.setError("blah blah blah this line is for only showing red colored box");
