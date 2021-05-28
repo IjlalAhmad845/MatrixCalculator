@@ -16,7 +16,6 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -31,11 +30,7 @@ import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Observable;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -64,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<ArrayList<String>> matrixPreviewStringList= new ArrayList<>();
     ArrayList<Integer> matrixRows=new ArrayList<>();
     ArrayList<Integer> matrixCols=new ArrayList<>();
-    ArrayList<String> matrixNamesList=new ArrayList<>();
+    ArrayList<String> matrixNamesStringList =new ArrayList<>();
+    ArrayList<TextView> matrixNamesTextviewList=new ArrayList<>();
 
     String[] alphabets={"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
 
@@ -101,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     /**=================================================== REVERTING BACK TO MATRIX PREVIEW CARDS =======================================================**/
-    public void inittextviews(int index,ArrayList<ArrayList<String>> s1){
+    public void inittextviews(int index,ArrayList<ArrayList<String>> s1,String matrixName){
 
 
 
@@ -120,6 +116,8 @@ public class MainActivity extends AppCompatActivity {
 
         matrixRows.set(index,s1.get(0).size());
         matrixCols.set(index,s1.size());
+
+        matrixNamesTextviewList.get(index).setText(matrixName);
 
 
 
@@ -142,9 +140,9 @@ public class MainActivity extends AppCompatActivity {
 
         //recycler name mechanism that recycles deleted names to new matrices
         for(int i=0;i<26;i++){
-            if(!matrixNamesList.contains(alphabets[i])){
+            if(!matrixNamesStringList.contains(alphabets[i])){
                 matrixName.setText(alphabets[i]);
-                matrixNamesList.add(alphabets[i]);
+                matrixNamesStringList.add(alphabets[i]);
                 break;
             }
         }
@@ -222,6 +220,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         IDlist.add(matrixPreviewContainerLL.getId());
+        matrixNamesTextviewList.add(matrixName);
 
         ConstraintSet set=new ConstraintSet();
         set.clone(Cl);
@@ -280,7 +279,8 @@ public class MainActivity extends AppCompatActivity {
         bundle.putSerializable("com.example.navigation.String_list",matrixPreviewStringList);
         bundle.putSerializable("com.example.navigation.columns",matrixPreviewStringList.get(0).size());
         bundle.putSerializable("com.example.navigation.rows",matrixPreviewStringList.size());
-        bundle.putSerializable("com.example.navigation.matrixNames",matrixNamesList.get(IDlist.indexOf(matrixPreviewContainerLL.getId())));
+        bundle.putSerializable("com.example.navigation.matrixName", matrixNamesStringList.get(IDlist.indexOf(matrixPreviewContainerLL.getId())));
+        bundle.putSerializable("com.example.navigation.matrixNames", matrixNamesStringList);
         intent.putExtras(bundle);
         startActivity(intent);
 
@@ -304,7 +304,7 @@ public class MainActivity extends AppCompatActivity {
                         matrixCols.remove(IDlist.indexOf(matrixPreviewContainerLL.getId()));
 
                         //removing by item of current linked to card
-                        matrixNamesList.remove(matrixName.getText().toString());
+                        matrixNamesStringList.remove(matrixName.getText().toString());
                         IDlist.remove((Integer) matrixPreviewContainerLL.getId());
 
                         //removing all children from Cl

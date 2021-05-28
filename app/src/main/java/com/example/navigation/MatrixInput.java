@@ -21,12 +21,15 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class MatrixInput extends AppCompatActivity {
 
     int index;
     int row=2,col=2,focusX=0,focusY=0;
     int p=0;
+    String name;
 
     MaterialButton rowUp,rowDown,colUp,colDown;
 
@@ -35,7 +38,6 @@ public class MatrixInput extends AppCompatActivity {
 
 
     AutoCompleteTextView act;
-    TextInputLayout til;
     ArrayList<String> Name=new ArrayList<>();
     ArrayAdapter<String> adt;
     CardView keyboardcard;
@@ -58,7 +60,7 @@ public class MatrixInput extends AppCompatActivity {
 
 
         keyboardcard=findViewById(R.id.numpadCard);
-        til=findViewById(R.id.menu);
+
         act=findViewById(R.id.textfield);
 
         //Taking Input from Intent through a large bundle
@@ -70,11 +72,12 @@ public class MatrixInput extends AppCompatActivity {
         row= (int) bundle.getSerializable("com.example.navigation.rows")-1;
         col= (int) bundle.getSerializable("com.example.navigation.columns")-1;
 
-        String name = (String) bundle.getSerializable("com.example.navigation.matrixNames");
+        name = (String) bundle.getSerializable("com.example.navigation.matrixName");
+        ArrayList<String> names = (ArrayList<String>) bundle.getSerializable("com.example.navigation.matrixNames");
 
         initializewidgets();
 
-        writeMatrix(matrixList,name);
+        writeMatrix(matrixList,names);
 
     }
 
@@ -239,16 +242,19 @@ public class MatrixInput extends AppCompatActivity {
     }
 
     /**==================================== WRITING DATA TO MATRIX ============================================================**/
-    public void writeMatrix(ArrayList<ArrayList<String>> matrixList,String name){
+    public void writeMatrix(ArrayList<ArrayList<String>> matrixList,ArrayList<String> names){
         for(int i=0;i<=row;i++)
             for(int j=0;j<=col;j++)
                 if(Integer.parseInt(matrixList.get(i).get(j).toString())!=0)
                 matrixFields[j][i].setText(matrixList.get(i).get(j));
 
-
-        Name.add("A");Name.add("B");Name.add("C");Name.add("D");Name.add("E");Name.add("F");Name.add("G");Name.add("H");Name.add("I");Name.add("J");Name.add("K");Name.add("L");
-        Name.add("M");Name.add("N");Name.add("O");Name.add("P");Name.add("Q");Name.add("R");Name.add("S");Name.add("T");Name.add("U");Name.add("V");Name.add("W");Name.add("X");
-        Name.add("Y");Name.add("Z");
+                //Sets Names in spinner Except those which are used by names list(other matrices in home page)
+                for(int i=65;i<91;i++){
+                    //checking if list contains A to Z alphabets
+                    if(!names.contains(String.valueOf((char)i))){
+                        Name.add(String.valueOf((char)i));
+                    }
+                }
 
         adt=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_activated_1,Name);
         act.setText(name);
@@ -257,8 +263,16 @@ public class MatrixInput extends AppCompatActivity {
         act.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                til.setErrorEnabled(false);
-                //til.setBoxStrokeColor(Color.GREEN);
+
+                //removing that item which is selected
+                Name.remove(position);
+                //added that which is removed (previous value is stored in name)
+                Name.add(name);
+                //sorted Collection Alphabetically
+                Collections.sort(Name);
+                //Stored new value in name to be used as previous value for next iteration
+                name=act.getText().toString();
+
             }
         });
     }
@@ -405,14 +419,8 @@ public class MatrixInput extends AppCompatActivity {
 
         }
 
-        MainActivity.getInstance().inittextviews(index,matrixList);
+        MainActivity.getInstance().inittextviews(index,matrixList,name);
 
-        if(act.getText().toString().length()==0){
-            til.setError("blah blah blah this line is for only showing red colored box");
-            Toast.makeText(this, "Matrix name field required", Toast.LENGTH_SHORT).show();
-        }
-
-        else
         super.onBackPressed();
     }
 
