@@ -518,6 +518,10 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }
+
+        Calculations calculations=new Calculations(editTextList);
+        calculations.realtimeCalc();
+
     }
 
     public void initializeWidgets(){
