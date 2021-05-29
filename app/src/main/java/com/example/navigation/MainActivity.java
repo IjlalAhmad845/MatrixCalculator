@@ -16,7 +16,6 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -36,6 +35,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private static MainActivity instance;
+    Calculations calculations;
 
     NavigationView nav;
     ActionBarDrawerToggle toggle;
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     //Arraylists Related to Matrix preview cards
-    ArrayList<Integer> IDList =new ArrayList<>();
+    ArrayList<Integer> matrixPreviewIDList =new ArrayList<>();
     ArrayList<ArrayList<ArrayList<TextView>>> matrixPreviewTextviewList= new ArrayList<>();
     ArrayList<ArrayList<String>> matrixPreviewStringList= new ArrayList<>();
     ArrayList<Integer> matrixRows=new ArrayList<>();
@@ -64,13 +64,15 @@ public class MainActivity extends AppCompatActivity {
 
     //Arraylists related to result cards
     ArrayList<EditText> editTextList=new ArrayList<>();
-
+    ArrayList<ArrayList<ArrayList<TextView>>> matrixOutputTextviewList= new ArrayList<>();
+    ArrayList<Integer> matrixOutputIDList =new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         instance=this;
+        calculations=new Calculations();
 
         linearLayout=findViewById(R.id.linearLayout);
         scrollView=findViewById(R.id.scrollview);
@@ -114,6 +116,10 @@ public class MainActivity extends AppCompatActivity {
         //Updating matrix names on preview cards given by matrix making page
         matrixNamesStringList.set(index,matrixName);
         matrixNamesTextviewList.get(index).setText(matrixName);
+
+        for(int i=0;i<editTextList.size();i++)
+            if(editTextList.get(i).isFocused())
+                sendToCalculations(i);
 
     }
 
@@ -193,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
 
                 matrixPreviewTextviewArray.setTextSize(15f);
                 matrixPreviewTextviewArray.setLayoutParams(params);
-                matrixPreviewTextviewArray.setText("0");
+                matrixPreviewTextviewArray.setText("1");
                 matrixPreviewLLArray.addView(matrixPreviewTextviewArray);
 
                 matrixPreviewTextviewList.get(counter1).get(i).add(matrixPreviewTextviewArray);
@@ -211,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
 
         removeButton.setBackgroundResource(outValue.resourceId);
         editButton.setBackgroundResource(outValue.resourceId);
-        matrixPreviewContainerLL.setBackgroundResource(outValue.resourceId);
+
 
 
         Cl.addView(removeButton);
@@ -221,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
         Cl.addView(matrixPreviewContainerLL);
 
         //adding matrix skeleton Container's Id to ID list
-        IDList.add(matrixPreviewContainerLL.getId());
+        matrixPreviewIDList.add(matrixPreviewContainerLL.getId());
         matrixNamesTextviewList.add(matrixName);
 
         //connecting different Constraints programmatically on Constraint layout
@@ -276,13 +282,13 @@ public class MainActivity extends AppCompatActivity {
                     public void onAnimationEnd(Animator animation) {
 
                         //removing by index retrieved by Ids of container LL
-                        matrixPreviewTextviewList.remove(IDList.indexOf(matrixPreviewContainerLL.getId()));
-                        matrixRows.remove(IDList.indexOf(matrixPreviewContainerLL.getId()));
-                        matrixCols.remove(IDList.indexOf(matrixPreviewContainerLL.getId()));
+                        matrixPreviewTextviewList.remove(matrixPreviewIDList.indexOf(matrixPreviewContainerLL.getId()));
+                        matrixRows.remove(matrixPreviewIDList.indexOf(matrixPreviewContainerLL.getId()));
+                        matrixCols.remove(matrixPreviewIDList.indexOf(matrixPreviewContainerLL.getId()));
 
                         //removing by item of current linked card
                         matrixNamesStringList.remove(matrixName.getText().toString());
-                        IDList.remove((Integer) matrixPreviewContainerLL.getId());
+                        matrixPreviewIDList.remove((Integer) matrixPreviewContainerLL.getId());
                         matrixNamesTextviewList.remove(matrixName);
                         matrixNamesStringList.remove(matrixName.getText().toString());
 
@@ -304,20 +310,20 @@ public class MainActivity extends AppCompatActivity {
         editButton.setOnClickListener(v1 -> {
             //ArrayList<TextView> object = new ArrayList<>();
             matrixPreviewStringList.clear();
-            for(int i = 0; i<matrixCols.get(IDList.indexOf(matrixPreviewContainerLL.getId())); i++){
+            for(int i = 0; i<matrixCols.get(matrixPreviewIDList.indexOf(matrixPreviewContainerLL.getId())); i++){
                 matrixPreviewStringList.add(new ArrayList<>());
-                for(int j = 0; j<matrixRows.get(IDList.indexOf(matrixPreviewContainerLL.getId())); j++)
-                    matrixPreviewStringList.get(i).add(matrixPreviewTextviewList.get(IDList.indexOf(matrixPreviewContainerLL.getId())).get(i).get(j).getText().toString());
+                for(int j = 0; j<matrixRows.get(matrixPreviewIDList.indexOf(matrixPreviewContainerLL.getId())); j++)
+                    matrixPreviewStringList.get(i).add(matrixPreviewTextviewList.get(matrixPreviewIDList.indexOf(matrixPreviewContainerLL.getId())).get(i).get(j).getText().toString());
             }
 
             //sending all the data from home to page matrix making page through a large bundle
             Intent intent = new Intent(getApplicationContext(), MatrixInput.class);
             Bundle bundle = new Bundle();
-            bundle.putSerializable("com.example.navigation.index", IDList.indexOf(matrixPreviewContainerLL.getId()));
+            bundle.putSerializable("com.example.navigation.index", matrixPreviewIDList.indexOf(matrixPreviewContainerLL.getId()));
             bundle.putSerializable("com.example.navigation.String_list",matrixPreviewStringList);
             bundle.putSerializable("com.example.navigation.columns",matrixPreviewStringList.get(0).size());
             bundle.putSerializable("com.example.navigation.rows",matrixPreviewStringList.size());
-            bundle.putSerializable("com.example.navigation.matrixName", matrixNamesStringList.get(IDList.indexOf(matrixPreviewContainerLL.getId())));
+            bundle.putSerializable("com.example.navigation.matrixName", matrixNamesStringList.get(matrixPreviewIDList.indexOf(matrixPreviewContainerLL.getId())));
             bundle.putSerializable("com.example.navigation.matrixNames", matrixNamesStringList);
             intent.putExtras(bundle);
             startActivity(intent);
@@ -327,7 +333,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Entering Matrix names on calculation Text fields
         cardView.setOnClickListener(v1 -> {
-            System.out.println(editTextList.size());
+
                     String str;
                     int cursorIndex;
 
@@ -336,10 +342,13 @@ public class MainActivity extends AppCompatActivity {
                             str = editTextList.get(i).getText().toString();
                             cursorIndex = editTextList.get(i).getSelectionStart();
 
-                            editTextList.get(i).setText(str.substring(0,cursorIndex)+matrixNamesStringList.get(IDList.indexOf(matrixPreviewContainerLL.getId()))+str.substring(cursorIndex));
+                            editTextList.get(i).setText(str.substring(0,cursorIndex)+matrixNamesStringList.get(matrixPreviewIDList.indexOf(matrixPreviewContainerLL.getId()))+str.substring(cursorIndex));
                             editTextList.get(i).setSelection(cursorIndex+1);
+
+                            sendToCalculations(i);
                         }
                     }
+
 
 
         });
@@ -377,6 +386,7 @@ public class MainActivity extends AppCompatActivity {
         matrixPreviewContainerLL.setLayoutParams(new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         matrixPreviewContainerLL.setId(View.generateViewId());
 
+        matrixOutputTextviewList.add(new ArrayList<>());
 
         //loop for adding Vertical Linear layouts in above Container
         //Columns
@@ -386,6 +396,8 @@ public class MainActivity extends AppCompatActivity {
             matrixPreviewLLArray.setGravity(Gravity.CENTER);
             matrixPreviewLLArray.setLayoutParams(new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
+
+            matrixOutputTextviewList.get(counter2).add(new ArrayList<>());
 
 
             //loop for adding TextViews in Vertical Linear layouts in container LL
@@ -405,6 +417,8 @@ public class MainActivity extends AppCompatActivity {
                 matrixPreviewTextviewArray.setText("0");
                 matrixPreviewLLArray.addView(matrixPreviewTextviewArray);
 
+                matrixOutputTextviewList.get(counter2).get(i).add(matrixPreviewTextviewArray);
+
             }
 
             matrixPreviewContainerLL.addView(matrixPreviewLLArray);
@@ -423,6 +437,7 @@ public class MainActivity extends AppCompatActivity {
         Cl.addView(matrixPreviewContainerLL);
 
         editTextList.add(editText);
+        matrixOutputIDList.add(matrixPreviewContainerLL.getId());
 
         ConstraintSet set=new ConstraintSet();
         set.clone(Cl);
@@ -516,12 +531,15 @@ public class MainActivity extends AppCompatActivity {
                     editTextList.get(i).setSelection(cursorIndex-1);
                 }
 
+                sendToCalculations(i);
             }
         }
 
-        Calculations calculations=new Calculations(editTextList);
-        calculations.realtimeCalc();
+    }
 
+    public void sendToCalculations(int outputCardIndex){
+        calculations.setOutputCardIndex(outputCardIndex);
+        calculations.masterControlFunction();
     }
 
     public void initializeWidgets(){
