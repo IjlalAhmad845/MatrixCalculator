@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     ScrollView scrollView2;
     int counter1=0,counter2=0;
 
-    Button[] buttons =new Button[12];
+    Button[] buttons =new Button[16];
     ImageButton[] imgbtns=new ImageButton[3];
     CardView keyboardCard;
 
@@ -528,22 +528,63 @@ public class MainActivity extends AppCompatActivity {
                     if(buttons[j].isPressed()){
                         editTextList.get(i).setText(str.substring(0,cursorIndex)+j+str.substring(cursorIndex));
                         editTextList.get(i).setSelection(cursorIndex+1);
+                        buttons[11].setEnabled(true);
+                        buttons[12].setEnabled(true);
+                        buttons[13].setEnabled(true);
                     }
                 }
 
-                if(buttons[10].isPressed() && !editTextList.get(0).getText().toString().contains(".")){
+                if(buttons[10].isPressed() && !editTextList.get(i).getText().toString().contains(".")){
                     editTextList.get(i).setText(str.substring(0,cursorIndex)+"."+str.substring(cursorIndex));
                     editTextList.get(i).setSelection(cursorIndex+1);
+                }
+                else if(buttons[11].isPressed()){
+                    editTextList.get(i).setText(str.substring(0,cursorIndex)+"*"+str.substring(cursorIndex));
+                    editTextList.get(i).setSelection(cursorIndex+1);
+                    buttons[11].setEnabled(false);
+                    buttons[12].setEnabled(false);
+                    buttons[13].setEnabled(false);
+                }
+                else if(buttons[12].isPressed()){
+                    editTextList.get(i).setText(str.substring(0,cursorIndex)+"+"+str.substring(cursorIndex));
+                    editTextList.get(i).setSelection(cursorIndex+1);
+                    buttons[11].setEnabled(false);
+                    buttons[12].setEnabled(false);
+                    buttons[13].setEnabled(false);
+                }
+                else if(buttons[13].isPressed()){
+                    editTextList.get(i).setText(str.substring(0,cursorIndex)+"-"+str.substring(cursorIndex));
+                    editTextList.get(i).setSelection(cursorIndex+1);
+                    buttons[11].setEnabled(false);
+                    buttons[12].setEnabled(false);
+                    buttons[13].setEnabled(false);
                 }
 
                 else if (imgbtns[0].isPressed() && cursorIndex>0){
                     editTextList.get(i).setText(str.substring(0,cursorIndex-1)+str.substring(cursorIndex));
                     editTextList.get(i).setSelection(cursorIndex-1);
+
+                    str=editTextList.get(i).getText().toString();
+
+                    if(str.length()-1>0 && (str.charAt(str.length()-1)=='+' || str.charAt(str.length()-1)=='-' || str.charAt(str.length()-1)=='*')){
+                        buttons[11].setEnabled(false);
+                        buttons[12].setEnabled(false);
+                        buttons[13].setEnabled(false);
+                    }
+                    else{
+                        //new way of assigning boolean with condition :)
+                        buttons[11].setEnabled(str.length() != 0);
+                        buttons[12].setEnabled(true);
+                        buttons[13].setEnabled(true);
+                    }
+
                 }
 
                 sendToCalculations(i);
             }
         }
+
+
 
     }
 
@@ -609,6 +650,13 @@ public class MainActivity extends AppCompatActivity {
         buttons[8]=findViewById(R.id.button8);
         buttons[9]=findViewById(R.id.button9);
         buttons[10]=findViewById(R.id.buttonDot);
+        buttons[11]=findViewById(R.id.buttonX);
+        buttons[12]=findViewById(R.id.buttonAdd);
+        buttons[13]=findViewById(R.id.buttonMinus);
+        buttons[14]=findViewById(R.id.buttonBracketStart);
+        buttons[15]=findViewById(R.id.buttonBracketEnd);
+
+        buttons[11].setEnabled(false);
 
         imgbtns[0]=findViewById(R.id.backspace);
 

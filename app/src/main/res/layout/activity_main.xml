@@ -432,6 +432,7 @@
                                 android:layout_marginStart="1dp"
                                 android:layout_marginEnd="1dp"
                                 android:layout_weight="1"
+                                android:onClick="KeyboardInput"
                                 android:padding="0px"
                                 android:text="x"
                                 android:textSize="13dp" />
@@ -483,6 +484,7 @@
                                 android:layout_marginStart="1dp"
                                 android:layout_marginEnd="1dp"
                                 android:layout_weight="1"
+                                android:onClick="KeyboardInput"
                                 android:padding="0px"
                                 android:text="+" />
 
@@ -534,6 +536,7 @@
                                 android:layout_marginStart="1dp"
                                 android:layout_marginEnd="1dp"
                                 android:layout_weight="1"
+                                android:onClick="KeyboardInput"
                                 android:padding="0px"
                                 android:text="-" />
 
@@ -551,7 +554,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_marginStart="1dp"
                                 android:layout_marginEnd="1dp"
-                                android:layout_weight="1.5"
+                                android:layout_weight="1"
                                 android:onClick="KeyboardInput"
                                 android:padding="0px"
                                 android:text="." />
@@ -562,20 +565,10 @@
                                 android:layout_height="match_parent"
                                 android:layout_marginStart="1dp"
                                 android:layout_marginEnd="1dp"
-                                android:layout_weight="1.5"
+                                android:layout_weight="1"
                                 android:onClick="KeyboardInput"
                                 android:padding="0px"
                                 android:text="0" />
-
-                            <Button
-                                android:id="@+id/buttonEqual"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="1dp"
-                                android:layout_marginEnd="1dp"
-                                android:layout_weight="1"
-                                android:padding="0px"
-                                android:text="=" />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -595,7 +588,7 @@
                             android:orientation="horizontal">
 
                             <Button
-                                android:id="@+id/btnA2"
+                                android:id="@+id/buttonBracketStart"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginStart="4dp"
@@ -605,7 +598,7 @@
                                 android:text="(" />
 
                             <Button
-                                android:id="@+id/btnB2"
+                                android:id="@+id/buttonBracketEnd"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginStart="2dp"
