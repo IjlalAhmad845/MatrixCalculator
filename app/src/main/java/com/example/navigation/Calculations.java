@@ -1,5 +1,7 @@
 package com.example.navigation;
 
+import android.view.View;
+
 public class Calculations {
 
     MainActivity instance;
@@ -21,12 +23,21 @@ public class Calculations {
 
     public void expressionCheck(String expression){
         if(expression.contains("A")){
-            for(int i=0;i<5;i++){
-                for(int j=0;j<5;j++){
+            for(int i=0;i<5;i++)
+                for(int j=0;j<5;j++)
+                    instance.matrixOutputTextviewList.get(outputCardIndex).get(i).get(j).setVisibility(View.GONE);
+
+            for(int i=0;i<instance.matrixCols.get(outputCardIndex);i++){
+                for(int j=0;j<instance.matrixRows.get(outputCardIndex);j++){
+                    instance.matrixOutputTextviewList.get(outputCardIndex).get(i).get(j).setVisibility(View.VISIBLE);
                     instance.matrixOutputTextviewList.get(outputCardIndex).get(i).get(j).setText(instance.matrixPreviewTextviewList.get(instance.matrixNamesStringList.indexOf("A")).get(i).get(j).getText().toString());
                 }
             }
-
+        }
+        else if(expression.equals("")){
+            for(int i=0;i<5;i++)
+                for(int j=0;j<5;j++)
+                    instance.matrixOutputTextviewList.get(outputCardIndex).get(i).get(j).setVisibility(View.GONE);
         }
     }
 }

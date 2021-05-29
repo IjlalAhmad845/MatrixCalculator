@@ -199,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
 
                 matrixPreviewTextviewArray.setTextSize(15f);
                 matrixPreviewTextviewArray.setLayoutParams(params);
-                matrixPreviewTextviewArray.setText("1");
+                matrixPreviewTextviewArray.setText("0");
                 matrixPreviewLLArray.addView(matrixPreviewTextviewArray);
 
                 matrixPreviewTextviewList.get(counter1).get(i).add(matrixPreviewTextviewArray);
@@ -492,16 +492,26 @@ public class MainActivity extends AppCompatActivity {
                         if(verticalLL.getChildCount()<=3)
                             keyboardCard.setVisibility(View.VISIBLE);
 
+                        matrixOutputTextviewList.remove(matrixOutputIDList.indexOf(matrixPreviewContainerLL.getId()));
+                        matrixOutputIDList.remove((Integer) matrixPreviewContainerLL.getId());
+
                         editTextList.remove(editText);
                         verticalLL.removeView(cardView);
 
                         Cl.removeAllViews();
+                        counter2--;
 
                         super.onAnimationEnd(animation);
                     }
                 });
             }
         });
+
+        for(int i=0;i<5;i++)
+            for(int j=0;j<5;j++)
+                matrixOutputTextviewList.get(counter2).get(i).get(j).setVisibility(View.GONE);
+
+            counter2++;
     }
 
     /**================================================ HOMEPAGE'S KEYBOARD FUNCTIONALITY ==============================**/
