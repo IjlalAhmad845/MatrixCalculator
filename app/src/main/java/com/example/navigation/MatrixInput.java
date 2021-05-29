@@ -11,17 +11,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 public class MatrixInput extends AppCompatActivity {
@@ -29,7 +26,7 @@ public class MatrixInput extends AppCompatActivity {
     int index;
     int row=2,col=2,focusX=0,focusY=0;
     int p=0;
-    String name;
+    String currentSpinnerValue;
 
     MaterialButton rowUp,rowDown,colUp,colDown;
 
@@ -38,7 +35,7 @@ public class MatrixInput extends AppCompatActivity {
 
 
     AutoCompleteTextView act;
-    ArrayList<String> Name=new ArrayList<>();
+    ArrayList<String> SpinnerList =new ArrayList<>();
     ArrayAdapter<String> adt;
     CardView keyboardcard;
 
@@ -72,7 +69,7 @@ public class MatrixInput extends AppCompatActivity {
         row= (int) bundle.getSerializable("com.example.navigation.rows")-1;
         col= (int) bundle.getSerializable("com.example.navigation.columns")-1;
 
-        name = (String) bundle.getSerializable("com.example.navigation.matrixName");
+        currentSpinnerValue = (String) bundle.getSerializable("com.example.navigation.matrixName");
         ArrayList<String> names = (ArrayList<String>) bundle.getSerializable("com.example.navigation.matrixNames");
 
         initializewidgets();
@@ -81,37 +78,28 @@ public class MatrixInput extends AppCompatActivity {
 
     }
 
+    /**============================================== UPDATING ROWS & COLS TEXT ===========================================**/
     public void controlmatrixsize(View v){
-        if(rowUp.isPressed() && row<4){
+        if(rowUp.isPressed() && row<4)
             rowText.setText(String.valueOf(++row+1));
 
-        }
-
-
         else if(rowDown.isPressed() && row>0)
-        {
             rowText.setText(String.valueOf(--row+1));
 
-        }
+
 
         if(colUp.isPressed() && col<4)
-        {
             colText.setText(String.valueOf(++col+1));
 
-        }
-
         else if(colDown.isPressed() && col>0)
-        {
             colText.setText(String.valueOf(--col+1));
-
-        }
 
         matrixFields[focusY][focusX].requestFocus();
         ShowHideMatrix();
 
-
     }
 
+    /**============================================== CHANGING MATRIX DIMENSIONS ===========================================**/
     public void ShowHideMatrix(){
         for(int i=0;i<5;i++)
             for(int j=0;j<5;j++)
@@ -126,7 +114,7 @@ public class MatrixInput extends AppCompatActivity {
 
     }
 
-    public void showhidekeyboard(View v){
+    public void showHideKeyboard(View v){
 
         if(p==1){
             keyboardcard.animate().alpha(1.0f).setDuration(70).setListener(new AnimatorListenerAdapter() {
@@ -242,22 +230,22 @@ public class MatrixInput extends AppCompatActivity {
     }
 
     /**==================================== WRITING DATA TO MATRIX ============================================================**/
-    public void writeMatrix(ArrayList<ArrayList<String>> matrixList,ArrayList<String> names){
+    public void writeMatrix(ArrayList<ArrayList<String>> matrixList,ArrayList<String> occupiedNames){
         for(int i=0;i<=row;i++)
             for(int j=0;j<=col;j++)
                 if(Integer.parseInt(matrixList.get(i).get(j).toString())!=0)
                 matrixFields[j][i].setText(matrixList.get(i).get(j));
 
-                //Sets Names in spinner Except those which are used by names list(other matrices in home page)
+                //Sets Names in spinner Except those which are used by occupiedNames list(other matrices in home page)
                 for(int i=65;i<91;i++){
                     //checking if list contains A to Z alphabets
-                    if(!names.contains(String.valueOf((char)i))){
-                        Name.add(String.valueOf((char)i));
+                    if(!occupiedNames.contains(String.valueOf((char)i))){
+                        SpinnerList.add(String.valueOf((char)i));
                     }
                 }
 
-        adt=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_activated_1,Name);
-        act.setText(name);
+        adt=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_activated_1, SpinnerList);
+        act.setText(currentSpinnerValue);
         act.setAdapter(adt);
         act.setThreshold(1);
         act.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -265,13 +253,13 @@ public class MatrixInput extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 //removing that item which is selected
-                Name.remove(position);
+                SpinnerList.remove(position);
                 //added that which is removed (previous value is stored in name)
-                Name.add(name);
+                SpinnerList.add(currentSpinnerValue);
                 //sorted Collection Alphabetically
-                Collections.sort(Name);
+                Collections.sort(SpinnerList);
                 //Stored new value in name to be used as previous value for next iteration
-                name=act.getText().toString();
+                currentSpinnerValue =act.getText().toString();
 
             }
         });
@@ -419,7 +407,7 @@ public class MatrixInput extends AppCompatActivity {
 
         }
 
-        MainActivity.getInstance().inittextviews(index,matrixList,name);
+        MainActivity.getInstance().inittextviews(index,matrixList, currentSpinnerValue);
 
         super.onBackPressed();
     }
