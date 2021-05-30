@@ -39,5 +39,7 @@ public class Calculations {
                 for(int j=0;j<5;j++)
                     instance.matrixOutputTextviewList.get(outputCardIndex).get(i).get(j).setVisibility(View.GONE);
         }
+        InfixtoPostfix infixtoPostfix=new InfixtoPostfix();
+        System.out.println(infixtoPostfix.infixToPostfix(expression));
     }
 }
