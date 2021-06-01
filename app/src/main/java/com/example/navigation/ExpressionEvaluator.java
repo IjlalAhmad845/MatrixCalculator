@@ -6,10 +6,18 @@ import java.util.HashMap;
 import java.util.Stack;
 
 public class ExpressionEvaluator {
-    static HashMap<Integer,Character> map=new HashMap<>();
+    HashMap<Character,Integer> map=new HashMap<>();
+    char[] cc=new char[50];
+
+    public void setCc() {
+        for(int i=0;i<50;i++)
+            cc[i]=(char)(i+160);
+    }
 
     /**============================================== FOR REPLACING NUMBERS TO ALPHABETS ==========================================**/
+
     public String Convert(String str){
+        setCc();
         int num=0;
         str=str+".";
         boolean counter=false;
@@ -29,11 +37,10 @@ public class ExpressionEvaluator {
         Collections.sort(numList);
         Collections.reverse(numList);
         for(int i=0;i<numList.size();i++){
-            map.put(numList.get(i),(char)(i+97));
-            str=str.replace(String.valueOf(numList.get(i)),String.valueOf( map.get(numList.get(i))));
+            map.put((char)(i+97),numList.get(i));
+            str=str.replace(String.valueOf(numList.get(i)),String.valueOf((char)(i+97)));
         }
         str=str.substring(0,str.length()-1);
-        //System.out.println(str);
         if(Valid_Arithmetic(str,str.length()))
             return  infixToPostfix(str);
         else return "Not valid";

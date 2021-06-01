@@ -343,7 +343,7 @@ public class MainActivity extends AppCompatActivity {
                             str = editTextList.get(i).getText().toString();
                             cursorIndex = editTextList.get(i).getSelectionStart();
 
-                            if(str.length()>0 && (Character.isLetterOrDigit(str.charAt(cursorIndex-1)) || str.charAt(cursorIndex-1)==')')){
+                            if(cursorIndex>0 && (Character.isLetterOrDigit(str.charAt(cursorIndex-1)) || str.charAt(cursorIndex-1)==')')){
                                 editTextList.get(i).setText(str.substring(0,cursorIndex)+"·"+matrixNamesStringList.get(matrixPreviewIDList.indexOf(matrixPreviewContainerLL.getId()))+str.substring(cursorIndex));
                                 editTextList.get(i).setSelection(cursorIndex+2);
                             }
@@ -543,7 +543,7 @@ public class MainActivity extends AppCompatActivity {
 
                 for(int j=0;j<10;j++){
                     if(buttons[j].isPressed()){
-                        if(str.length()>0 && (Character.isAlphabetic(str.charAt(cursorIndex-1)) || str.charAt(cursorIndex-1)==')')){
+                        if(cursorIndex>0 && (Character.isAlphabetic(str.charAt(cursorIndex-1)) || str.charAt(cursorIndex-1)==')')){
                             editTextList.get(i).setText(str.substring(0,cursorIndex)+"·"+j+str.substring(cursorIndex));
                             editTextList.get(i).setSelection(cursorIndex+2);
                         }
@@ -584,7 +584,7 @@ public class MainActivity extends AppCompatActivity {
                     buttons[13].setEnabled(false);
                 }
                 else if(buttons[14].isPressed()){
-                    if(str.length()>0 && Character.isLetterOrDigit(str.charAt(cursorIndex-1))){
+                    if(cursorIndex>0 && Character.isLetterOrDigit(str.charAt(cursorIndex-1))){
                         editTextList.get(i).setText(str.substring(0,cursorIndex)+"·("+str.substring(cursorIndex));
                         editTextList.get(i).setSelection(cursorIndex+2);
                     }
