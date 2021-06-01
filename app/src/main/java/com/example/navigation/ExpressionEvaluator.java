@@ -61,7 +61,7 @@ public class ExpressionEvaluator {
         {
             if (((int)str.charAt(i) >= 65 && (int)str.charAt(i) <= 91) || ((int)str.charAt(i) >= 97 && (int)str.charAt(i) <= 123))
                 OperandCount++;
-            if (str.charAt(i) == '^' || str.charAt(i) == '-' || str.charAt(i) == '+' || str.charAt(i) == '*' || str.charAt(i) == '/')
+            if (str.charAt(i) == '^' || str.charAt(i) == '-' || str.charAt(i) == '+' || str.charAt(i) == '·' || str.charAt(i) == '/')
                 OperatorCount++;
         }
         return !(OperatorCount + 1 == OperandCount);
@@ -80,12 +80,12 @@ public class ExpressionEvaluator {
                 if (str.charAt(i-1) == ')' && b)
                     return true;
                 else {
-                    boolean c = str.charAt(i - 1) == '^' || str.charAt(i - 1) == '-' || str.charAt(i - 1) == '+' || str.charAt(i - 1) == '*' || str.charAt(i - 1) == '/';
+                    boolean c = str.charAt(i - 1) == '^' || str.charAt(i - 1) == '-' || str.charAt(i - 1) == '+' || str.charAt(i - 1) == '·' || str.charAt(i - 1) == '/';
                     if (c && str.charAt(i) == ')')
                         return true;
                     else if (a && b)
                         return true;
-                    else if (c && (str.charAt(i)== '^' || str.charAt(i) == '-' || str.charAt(i) == '+' || str.charAt(i) == '*' ||str.charAt(i) == '/'))
+                    else if (c && (str.charAt(i)== '^' || str.charAt(i) == '-' || str.charAt(i) == '+' || str.charAt(i) == '·' ||str.charAt(i) == '/'))
                         return true;
                 }
             }
@@ -134,7 +134,7 @@ public class ExpressionEvaluator {
             case '-':
                 return 1;
 
-            case '*':
+            case '·':
             case '/':
                 return 2;
 

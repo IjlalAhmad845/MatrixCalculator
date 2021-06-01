@@ -342,8 +342,15 @@ public class MainActivity extends AppCompatActivity {
                             str = editTextList.get(i).getText().toString();
                             cursorIndex = editTextList.get(i).getSelectionStart();
 
-                            editTextList.get(i).setText(str.substring(0,cursorIndex)+matrixNamesStringList.get(matrixPreviewIDList.indexOf(matrixPreviewContainerLL.getId()))+str.substring(cursorIndex));
-                            editTextList.get(i).setSelection(cursorIndex+1);
+                            if(str.length()>0 && (Character.isLetterOrDigit(str.charAt(cursorIndex-1)) || str.charAt(cursorIndex-1)==')')){
+                                editTextList.get(i).setText(str.substring(0,cursorIndex)+"·"+matrixNamesStringList.get(matrixPreviewIDList.indexOf(matrixPreviewContainerLL.getId()))+str.substring(cursorIndex));
+                                editTextList.get(i).setSelection(cursorIndex+2);
+                            }
+                            else {
+                                editTextList.get(i).setText(str.substring(0,cursorIndex)+matrixNamesStringList.get(matrixPreviewIDList.indexOf(matrixPreviewContainerLL.getId()))+str.substring(cursorIndex));
+                                editTextList.get(i).setSelection(cursorIndex+1);
+                            }
+
 
                             sendToCalculations(i);
                         }
@@ -526,8 +533,15 @@ public class MainActivity extends AppCompatActivity {
 
                 for(int j=0;j<10;j++){
                     if(buttons[j].isPressed()){
-                        editTextList.get(i).setText(str.substring(0,cursorIndex)+j+str.substring(cursorIndex));
-                        editTextList.get(i).setSelection(cursorIndex+1);
+                        if(str.length()>0 && (Character.isAlphabetic(str.charAt(cursorIndex-1)) || str.charAt(cursorIndex-1)==')')){
+                            editTextList.get(i).setText(str.substring(0,cursorIndex)+"·"+j+str.substring(cursorIndex));
+                            editTextList.get(i).setSelection(cursorIndex+2);
+                        }
+                        else{
+                            editTextList.get(i).setText(str.substring(0,cursorIndex)+j+str.substring(cursorIndex));
+                            editTextList.get(i).setSelection(cursorIndex+1);
+                        }
+
                         buttons[11].setEnabled(true);
                         buttons[12].setEnabled(true);
                         buttons[13].setEnabled(true);
@@ -539,7 +553,7 @@ public class MainActivity extends AppCompatActivity {
                     editTextList.get(i).setSelection(cursorIndex+1);
                 }
                 else if(buttons[11].isPressed()){
-                    editTextList.get(i).setText(str.substring(0,cursorIndex)+"*"+str.substring(cursorIndex));
+                    editTextList.get(i).setText(str.substring(0,cursorIndex)+"·"+str.substring(cursorIndex));
                     editTextList.get(i).setSelection(cursorIndex+1);
                     buttons[11].setEnabled(false);
                     buttons[12].setEnabled(false);
@@ -560,8 +574,15 @@ public class MainActivity extends AppCompatActivity {
                     buttons[13].setEnabled(false);
                 }
                 else if(buttons[14].isPressed()){
-                    editTextList.get(i).setText(str.substring(0,cursorIndex)+"("+str.substring(cursorIndex));
-                    editTextList.get(i).setSelection(cursorIndex+1);
+                    if(str.length()>0 && Character.isLetterOrDigit(str.charAt(cursorIndex-1))){
+                        editTextList.get(i).setText(str.substring(0,cursorIndex)+"·("+str.substring(cursorIndex));
+                        editTextList.get(i).setSelection(cursorIndex+2);
+                    }
+                    else {
+                        editTextList.get(i).setText(str.substring(0,cursorIndex)+"("+str.substring(cursorIndex));
+                        editTextList.get(i).setSelection(cursorIndex+1);
+                    }
+
 
                 }
                 else if(buttons[15].isPressed()){
