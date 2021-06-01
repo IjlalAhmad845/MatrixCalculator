@@ -559,6 +559,15 @@ public class MainActivity extends AppCompatActivity {
                     buttons[12].setEnabled(false);
                     buttons[13].setEnabled(false);
                 }
+                else if(buttons[14].isPressed()){
+                    editTextList.get(i).setText(str.substring(0,cursorIndex)+"("+str.substring(cursorIndex));
+                    editTextList.get(i).setSelection(cursorIndex+1);
+
+                }
+                else if(buttons[15].isPressed()){
+                    editTextList.get(i).setText(str.substring(0,cursorIndex)+")"+str.substring(cursorIndex));
+                    editTextList.get(i).setSelection(cursorIndex+1);
+                }
 
                 else if (imgbtns[0].isPressed() && cursorIndex>0){
                     editTextList.get(i).setText(str.substring(0,cursorIndex-1)+str.substring(cursorIndex));
