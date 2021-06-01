@@ -606,7 +606,7 @@ public class MainActivity extends AppCompatActivity {
 
                     str=editTextList.get(i).getText().toString();
 
-                    if(str.length()-1>0 && (str.charAt(str.length()-1)=='+' || str.charAt(str.length()-1)=='-' || str.charAt(str.length()-1)=='*')){
+                    if(str.length()-1>0 && (str.charAt(str.length()-1)=='+' || str.charAt(str.length()-1)=='-' || str.charAt(str.length()-1)=='·')){
                         buttons[11].setEnabled(false);
                         buttons[12].setEnabled(false);
                         buttons[13].setEnabled(false);
