@@ -33,7 +33,7 @@ public class ExpressionEvaluator {
             str=str.replace(String.valueOf(numList.get(i)),String.valueOf( map.get(numList.get(i))));
         }
         str=str.substring(0,str.length()-1);
-        System.out.println(str);
+        //System.out.println(str);
         if(Valid_Arithmetic(str,str.length()))
             return  infixToPostfix(str);
         else return "Not valid";

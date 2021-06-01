@@ -17,7 +17,7 @@ public class Calculations {
 
     public void masterControlFunction(){
 
-        expressionCheck(instance.editTextList.get(0).getText().toString());
+        expressionCheck(instance.editTextList.get(outputCardIndex).getText().toString());
 
     }
 
@@ -38,6 +38,11 @@ public class Calculations {
             for(int i=0;i<5;i++)
                 for(int j=0;j<5;j++)
                     instance.matrixOutputTextviewList.get(outputCardIndex).get(i).get(j).setVisibility(View.GONE);
+        }
+
+        if(!expression.equals("")){
+            ExpressionEvaluator EE=new ExpressionEvaluator();
+            instance.messageTextviewList.get(outputCardIndex).setText(EE.Convert(expression));
         }
     }
 }

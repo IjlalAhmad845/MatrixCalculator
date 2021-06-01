@@ -622,15 +622,15 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
+                                android:onClick="KeyboardInput"
                                 app:srcCompat="@drawable/ic_left" />
 
                             <ImageButton
                                 android:id="@+id/right"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-
                                 android:layout_weight="1"
-
+                                android:onClick="KeyboardInput"
                                 app:srcCompat="@drawable/ic_right" />
                         </LinearLayout>
 

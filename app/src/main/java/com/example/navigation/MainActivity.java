@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<EditText> editTextList=new ArrayList<>();
     ArrayList<ArrayList<ArrayList<TextView>>> matrixOutputTextviewList= new ArrayList<>();
     ArrayList<Integer> matrixOutputIDList =new ArrayList<>();
+    ArrayList<TextView> messageTextviewList=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -384,7 +385,11 @@ public class MainActivity extends AppCompatActivity {
                 verticalLL.getWidth()-(int) (160 * scale1 + 0.5f),
                 ViewGroup.LayoutParams.WRAP_CONTENT
         );
-        //editTextparams.setMargins((int) (10 * scale1 + 0.5f), (int) (10 * scale1 + 0.5f), (int) (150 * scale1 + 0.5f), (int) (0 * scale1 + 0.5f));
+
+        TextView messageTextview=new TextView(this);
+        messageTextview.setId(View.generateViewId());
+        messageTextview.setTextColor(Color.RED);
+
 
 
         //Linear Layout Container of Whole matrix skeleton
@@ -441,10 +446,12 @@ public class MainActivity extends AppCompatActivity {
 
         Cl.addView(removeButton);
         Cl.addView(editText,editTextparams);
+        Cl.addView(messageTextview);
         Cl.addView(matrixPreviewContainerLL);
 
         editTextList.add(editText);
         matrixOutputIDList.add(matrixPreviewContainerLL.getId());
+        messageTextviewList.add(messageTextview);
 
         ConstraintSet set=new ConstraintSet();
         set.clone(Cl);
@@ -453,7 +460,9 @@ public class MainActivity extends AppCompatActivity {
 
         set.connect(editText.getId(),ConstraintSet.LEFT,ConstraintSet.PARENT_ID,ConstraintSet.LEFT,16);
         set.connect(editText.getId(),ConstraintSet.TOP,ConstraintSet.PARENT_ID,ConstraintSet.TOP,12);
-        //set.connect(editText.getId(),ConstraintSet.RIGHT,removeButton.getId(),ConstraintSet.LEFT,20);
+
+        set.connect(messageTextview.getId(),ConstraintSet.LEFT,ConstraintSet.PARENT_ID,ConstraintSet.LEFT,16);
+        set.connect(messageTextview.getId(),ConstraintSet.TOP,editText.getId(),ConstraintSet.BOTTOM,12);
 
         set.connect(matrixPreviewContainerLL.getId(),ConstraintSet.RIGHT,ConstraintSet.PARENT_ID,ConstraintSet.RIGHT,100);
         set.connect(matrixPreviewContainerLL.getId(),ConstraintSet.TOP,ConstraintSet.PARENT_ID,ConstraintSet.TOP,0);
@@ -501,6 +510,7 @@ public class MainActivity extends AppCompatActivity {
 
                         matrixOutputTextviewList.remove(matrixOutputIDList.indexOf(matrixPreviewContainerLL.getId()));
                         matrixOutputIDList.remove((Integer) matrixPreviewContainerLL.getId());
+                        messageTextviewList.remove(messageTextview);
 
                         editTextList.remove(editText);
                         verticalLL.removeView(cardView);
@@ -609,6 +619,12 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                 }
+                else if (imgbtns[1].isPressed() && cursorIndex>0){
+                    editTextList.get(i).setSelection(editTextList.get(i).getSelectionStart()-1);
+                }
+                else if (imgbtns[2].isPressed() && cursorIndex<str.length()){
+                    editTextList.get(i).setSelection(editTextList.get(i).getSelectionStart()+1);
+                }
 
                 sendToCalculations(i);
             }
@@ -689,6 +705,8 @@ public class MainActivity extends AppCompatActivity {
         buttons[11].setEnabled(false);
 
         imgbtns[0]=findViewById(R.id.backspace);
+        imgbtns[1]=findViewById(R.id.left);
+        imgbtns[2]=findViewById(R.id.right);
 
     }
 
