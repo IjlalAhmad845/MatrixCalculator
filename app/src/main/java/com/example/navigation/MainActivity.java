@@ -584,7 +584,7 @@ public class MainActivity extends AppCompatActivity {
                     buttons[13].setEnabled(false);
                 }
                 else if(buttons[14].isPressed()){
-                    if(cursorIndex>0 && Character.isLetterOrDigit(str.charAt(cursorIndex-1))){
+                    if(cursorIndex>0 && (Character.isLetterOrDigit(str.charAt(cursorIndex-1)) || str.charAt(cursorIndex-1)==')')){
                         editTextList.get(i).setText(str.substring(0,cursorIndex)+"·("+str.substring(cursorIndex));
                         editTextList.get(i).setSelection(cursorIndex+2);
                     }

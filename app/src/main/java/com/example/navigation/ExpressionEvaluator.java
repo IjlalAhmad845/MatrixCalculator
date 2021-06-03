@@ -7,17 +7,11 @@ import java.util.Stack;
 
 public class ExpressionEvaluator {
     HashMap<Character,Integer> map=new HashMap<>();
-    char[] cc=new char[50];
-
-    public void setCc() {
-        for(int i=0;i<50;i++)
-            cc[i]=(char)(i+160);
-    }
 
     /**============================================== FOR REPLACING NUMBERS TO ALPHABETS ==========================================**/
 
     public String Convert(String str){
-        setCc();
+        map.clear();
         int num=0;
         str=str+".";
         boolean counter=false;
@@ -41,7 +35,9 @@ public class ExpressionEvaluator {
             str=str.replace(String.valueOf(numList.get(i)),String.valueOf((char)(i+97)));
         }
         str=str.substring(0,str.length()-1);
-        if(Valid_Arithmetic(str,str.length()))
+        if(map.size()>26)
+            return "Expression too long to evaluate";
+        else if(Valid_Arithmetic(str,str.length()))
             return  infixToPostfix(str);
         else return "Not valid";
     }

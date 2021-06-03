@@ -10,7 +10,7 @@ public class Calculations {
 
     int outputCardIndex;
     String expression;
-    char[] cc=new char[30];
+    char[] cc=new char[60];
 
     Stack<Character> stringStack=new Stack<>();
 
@@ -19,7 +19,7 @@ public class Calculations {
     }
 
     public void setCc() {
-        for(int i=0;i<30;i++)
+        for(int i=0;i<60;i++)
             cc[i]=(char)(i+130);
     }
 
