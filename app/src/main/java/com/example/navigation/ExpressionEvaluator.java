@@ -6,26 +6,33 @@ import java.util.HashMap;
 import java.util.Stack;
 
 public class ExpressionEvaluator {
-    HashMap<Character,Integer> map=new HashMap<>();
+    HashMap<Character,Double> map=new HashMap<>();
 
     /**============================================== FOR REPLACING NUMBERS TO ALPHABETS ==========================================**/
 
     public String Convert(String str){
         map.clear();
-        int num=0;
-        str=str+".";
-        boolean counter=false;
-        ArrayList<Integer> numList=new ArrayList<>();
+        str=str+";";
+        String s="";
+        ArrayList<Double> numList=new ArrayList<>();
         for(int i=0;i<str.length();i++){
-            if(Character.isDigit(str.charAt(i))){
-                num=num*10+Integer.parseInt(String.valueOf(str.charAt(i)));
-                counter=true;
-            }
+            if(Character.isDigit(str.charAt(i)) || str.charAt(i)=='.')
+                s=s+str.charAt(i);
+
             else {
-                if(counter)
-                    numList.add(num);
-                num=0;
-                counter=false;
+                if(!s.equals("")){
+                    if(!s.contains(".")) {
+                        str = str.substring(0, i) + ".0" + str.substring(i);
+                        s += ".0";
+                        i += 2;
+                    }
+                    try {
+                        numList.add(Double.parseDouble(s));
+                    } catch (Exception e) {
+                        return "Decimal Mistake";
+                    }
+                }
+                s="";
             }
         }
         Collections.sort(numList);
