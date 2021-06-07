@@ -558,7 +558,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
-                if(buttons[10].isPressed() && !editTextList.get(i).getText().toString().contains(".")){
+                if(buttons[10].isPressed()){
                     editTextList.get(i).setText(str.substring(0,cursorIndex)+"."+str.substring(cursorIndex));
                     editTextList.get(i).setSelection(cursorIndex+1);
                 }
