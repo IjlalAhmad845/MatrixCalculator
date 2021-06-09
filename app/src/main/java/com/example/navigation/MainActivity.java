@@ -352,6 +352,10 @@ public class MainActivity extends AppCompatActivity {
                                 editTextList.get(i).setSelection(cursorIndex+1);
                             }
 
+                            //activated operator buttons after pressing Matrix cards
+                            buttons[11].setEnabled(true);
+                            buttons[12].setEnabled(true);
+                            buttons[13].setEnabled(true);
 
                             sendToCalculations(i);
                         }
