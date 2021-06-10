@@ -21,22 +21,25 @@ public class ExpressionEvaluator {
         String s="";
         ArrayList<Double> numList=new ArrayList<>();
         for(int i=0;i<str.length();i++){
+            if(Character.isUpperCase(str.charAt(i))){
+                if(!matrixMap.containsKey(str.charAt(i)))
+                    matrixMap.put(str.charAt(i),returnCurrentMatrix(String.valueOf(str.charAt(i))));
+            }
+
             if(Character.isDigit(str.charAt(i)) || str.charAt(i)=='.')
                 s=s+str.charAt(i);
 
             //Stored all the matrices into separate hashmap
-            else if(Character.isUpperCase(str.charAt(i))){
-                if(!matrixMap.containsKey(str.charAt(i)))
-                matrixMap.put(str.charAt(i),returnCurrentMatrix(String.valueOf(str.charAt(i))));
-            }
-
-
             else {
                 if(!s.equals("")){
                     if(!s.contains(".")) {
                         str = str.substring(0, i) + ".0" + str.substring(i);
                         s += ".0";
                         i += 2;
+                    }
+                    //checking if incoming numbers does not have value before and after '.'
+                    else if(s.indexOf(".")==0 || s.indexOf(".")==s.length()-1) {
+                            return "Decimal Mistake";
                     }
                     try {
                         numList.add(Double.parseDouble(s));

@@ -44,7 +44,7 @@ public class Calculations {
         stringStack.clear();
         expression=instance.editTextList.get(outputCardIndex).getText().toString();
 
-        if(!expression.equals("") && !EE.Convert(expression).equals("Not valid")) {
+        if(!expression.equals("") && !EE.Convert(expression).equals("Not valid")&& !EE.Convert(expression).equals("Decimal Mistake")) {
             expression=EE.Convert(expression);
             instance.messageTextviewList.get(outputCardIndex).setText(expression);
 
