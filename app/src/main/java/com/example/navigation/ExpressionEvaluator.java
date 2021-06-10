@@ -11,19 +11,24 @@ public class ExpressionEvaluator {
     ExpressionEvaluator(){this.instance = MainActivity.getInstance();}
     HashMap<Character,Double> charMap =new HashMap<>();
     HashMap<Character,ArrayList<ArrayList<Double>>> matrixMap=new HashMap<>();
+    HashMap<Character,Integer> matrixColsMap=new HashMap<>();
+    HashMap<Character,Integer> matrixRowsMap=new HashMap<>();
 
     /**============================================== FOR REPLACING NUMBERS TO ALPHABETS ==========================================**/
 
     public String Convert(String str){
         charMap.clear();
         matrixMap.clear();
+        matrixRowsMap.clear();
+        matrixColsMap.clear();
         str=str+";";
         String s="";
         ArrayList<Double> numList=new ArrayList<>();
         for(int i=0;i<str.length();i++){
             if(Character.isUpperCase(str.charAt(i))){
-                if(!matrixMap.containsKey(str.charAt(i)))
                     matrixMap.put(str.charAt(i),returnCurrentMatrix(String.valueOf(str.charAt(i))));
+                    matrixRowsMap.put(str.charAt(i),returnCurrentMatRows(String.valueOf(str.charAt(i))));
+                    matrixColsMap.put(str.charAt(i),returnCurrentMatCols(String.valueOf(str.charAt(i))));
             }
 
             if(Character.isDigit(str.charAt(i)) || str.charAt(i)=='.')
@@ -64,16 +69,25 @@ public class ExpressionEvaluator {
             return  infixToPostfix(str);
         else return "Not valid";
     }
-public ArrayList<ArrayList<Double>> returnCurrentMatrix(String MatName){
-        ArrayList<ArrayList<Double>> currentMat=new ArrayList<>();
-        for(int i=0;i<5;i++){
-            currentMat.add(new ArrayList<>());
-            for(int j=0;j<5;j++){
-                currentMat.get(i).add(Double.valueOf(instance.matrixPreviewTextviewList.get(instance.matrixNamesStringList.indexOf(MatName)).get(i).get(j).getText().toString()));
+
+    public ArrayList<ArrayList<Double>> returnCurrentMatrix(String MatName){
+            ArrayList<ArrayList<Double>> currentMat=new ArrayList<>();
+            for(int i=0;i<5;i++){
+                currentMat.add(new ArrayList<>());
+                for(int j=0;j<5;j++){
+                    currentMat.get(i).add(Double.valueOf(instance.matrixPreviewTextviewList.get(instance.matrixNamesStringList.indexOf(MatName)).get(i).get(j).getText().toString()));
+                }
             }
-        }
-        return currentMat;
-}
+            return currentMat;
+    }
+
+    public int returnCurrentMatRows(String MatName){
+            return instance.matrixRows.get(instance.matrixNamesStringList.indexOf(MatName));
+    }
+    public int returnCurrentMatCols(String MatName){
+        return instance.matrixCols.get(instance.matrixNamesStringList.indexOf(MatName));
+    }
+
     /**============================================== FOR CHECKING VALIDITY OF EXPRESSION ==========================================**/
     public boolean Valid_Arithmetic(String str, int len)
     {

@@ -14,6 +14,8 @@ public class Calculations {
     String expression;
     ArrayList<Character> ccList=new ArrayList<>();
     ArrayList<Character> mmList=new ArrayList<>();
+    ArrayList<ArrayList<Double>> Temp =new ArrayList<>();
+    int rows=0,cols=0;
 
     Stack<Character> stringStack=new Stack<>();
 
@@ -84,7 +86,7 @@ public class Calculations {
                                 instance.messageTextviewList.get(outputCardIndex).setText("Only Matrices will be Subtracted From Matrices ");
                                 break;
                             case '·':
-                                EE.matrixMap.put(mmList.get(i), ScalarMultiply(EE.matrixMap.get(c1), EE.charMap.get(c2)));//but char will be extracted from charmap
+                                EE.matrixMap.put(mmList.get(i), ScalarMultiply(EE.matrixMap.get(c1), EE.charMap.get(c2),EE.matrixRowsMap.get(c1),EE.matrixColsMap.get(c1)));//but char will be extracted from charmap
                                 stringStack.push(mmList.get(i));
                                 break;
                         }
@@ -99,7 +101,7 @@ public class Calculations {
                                 instance.messageTextviewList.get(outputCardIndex).setText("Only Matrices will be Subtracted From Matrices ");
                                 break;
                             case '·':
-                                EE.matrixMap.put(mmList.get(i), ScalarMultiply(EE.matrixMap.get(c2), EE.charMap.get(c1)));//but char will be extracted from charmap
+                                EE.matrixMap.put(mmList.get(i), ScalarMultiply(EE.matrixMap.get(c2), EE.charMap.get(c1),EE.matrixRowsMap.get(c2),EE.matrixColsMap.get(c2)));//but char will be extracted from charmap
                                 stringStack.push(mmList.get(i));
                                 break;
                         }
@@ -107,16 +109,41 @@ public class Calculations {
                         //if both chars are uppercase or from uppercase chars list
                     else if((Character.isUpperCase(c1) || mmList.contains(c1)) && (Character.isUpperCase(c2) || mmList.contains(c2)))
                         switch (c) {
-                            case '+':
-                                EE.matrixMap.put(mmList.get(i), addMatrix(EE.matrixMap.get(c2), EE.matrixMap.get(c1)));//but char will be extracted from charmap
+                            case '+':                                                       //but char will be extracted from charmap
+                                Temp =addMatrix(EE.matrixMap.get(c2), EE.matrixMap.get(c1),EE.matrixRowsMap.get(c2),EE.matrixColsMap.get(c2),EE.matrixRowsMap.get(c1),EE.matrixColsMap.get(c1));
+                                EE.matrixMap.put(mmList.get(i), Temp);
+
+                                if(Temp.size()>0) {
+                                    EE.matrixRowsMap.put(mmList.get(i), Temp.get(0).size());
+                                    EE.matrixColsMap.put(mmList.get(i), Temp.size());
+                                }
+
                                 stringStack.push(mmList.get(i));
                                 break;
-                            case '-':
-                                EE.matrixMap.put(mmList.get(i), subtractMatrix(EE.matrixMap.get(c2), EE.matrixMap.get(c1)));//but char will be extracted from charmap
+                            case '-':                                                            //but char will be extracted from charmap
+                                Temp=subtractMatrix(EE.matrixMap.get(c2), EE.matrixMap.get(c1),EE.matrixRowsMap.get(c2),EE.matrixColsMap.get(c2),EE.matrixRowsMap.get(c1),EE.matrixColsMap.get(c1));
+                                EE.matrixMap.put(mmList.get(i), Temp);
+
+                                if(Temp.size()>0) {
+                                    EE.matrixRowsMap.put(mmList.get(i), Temp.get(0).size());
+                                    EE.matrixColsMap.put(mmList.get(i), Temp.size());
+                                }
+
                                 stringStack.push(mmList.get(i));
                                 break;
-                            case '·':                                                               //matrices will be fetched in a reverse order for multiplication
-                                EE.matrixMap.put(mmList.get(i), multiplyMatrix(EE.matrixMap.get(c1), EE.matrixMap.get(c2)));//but char will be extracted from charmap
+                            case '·':
+                                //for handling exception in case when there is already error in Multiplication
+                                if(EE.matrixMap.get(c1).size()>0 && EE.matrixMap.get(c2).size()>0 )
+                                                                        //matrices will be fetched in a reverse order for multiplication
+                                    Temp = multiplyMatrix(EE.matrixMap.get(c1), EE.matrixMap.get(c2), EE.matrixRowsMap.get(c2), EE.matrixColsMap.get(c2), EE.matrixRowsMap.get(c1), EE.matrixColsMap.get(c1));//but char will be extracted from charmap
+                                    EE.matrixMap.put(mmList.get(i), Temp);
+
+
+                                if(Temp.size()>0) {
+                                    EE.matrixRowsMap.put(mmList.get(i), Temp.get(0).size());
+                                    EE.matrixColsMap.put(mmList.get(i), Temp.size());
+                                }
+
                                 stringStack.push(mmList.get(i));
                                 break;
                         }
@@ -147,9 +174,20 @@ public class Calculations {
 
             //condition if any matrix is present in expression
             else if(stringStack.size()>0 && (Character.isUpperCase(stringStack.elementAt(stringStack.size()-1)) || mmList.contains(stringStack.elementAt(stringStack.size()-1)))){
+                cols=rows=0;
 
                 //extracted matrix from hashmap by last stack element
-                ArrayList<ArrayList<Double>> A=EE.matrixMap.get(stringStack.pop());
+                Temp=EE.matrixMap.get(stringStack.pop());
+
+                //if only single matrix is present in the expression field then it will show its original dimensions at first time
+                if(expression.length()==1){
+                    rows=instance.matrixRows.get(instance.matrixNamesStringList.indexOf(expression));
+                    cols=instance.matrixCols.get(instance.matrixNamesStringList.indexOf(expression));
+                }
+                else if(Temp.size()>0){
+                    cols=Temp.size();
+                    rows=Temp.get(0).size();
+                }
 
                 //hiding all the elements of matrix for fresh printing
                 for(int i=0;i<5;i++){
@@ -157,13 +195,13 @@ public class Calculations {
                         instance.matrixOutputTextviewList.get(outputCardIndex).get(i).get(j).setVisibility(View.GONE);
                 }
                 double result;
-
-                for(int i=0;i<5;i++){
-                    for(int j=0;j<5;j++) {
+                System.out.println(cols);
+                for(int i=0;i<cols;i++){
+                    for(int j=0;j<rows;j++) {
                         instance.matrixOutputTextviewList.get(outputCardIndex).get(i).get(j).setVisibility(View.VISIBLE);
 
                         //typecasting to remove '.' in non decimal values
-                        result=A.get(i).get(j);
+                        result=Temp.get(i).get(j);
                         result=Math.round(result*100.0)/100.0;
 
                         if(result==(int)result)
@@ -200,50 +238,64 @@ public class Calculations {
     }
 
     /**============================================ METHOD FOR SCALAR MULTIPLY OF MATRIX =============================================================**/
-    public ArrayList<ArrayList<Double>> ScalarMultiply(ArrayList<ArrayList<Double>> A, double scalar){
+    public ArrayList<ArrayList<Double>> ScalarMultiply(ArrayList<ArrayList<Double>> A, double scalar,int rows,int cols){
+        ArrayList<ArrayList<Double>> B=new ArrayList<>();
 
-        for(int i=0;i<A.size();i++){
-            for(int j=0;j<A.size();j++){
-                A.get(i).set(j,A.get(i).get(j)*scalar);
+        for(int i=0;i<cols;i++){
+            B.add(new ArrayList<>());
+            for(int j=0;j<rows;j++){
+                B.get(i).add(A.get(i).get(j)*scalar);
             }
         }
 
-        return A;
+        return B;
     }
 
-    private ArrayList<ArrayList<Double>> addMatrix(ArrayList<ArrayList<Double>> A, ArrayList<ArrayList<Double>> B) {
-        for(int i=0;i<A.size();i++){
-            for(int j=0;j<A.size();j++){
-                A.get(i).set(j,A.get(i).get(j)+B.get(i).get(j));
-            }
-        }
-
-        return A;
-    }
-
-    private ArrayList<ArrayList<Double>> subtractMatrix(ArrayList<ArrayList<Double>> A, ArrayList<ArrayList<Double>> B) {
-        for(int i=0;i<A.size();i++){
-            for(int j=0;j<A.size();j++){
-                A.get(i).set(j,A.get(i).get(j)-B.get(i).get(j));
-            }
-        }
-
-        return A;
-    }
-
-    private ArrayList<ArrayList<Double>> multiplyMatrix(ArrayList<ArrayList<Double>> A, ArrayList<ArrayList<Double>> B) {
+    private ArrayList<ArrayList<Double>> addMatrix(ArrayList<ArrayList<Double>> A, ArrayList<ArrayList<Double>> B,int rows1,int cols1,int rows2,int cols2) {
         ArrayList<ArrayList<Double>> C=new ArrayList<>();
 
-        for(int i=0;i<A.size();i++){
+        if(rows1==rows2 && cols1==cols2)
+        for(int i=0;i<cols1;i++){
+            C.add(new ArrayList<>());
+            for(int j=0;j<rows1;j++){
+                C.get(i).add(A.get(i).get(j)+B.get(i).get(j));
+            }
+        }
+        else instance.messageTextviewList.get(outputCardIndex).setText("Matrix Order must be same for Addition");
+
+        return C;
+    }
+
+    private ArrayList<ArrayList<Double>> subtractMatrix(ArrayList<ArrayList<Double>> A, ArrayList<ArrayList<Double>> B,int rows1,int cols1,int rows2,int cols2) {
+        ArrayList<ArrayList<Double>> C=new ArrayList<>();
+
+        if(rows1==rows2 && cols1==cols2)
+        for(int i=0;i<cols1;i++){
+            C.add(new ArrayList<>());
+            for(int j=0;j<rows1;j++){
+                C.get(i).add(A.get(i).get(j)-B.get(i).get(j));
+            }
+        }
+        else instance.messageTextviewList.get(outputCardIndex).setText("Matrix Order must be same for Subtraction");
+
+        return C;
+    }
+
+    private ArrayList<ArrayList<Double>> multiplyMatrix(ArrayList<ArrayList<Double>> A, ArrayList<ArrayList<Double>> B,int rows1,int cols1,int rows2,int cols2) {
+        ArrayList<ArrayList<Double>> C=new ArrayList<>();
+
+        if(cols1==rows2)
+        for(int i=0;i<cols2;i++){
             C.add(new ArrayList<>());
 
-            for(int j=0;j<A.size();j++){
+            for(int j=0;j<rows1;j++){
 
                 C.get(i).add(0.0);
-                for(int k=0;k<A.size();k++)
+                for(int k=0;k<cols1;k++)
                     C.get(i).set(j,A.get(i).get(k)*B.get(k).get(j)+C.get(i).get(j));
             }
         }
+        else instance.messageTextviewList.get(outputCardIndex).setText("Matrices with in incompatible Dimensions");
 
         return C;
     }
