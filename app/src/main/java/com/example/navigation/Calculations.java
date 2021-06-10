@@ -84,7 +84,7 @@ public class Calculations {
                                 instance.messageTextviewList.get(outputCardIndex).setText("Only Matrices will be Subtracted From Matrices ");
                                 break;
                             case '·':
-                                EE.matrixMap.put(mmList.get(i), ScalarMultiply(EE.matrixMap.get(c2), EE.charMap.get(c1)));//but char will be extracted from charmap
+                                EE.matrixMap.put(mmList.get(i), ScalarMultiply(EE.matrixMap.get(c1), EE.charMap.get(c2)));//but char will be extracted from charmap
                                 stringStack.push(mmList.get(i));
                                 break;
                         }
@@ -100,6 +100,23 @@ public class Calculations {
                                 break;
                             case '·':
                                 EE.matrixMap.put(mmList.get(i), ScalarMultiply(EE.matrixMap.get(c2), EE.charMap.get(c1)));//but char will be extracted from charmap
+                                stringStack.push(mmList.get(i));
+                                break;
+                        }
+
+                        //if both chars are uppercase or from uppercase chars list
+                    else if((Character.isUpperCase(c1) || mmList.contains(c1)) && (Character.isUpperCase(c2) || mmList.contains(c2)))
+                        switch (c) {
+                            case '+':
+                                EE.matrixMap.put(mmList.get(i), addMatrix(EE.matrixMap.get(c2), EE.matrixMap.get(c1)));//but char will be extracted from charmap
+                                stringStack.push(mmList.get(i));
+                                break;
+                            case '-':
+                                EE.matrixMap.put(mmList.get(i), subtractMatrix(EE.matrixMap.get(c2), EE.matrixMap.get(c1)));//but char will be extracted from charmap
+                                stringStack.push(mmList.get(i));
+                                break;
+                            case '·':                                                               //matrices will be fetched in a reverse order for multiplication
+                                EE.matrixMap.put(mmList.get(i), multiplyMatrix(EE.matrixMap.get(c1), EE.matrixMap.get(c2)));//but char will be extracted from charmap
                                 stringStack.push(mmList.get(i));
                                 break;
                         }
@@ -192,5 +209,42 @@ public class Calculations {
         }
 
         return A;
+    }
+
+    private ArrayList<ArrayList<Double>> addMatrix(ArrayList<ArrayList<Double>> A, ArrayList<ArrayList<Double>> B) {
+        for(int i=0;i<A.size();i++){
+            for(int j=0;j<A.size();j++){
+                A.get(i).set(j,A.get(i).get(j)+B.get(i).get(j));
+            }
+        }
+
+        return A;
+    }
+
+    private ArrayList<ArrayList<Double>> subtractMatrix(ArrayList<ArrayList<Double>> A, ArrayList<ArrayList<Double>> B) {
+        for(int i=0;i<A.size();i++){
+            for(int j=0;j<A.size();j++){
+                A.get(i).set(j,A.get(i).get(j)-B.get(i).get(j));
+            }
+        }
+
+        return A;
+    }
+
+    private ArrayList<ArrayList<Double>> multiplyMatrix(ArrayList<ArrayList<Double>> A, ArrayList<ArrayList<Double>> B) {
+        ArrayList<ArrayList<Double>> C=new ArrayList<>();
+
+        for(int i=0;i<A.size();i++){
+            C.add(new ArrayList<>());
+
+            for(int j=0;j<A.size();j++){
+
+                C.get(i).add(0.0);
+                for(int k=0;k<A.size();k++)
+                    C.get(i).set(j,A.get(i).get(k)*B.get(k).get(j)+C.get(i).get(j));
+            }
+        }
+
+        return C;
     }
 }
