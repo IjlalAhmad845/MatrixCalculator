@@ -108,9 +108,11 @@
                             android:orientation="horizontal">
 
                             <androidx.cardview.widget.CardView
-                                android:layout_width="match_parent"
+                                android:id="@+id/detButton"
+                                android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
+                                android:onClick="KeyboardInput"
                                 android:layout_marginTop="4dp"
                                 android:layout_marginEnd="2dp"
                                 android:layout_marginStart="2dp"
@@ -122,6 +124,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:gravity="center"
+                                    android:background="@android:color/transparent"
                                     android:text="|A|"
                                     android:textSize="16dp">
 
@@ -130,7 +133,8 @@
                             </androidx.cardview.widget.CardView>
 
                             <androidx.cardview.widget.CardView
-                                android:layout_width="match_parent"
+                                android:id="@+id/transButton"
+                                android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:layout_marginTop="4dp"
@@ -163,7 +167,8 @@
                             </androidx.cardview.widget.CardView>
 
                             <androidx.cardview.widget.CardView
-                                android:layout_width="match_parent"
+                                android:id="@+id/squareButton"
+                                android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:layout_marginTop="4dp"
@@ -196,7 +201,8 @@
                             </androidx.cardview.widget.CardView>
 
                             <androidx.cardview.widget.CardView
-                                android:layout_width="match_parent"
+                                android:id="@+id/cubeButton"
+                                android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:layout_marginTop="4dp"
@@ -236,7 +242,8 @@
                             android:orientation="horizontal">
 
                             <androidx.cardview.widget.CardView
-                                android:layout_width="match_parent"
+                                android:id="@+id/nthButton"
+                                android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:layout_marginTop="4dp"
@@ -269,7 +276,8 @@
                             </androidx.cardview.widget.CardView>
 
                             <androidx.cardview.widget.CardView
-                                android:layout_width="match_parent"
+                                android:id="@+id/inverseButton"
+                                android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:layout_marginTop="4dp"
@@ -302,7 +310,8 @@
                             </androidx.cardview.widget.CardView>
 
                             <androidx.cardview.widget.CardView
-                                android:layout_width="match_parent"
+                                android:id="@+id/traceButton"
+                                android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:layout_marginTop="4dp"
@@ -324,7 +333,8 @@
                             </androidx.cardview.widget.CardView>
 
                             <androidx.cardview.widget.CardView
-                                android:layout_width="match_parent"
+                                android:id="@+id/adjButton"
+                                android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:layout_marginTop="4dp"
@@ -354,6 +364,7 @@
                             android:orientation="horizontal">
 
                             <androidx.cardview.widget.CardView
+                                android:id="@+id/minorsButton"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -368,7 +379,30 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:gravity="center"
-                                    android:text="miscellaneous"
+                                    android:text="minors"
+                                    android:textSize="16dp">
+
+                                </TextView>
+
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/cofButton"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginEnd="2dp"
+                                android:layout_marginStart="2dp"
+                                android:layout_marginBottom="4dp"
+                                app:cardCornerRadius="5dp"
+                                android:padding="0dp">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:text="co-fac"
                                     android:textSize="16dp">
 
                                 </TextView>

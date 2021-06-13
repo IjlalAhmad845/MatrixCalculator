@@ -25,6 +25,10 @@ public class ExpressionEvaluator {
         String s="";
         ArrayList<Double> numList=new ArrayList<>();
         for(int i=0;i<str.length();i++){
+            if(str.contains("det")){
+                str=str.replace("det","#");
+            }
+
             if(Character.isUpperCase(str.charAt(i))){
                     matrixMap.put(str.charAt(i),returnCurrentMatrix(String.valueOf(str.charAt(i))));
                     matrixRowsMap.put(str.charAt(i),returnCurrentMatRows(String.valueOf(str.charAt(i))));

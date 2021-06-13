@@ -58,6 +58,17 @@ public class Calculations {
                 if(((int)c>=97 && (int)c<=123) || (int)c >= 65 && (int)c <= 91){
                     stringStack.push(c);
                 }
+
+                else if(c=='#'){
+                    char c1 = stringStack.pop();
+                    switch (c){
+                        case '#':
+                            EE.charMap.put(ccList.get(i),detN(EE.matrixMap.get(c1)));
+                            System.out.println(detN(EE.matrixMap.get(c1)));
+                            stringStack.push(ccList.get(i));
+                            break;
+                    }
+                }
                 else {
                     char c1 = stringStack.pop();
                     char c2 = stringStack.pop();
@@ -102,7 +113,6 @@ public class Calculations {
                                 }
 
                                 stringStack.push(mmList.get(i));
-                                System.out.println("1");
                                 break;
                         }
                         if(error)break;
@@ -130,7 +140,6 @@ public class Calculations {
                                 }
 
                                 stringStack.push(mmList.get(i));
-                                System.out.println("2");
                                 break;
                         }
                     }
@@ -163,7 +172,6 @@ public class Calculations {
                                 stringStack.push(mmList.get(i));
                                 break;
                             case '·':
-                                System.out.println("3");
                                 //for handling exception in case when there is already error in Multiplication
                                 if (EE.matrixMap.get(c1).size() > 0 && EE.matrixMap.get(c2).size() > 0)
                                     //matrices will be fetched in a reverse order for multiplication
@@ -342,4 +350,44 @@ public class Calculations {
 
         return C;
     }
+
+    public static Double det2(ArrayList<ArrayList<Double>> A){
+        return A.get(0).get(0)*A.get(1).get(1)-A.get(1).get(0)*A.get(0).get(1);
+    }
+
+    public static Double detN(ArrayList<ArrayList<Double>> A){
+        double result=0.0;
+        if(A.size()>=3){
+            int i1=0,j1=0;
+
+            ArrayList<ArrayList<Double>> B=new ArrayList<>();
+
+            for(int i=0;i<A.size()-1;i++){
+                B.add(new ArrayList<>());
+                for(int j=0;j<A.size()-1;j++)
+                    B.get(i).add(0.0);
+            }
+
+            for(int itr=0;itr<A.size();itr++){
+                for(int i=0;i<A.size();i++){
+                    for(int j=0;j<A.size();j++)
+                        if(i!=0 && j!=itr){
+                            B.get(i1).set(j1,A.get(i).get(j));
+                            if(j1==A.size()-2){
+                                if(i1==A.size()-2)i1=0;
+                                else i1++;
+                                j1=0;
+                            }
+                            else j1++;
+                        }
+                }
+                result+=A.get(0).get(itr)*Math.pow(-1,itr)*detN(B);
+            }
+            B.clear();
+        }
+        else result=det2(A);
+
+        return result;
+    }
+
 }

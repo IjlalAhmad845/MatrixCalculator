@@ -46,9 +46,10 @@ public class MainActivity extends AppCompatActivity {
     ScrollView scrollView2;
     int counter1=0,counter2=0;
 
+    CardView keyboardCard;
     Button[] buttons =new Button[16];
     ImageButton[] imgbtns=new ImageButton[3];
-    CardView keyboardCard;
+    CardView[] matrixOperationsButtons=new CardView[10];
 
 
     //Arraylists Related to Matrix preview cards
@@ -629,6 +630,10 @@ public class MainActivity extends AppCompatActivity {
                 else if (imgbtns[2].isPressed() && cursorIndex<str.length()){
                     editTextList.get(i).setSelection(editTextList.get(i).getSelectionStart()+1);
                 }
+                else if(matrixOperationsButtons[0].isPressed()){
+                    editTextList.get(i).setText(str.substring(0,cursorIndex)+"det()"+str.substring(cursorIndex));
+                    editTextList.get(i).setSelection(cursorIndex+4);
+                }
 
                 sendToCalculations(i);
             }
@@ -711,6 +716,17 @@ public class MainActivity extends AppCompatActivity {
         imgbtns[0]=findViewById(R.id.backspace);
         imgbtns[1]=findViewById(R.id.left);
         imgbtns[2]=findViewById(R.id.right);
+
+        matrixOperationsButtons[0]=findViewById(R.id.detButton);
+        matrixOperationsButtons[1]=findViewById(R.id.transButton);
+        matrixOperationsButtons[2]=findViewById(R.id.squareButton);
+        matrixOperationsButtons[3]=findViewById(R.id.cubeButton);
+        matrixOperationsButtons[4]=findViewById(R.id.nthButton);
+        matrixOperationsButtons[5]=findViewById(R.id.inverseButton);
+        matrixOperationsButtons[6]=findViewById(R.id.traceButton);
+        matrixOperationsButtons[7]=findViewById(R.id.adjButton);
+        matrixOperationsButtons[8]=findViewById(R.id.minorsButton);
+        matrixOperationsButtons[9]=findViewById(R.id.cofButton);
 
     }
 
