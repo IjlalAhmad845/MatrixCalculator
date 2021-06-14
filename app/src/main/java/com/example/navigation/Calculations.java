@@ -26,6 +26,7 @@ public class Calculations {
     }
 
     public void setCc() {
+        ccList.clear();
         for(int i=0;i<40;i++){
            // System.out.println((char)(i+130));
             ccList.add((char)(i+130));
@@ -33,6 +34,7 @@ public class Calculations {
     }
 
     public void setMm() {
+        mmList.clear();
         for(int i=0;i<40;i++) {
            // System.out.println((char) (i + 170));
             mmList.add((char) (i + 170));
@@ -63,11 +65,17 @@ public class Calculations {
                     char c1 = stringStack.pop();
                     switch (c){
                         case '#':
-                            EE.charMap.put(ccList.get(i),detN(EE.matrixMap.get(c1)));
-                            System.out.println(detN(EE.matrixMap.get(c1)));
+                            if(EE.matrixRowsMap.get(c1)==(EE.matrixColsMap.get(c1)))
+                            EE.charMap.put(ccList.get(i),detN(EE.matrixMap.get(c1),EE.matrixRowsMap.get(c1)));
+                            else {
+                                instance.messageTextviewList.get(outputCardIndex).setText("Only Square Matrices are applicable for determinant");
+                                error=true;
+                            }
+
                             stringStack.push(ccList.get(i));
                             break;
                     }
+                    if(error)break;
                 }
                 else {
                     char c1 = stringStack.pop();
@@ -195,7 +203,7 @@ public class Calculations {
             //loop ended AND the final result is present in STACK
 
             //condition for all the chars present in the expression
-            if(stringStack.size()>0 && (Character.isLowerCase(stringStack.elementAt(stringStack.size()-1)) || ccList.contains(stringStack.elementAt(stringStack.size()-1)))){
+            if(!error && stringStack.size()>0 && (Character.isLowerCase(stringStack.elementAt(stringStack.size()-1)) || ccList.contains(stringStack.elementAt(stringStack.size()-1)))){
 
                 //hiding all the elements of matrix for fresh printing
                 for(int i=0;i<5;i++){
@@ -216,7 +224,7 @@ public class Calculations {
             }
 
             //condition if any matrix is present in expression
-            else if(stringStack.size()>0 && (Character.isUpperCase(stringStack.elementAt(stringStack.size()-1)) || mmList.contains(stringStack.elementAt(stringStack.size()-1)))){
+            else if(!error && stringStack.size()>0 && (Character.isUpperCase(stringStack.elementAt(stringStack.size()-1)) || mmList.contains(stringStack.elementAt(stringStack.size()-1)))){
                 cols=rows=0;
 
                 //extracted matrix from hashmap by last stack element
@@ -250,6 +258,12 @@ public class Calculations {
                         instance.matrixOutputTextviewList.get(outputCardIndex).get(i).get(j).setText((int)result+"");
                         else instance.matrixOutputTextviewList.get(outputCardIndex).get(i).get(j).setText(result+"");
                     }
+                }
+            }
+            else if(error){
+                for(int i=0;i<5;i++){
+                    for(int j=0;j<5;j++)
+                        instance.matrixOutputTextviewList.get(outputCardIndex).get(i).get(j).setVisibility(View.GONE);
                 }
             }
 
@@ -293,6 +307,7 @@ public class Calculations {
         return B;
     }
 
+    /**============================================ METHOD FOR ADDING TWO MATRICES =============================================================**/
     private ArrayList<ArrayList<Double>> addMatrix(ArrayList<ArrayList<Double>> A, ArrayList<ArrayList<Double>> B,int rows1,int cols1,int rows2,int cols2) {
         ArrayList<ArrayList<Double>> C=new ArrayList<>();
 
@@ -311,6 +326,7 @@ public class Calculations {
         return C;
     }
 
+    /**============================================ METHOD FOR SUBTRACTING TWO MATRICES =============================================================**/
     private ArrayList<ArrayList<Double>> subtractMatrix(ArrayList<ArrayList<Double>> A, ArrayList<ArrayList<Double>> B,int rows1,int cols1,int rows2,int cols2) {
         ArrayList<ArrayList<Double>> C=new ArrayList<>();
 
@@ -329,6 +345,7 @@ public class Calculations {
         return C;
     }
 
+    /**============================================ METHOD FOR MULTIPLYING TWO MATRICES =============================================================**/
     private ArrayList<ArrayList<Double>> multiplyMatrix(ArrayList<ArrayList<Double>> A, ArrayList<ArrayList<Double>> B,int rows1,int cols1,int rows2,int cols2) {
         ArrayList<ArrayList<Double>> C=new ArrayList<>();
 
@@ -351,37 +368,38 @@ public class Calculations {
         return C;
     }
 
+    /**========================================== METHODS FOR CALCULATING DETERMINANT OF MATRIX =========================================================**/
     public static Double det2(ArrayList<ArrayList<Double>> A){
         return A.get(0).get(0)*A.get(1).get(1)-A.get(1).get(0)*A.get(0).get(1);
     }
 
-    public static Double detN(ArrayList<ArrayList<Double>> A){
+    public static Double detN(ArrayList<ArrayList<Double>> A,int n){
         double result=0.0;
         if(A.size()>=3){
             int i1=0,j1=0;
 
             ArrayList<ArrayList<Double>> B=new ArrayList<>();
 
-            for(int i=0;i<A.size()-1;i++){
+            for(int i=0;i<n-1;i++){
                 B.add(new ArrayList<>());
-                for(int j=0;j<A.size()-1;j++)
+                for(int j=0;j<n-1;j++)
                     B.get(i).add(0.0);
             }
 
-            for(int itr=0;itr<A.size();itr++){
-                for(int i=0;i<A.size();i++){
-                    for(int j=0;j<A.size();j++)
+            for(int itr=0;itr<n;itr++){
+                for(int i=0;i<n;i++){
+                    for(int j=0;j<n;j++)
                         if(i!=0 && j!=itr){
                             B.get(i1).set(j1,A.get(i).get(j));
-                            if(j1==A.size()-2){
-                                if(i1==A.size()-2)i1=0;
+                            if(j1==n-2){
+                                if(i1==n-2)i1=0;
                                 else i1++;
                                 j1=0;
                             }
                             else j1++;
                         }
                 }
-                result+=A.get(0).get(itr)*Math.pow(-1,itr)*detN(B);
+                result+=A.get(0).get(itr)*Math.pow(-1,itr)*detN(B,B.size());
             }
             B.clear();
         }
