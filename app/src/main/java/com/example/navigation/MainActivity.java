@@ -545,6 +545,7 @@ public class MainActivity extends AppCompatActivity {
     /**================================================ HOMEPAGE'S KEYBOARD FUNCTIONALITY ==============================**/
     public void KeyboardInput(View v){
         String str;
+        String removed;
         int cursorIndex;
 
         for(int i=0;i<editTextList.size();i++) {
@@ -612,8 +613,24 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 else if (imgbtns[0].isPressed() && cursorIndex>0){
-                    editTextList.get(i).setText(str.substring(0,cursorIndex-1)+str.substring(cursorIndex));
-                    editTextList.get(i).setSelection(cursorIndex-1);
+                        editTextList.get(i).setText(str.substring(0,cursorIndex-1)+str.substring(cursorIndex));
+
+                        if(Character.isLowerCase(str.charAt(cursorIndex-1))){
+
+                            while(cursorIndex>1 && Character.isLowerCase(str.charAt(cursorIndex-2))){
+                                cursorIndex--;
+                                str=editTextList.get(i).getText().toString();
+                                editTextList.get(i).setText(str.substring(0,cursorIndex-1)+str.substring(cursorIndex));
+                            }
+
+                            while(cursorIndex<str.length() && Character.isLowerCase(str.charAt(cursorIndex))){
+
+                                str=editTextList.get(i).getText().toString();
+                                editTextList.get(i).setText(str.substring(0,cursorIndex-1)+str.substring(cursorIndex));
+                            }
+                        }
+
+                        editTextList.get(i).setSelection(cursorIndex-1);
 
                     str=editTextList.get(i).getText().toString();
 
