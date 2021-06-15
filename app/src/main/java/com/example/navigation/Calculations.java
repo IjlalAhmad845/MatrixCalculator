@@ -50,7 +50,7 @@ public class Calculations {
         stringStack.clear();
         expression=instance.editTextList.get(outputCardIndex).getText().toString();
 
-        if(!expression.equals("") && !EE.Convert(expression).equals("Not valid")&& !EE.Convert(expression).equals("Decimal Mistake")) {
+        if(!expression.equals("") && !EE.Convert(expression).equals("Not valid") && !EE.Convert(expression).equals("Decimal Mistake")) {
             expression=EE.Convert(expression);
             instance.messageTextviewList.get(outputCardIndex).setText(expression);
 
@@ -63,6 +63,7 @@ public class Calculations {
 
                 else if(c=='#'){
                     char c1 = stringStack.pop();
+                    if(Character.isUpperCase(c1) || mmList.contains(c1))
                     switch (c){
                         case '#':
                             if(EE.matrixRowsMap.get(c1)==(EE.matrixColsMap.get(c1)))
@@ -74,6 +75,10 @@ public class Calculations {
 
                             stringStack.push(ccList.get(i));
                             break;
+                    }
+                    else {
+                        instance.messageTextviewList.get(outputCardIndex).setText("determinant no applicable on scalars");
+                        error=true;
                     }
                     if(error)break;
                 }

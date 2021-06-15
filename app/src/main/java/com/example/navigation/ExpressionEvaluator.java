@@ -21,12 +21,14 @@ public class ExpressionEvaluator {
         matrixMap.clear();
         matrixRowsMap.clear();
         matrixColsMap.clear();
-        str=str+";";
+        str=str+";;;";
         String s="";
         ArrayList<Double> numList=new ArrayList<>();
         for(int i=0;i<str.length();i++){
             if(str.contains("det")){
                 str=str.replace("det","#");
+                if( str.charAt(str.indexOf("#")+2)==')')
+                    return "Not valid";
             }
 
             if(Character.isUpperCase(str.charAt(i))){
@@ -65,7 +67,7 @@ public class ExpressionEvaluator {
             charMap.put((char)(i+97),numList.get(i));
             str=str.replace(String.valueOf(numList.get(i)),String.valueOf((char)(i+97)));
         }
-        str=str.substring(0,str.length()-1);
+        str=str.substring(0,str.length()-3);
         //System.out.println(matrixMap.size());
         if(charMap.size()>26)
             return "Expression too long to evaluate";
@@ -232,17 +234,14 @@ public class ExpressionEvaluator {
                 // until an '(' is encountered.
             else if (c == ')')
             {
-                while (!stack.isEmpty() &&
-                        stack.peek() != '(')
+                while (!stack.isEmpty() && stack.peek() != '(')
                     result.append(stack.pop());
 
                 stack.pop();
             }
             else // an operator is encountered
             {
-                while (!stack.isEmpty() && Precedence(c)
-                        <= Precedence(stack.peek())){
-
+                while (!stack.isEmpty() && Precedence(c) <= Precedence(stack.peek())){
                     result.append(stack.pop());
                 }
                 stack.push(c);

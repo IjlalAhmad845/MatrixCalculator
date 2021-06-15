@@ -499,7 +499,13 @@ public class MainActivity extends AppCompatActivity {
         cardView.animate().alpha(1.0f).setDuration(200).setListener(null);
         scrollView2.fullScroll(View.FOCUS_DOWN);
 
-       editText.setOnClickListener(v -> keyboardCard.setVisibility(View.VISIBLE));
+       editText.setOnClickListener(v -> {
+           keyboardCard.setVisibility(View.VISIBLE);
+
+           buttons[11].setEnabled(true);
+           buttons[12].setEnabled(true);
+           buttons[13].setEnabled(true);
+       });
 
 
         removeButton.setOnClickListener(new View.OnClickListener() {
@@ -631,8 +637,14 @@ public class MainActivity extends AppCompatActivity {
                     editTextList.get(i).setSelection(editTextList.get(i).getSelectionStart()+1);
                 }
                 else if(matrixOperationsButtons[0].isPressed()){
-                    editTextList.get(i).setText(str.substring(0,cursorIndex)+"det()"+str.substring(cursorIndex));
-                    editTextList.get(i).setSelection(cursorIndex+4);
+                    if(cursorIndex>0 && (Character.isLetterOrDigit(str.charAt(cursorIndex-1)) || str.charAt(cursorIndex-1)==')')) {
+                        editTextList.get(i).setText(str.substring(0, cursorIndex) + "·det()" + str.substring(cursorIndex));
+                        editTextList.get(i).setSelection(cursorIndex+5);
+                    }
+                    else {
+                        editTextList.get(i).setText(str.substring(0, cursorIndex) + "det()" + str.substring(cursorIndex));
+                        editTextList.get(i).setSelection(cursorIndex + 4);
+                    }
                 }
 
                 sendToCalculations(i);
