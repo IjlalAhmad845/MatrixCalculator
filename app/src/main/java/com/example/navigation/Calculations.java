@@ -53,7 +53,6 @@ public class Calculations {
         if(!expression.equals("") && !EE.Convert(expression).equals("Not valid") && !EE.Convert(expression).equals("Decimal Mistake")) {
             expression=EE.Convert(expression);
             instance.messageTextviewList.get(outputCardIndex).setText(expression);
-            System.out.println(expression);
 
             for(int i=0;i<expression.length();i++){
                 char c=expression.charAt(i);
@@ -62,8 +61,9 @@ public class Calculations {
                     stringStack.push(c);
                 }
 
-                else if(c=='#'){
+                else if(c=='#' || c=='~'){
                     char c1 = 0;
+                    //Error handling of empty function brackets
                     try{
                          c1 = stringStack.pop();
                     }catch(Exception e){
@@ -83,9 +83,21 @@ public class Calculations {
 
                             stringStack.push(ccList.get(i));
                             break;
+
+                        case '~':
+                            Temp=transpose(EE.matrixMap.get(c1),EE.matrixRowsMap.get(c1),EE.matrixColsMap.get(c1));
+                            EE.matrixMap.put(mmList.get(i),Temp);
+
+                            if (Temp.size() > 0) {
+                                EE.matrixRowsMap.put(mmList.get(i), Temp.get(0).size());
+                                EE.matrixColsMap.put(mmList.get(i), Temp.size());
+                            }
+
+                            stringStack.push(mmList.get(i));
+                            break;
                     }
                     else {
-                        instance.messageTextviewList.get(outputCardIndex).setText("determinant no applicable on scalars");
+                        instance.messageTextviewList.get(outputCardIndex).setText("Function not applicable on scalars");
                         error=true;
                     }
                     if(error)break;
@@ -421,4 +433,15 @@ public class Calculations {
         return result;
     }
 
+    public ArrayList<ArrayList<Double>> transpose(ArrayList<ArrayList<Double>> A,int rows, int cols){
+
+        ArrayList<ArrayList<Double>> B=new ArrayList<>();
+
+        for(int i=0;i<rows;i++){
+            B.add(new ArrayList<>());
+            for(int j=0;j<cols;j++)
+                B.get(i).add(A.get(j).get(i));
+        }
+        return B;
+    }
 }

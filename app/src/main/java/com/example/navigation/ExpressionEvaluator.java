@@ -28,9 +28,16 @@ public class ExpressionEvaluator {
         String s="";
         ArrayList<Double> numList=new ArrayList<>();
         for(int i=0;i<str.length();i++){
+
             if(str.contains("det")){
                 str=str.replace("det","#");
                 if( str.charAt(str.indexOf("#")+2)==')')
+                    return "Not valid";
+            }
+
+            if(str.contains("tps")){
+                str=str.replace("tps","~");
+                if( str.charAt(str.indexOf("~")+2)==')')
                     return "Not valid";
             }
 

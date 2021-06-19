@@ -653,6 +653,7 @@ public class MainActivity extends AppCompatActivity {
                 else if (imgbtns[2].isPressed() && cursorIndex<str.length()){
                     editTextList.get(i).setSelection(editTextList.get(i).getSelectionStart()+1);
                 }
+
                 else if(matrixOperationsButtons[0].isPressed()){
                     if(cursorIndex>0 && (Character.isLetterOrDigit(str.charAt(cursorIndex-1)) || str.charAt(cursorIndex-1)==')')) {
                         editTextList.get(i).setText(str.substring(0, cursorIndex) + "·det()" + str.substring(cursorIndex));
@@ -660,6 +661,17 @@ public class MainActivity extends AppCompatActivity {
                     }
                     else {
                         editTextList.get(i).setText(str.substring(0, cursorIndex) + "det()" + str.substring(cursorIndex));
+                        editTextList.get(i).setSelection(cursorIndex + 4);
+                    }
+                }
+
+                else if(matrixOperationsButtons[1].isPressed()){
+                    if(cursorIndex>0 && (Character.isLetterOrDigit(str.charAt(cursorIndex-1)) || str.charAt(cursorIndex-1)==')')) {
+                        editTextList.get(i).setText(str.substring(0, cursorIndex) + "·tps()" + str.substring(cursorIndex));
+                        editTextList.get(i).setSelection(cursorIndex+5);
+                    }
+                    else {
+                        editTextList.get(i).setText(str.substring(0, cursorIndex) + "tps()" + str.substring(cursorIndex));
                         editTextList.get(i).setSelection(cursorIndex + 4);
                     }
                 }
