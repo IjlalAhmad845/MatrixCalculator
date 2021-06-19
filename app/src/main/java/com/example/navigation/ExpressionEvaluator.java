@@ -21,6 +21,9 @@ public class ExpressionEvaluator {
         matrixMap.clear();
         matrixRowsMap.clear();
         matrixColsMap.clear();
+        if(str.length()==1 && Character.isLowerCase(str.charAt(0)))
+            return "Not valid";
+
         str=str+";;;";
         String s="";
         ArrayList<Double> numList=new ArrayList<>();

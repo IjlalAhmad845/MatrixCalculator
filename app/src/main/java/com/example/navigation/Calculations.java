@@ -53,6 +53,7 @@ public class Calculations {
         if(!expression.equals("") && !EE.Convert(expression).equals("Not valid") && !EE.Convert(expression).equals("Decimal Mistake")) {
             expression=EE.Convert(expression);
             instance.messageTextviewList.get(outputCardIndex).setText(expression);
+            System.out.println(expression);
 
             for(int i=0;i<expression.length();i++){
                 char c=expression.charAt(i);
@@ -62,8 +63,15 @@ public class Calculations {
                 }
 
                 else if(c=='#'){
-                    char c1 = stringStack.pop();
-                    if(Character.isUpperCase(c1) || mmList.contains(c1))
+                    char c1 = 0;
+                    try{
+                         c1 = stringStack.pop();
+                    }catch(Exception e){
+                        error = true;
+                        instance.messageTextviewList.get(outputCardIndex).setText("Invalid");
+                    }
+
+                    if(!error && (Character.isUpperCase(c1) || mmList.contains(c1)))
                     switch (c){
                         case '#':
                             if(EE.matrixRowsMap.get(c1)==(EE.matrixColsMap.get(c1)))
