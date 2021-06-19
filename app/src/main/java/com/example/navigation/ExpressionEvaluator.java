@@ -42,9 +42,12 @@ public class ExpressionEvaluator {
             }
 
             if(Character.isUpperCase(str.charAt(i))){
-                    matrixMap.put(str.charAt(i),returnCurrentMatrix(String.valueOf(str.charAt(i))));
-                    matrixRowsMap.put(str.charAt(i),returnCurrentMatRows(String.valueOf(str.charAt(i))));
-                    matrixColsMap.put(str.charAt(i),returnCurrentMatCols(String.valueOf(str.charAt(i))));
+                if(returnCurrentMatrix(String.valueOf(str.charAt(i))).size()==0) return "Not valid";
+                else {
+                    matrixMap.put(str.charAt(i), returnCurrentMatrix(String.valueOf(str.charAt(i))));
+                    matrixRowsMap.put(str.charAt(i), returnCurrentMatRows(String.valueOf(str.charAt(i))));
+                    matrixColsMap.put(str.charAt(i), returnCurrentMatCols(String.valueOf(str.charAt(i))));
+                }
             }
 
             if(Character.isDigit(str.charAt(i)) || str.charAt(i)=='.')
@@ -88,6 +91,11 @@ public class ExpressionEvaluator {
 
     public ArrayList<ArrayList<Double>> returnCurrentMatrix(String MatName){
             ArrayList<ArrayList<Double>> currentMat=new ArrayList<>();
+
+            //returning null matrix if the corresponding matrix don't exist
+            if(!instance.matrixNamesStringList.contains(MatName))
+                return currentMat;
+
             for(int i=0;i<5;i++){
                 currentMat.add(new ArrayList<>());
                 for(int j=0;j<5;j++){
