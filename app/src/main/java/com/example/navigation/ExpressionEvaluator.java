@@ -22,7 +22,7 @@ public class ExpressionEvaluator {
         matrixRowsMap.clear();
         matrixColsMap.clear();
         if(str.length()==1 && Character.isLowerCase(str.charAt(0)))
-            return "Not valid";
+            return "Invalid";
 
         str=str+";;;";
         String s="";
@@ -32,17 +32,18 @@ public class ExpressionEvaluator {
             if(str.contains("det")){
                 str=str.replace("det","#");
                 if( str.charAt(str.indexOf("#")+2)==')')
-                    return "Not valid";
+                    return "Empty Brackets";
             }
 
             if(str.contains("tps")){
                 str=str.replace("tps","~");
                 if( str.charAt(str.indexOf("~")+2)==')')
-                    return "Not valid";
+                    return "Empty Brackets";
             }
 
             if(Character.isUpperCase(str.charAt(i))){
-                if(returnCurrentMatrix(String.valueOf(str.charAt(i))).size()==0) return "Not valid";
+                if(returnCurrentMatrix(String.valueOf(str.charAt(i))).size()==0)
+                    return "Matrix '"+str.charAt(i)+"' doesn't Exist";
                 else {
                     matrixMap.put(str.charAt(i), returnCurrentMatrix(String.valueOf(str.charAt(i))));
                     matrixRowsMap.put(str.charAt(i), returnCurrentMatRows(String.valueOf(str.charAt(i))));
@@ -76,17 +77,27 @@ public class ExpressionEvaluator {
         }
         Collections.sort(numList);
         Collections.reverse(numList);
+
         for(int i=0;i<numList.size();i++){
             charMap.put((char)(i+97),numList.get(i));
             str=str.replace(String.valueOf(numList.get(i)),String.valueOf((char)(i+97)));
         }
+
         str=str.substring(0,str.length()-3);
         //System.out.println(matrixMap.size());
+
         if(charMap.size()>26)
             return "Expression too long to evaluate";
-        else if(Valid_Arithmetic(str,str.length()))
+
+        else if(Valid_Arithmetic(str,str.length())==0)
             return  infixToPostfix(str);
-        else return "Not valid";
+        else if(Valid_Arithmetic(str,str.length())==1)
+            return "Brackets Mistake";
+        else if(Valid_Arithmetic(str,str.length())==2)
+            return "Invalid";
+        else if(Valid_Arithmetic(str,str.length())==3)
+            return "Operator Mistake";
+        else return "Invalid";
     }
 
     public ArrayList<ArrayList<Double>> returnCurrentMatrix(String MatName){
@@ -113,18 +124,21 @@ public class ExpressionEvaluator {
     }
 
     /**============================================== FOR CHECKING VALIDITY OF EXPRESSION ==========================================**/
-    public boolean Valid_Arithmetic(String str, int len)
+    public int Valid_Arithmetic(String str, int len)
     {
         if (Check_Parenthesis(str, len)) // like "())" and more
         {
-            return false;
+            return 1;
         }
         if (Check_For_Invalidity(str, len)) // like "a(" and "a-)" and ")a" and "ab"
         {
-            return false;
+            return 2;
         }
         // Operator Are Always Less Than One Then The Operands
-        return !Check_Opeartor_Opearand(str, len);
+        if(!Check_Opeartor_Opearand(str, len))
+            return 0;
+        else
+            return 3;
     }
 
     public static boolean Check_Opeartor_Opearand(String str, int len)

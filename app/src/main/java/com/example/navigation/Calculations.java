@@ -27,17 +27,15 @@ public class Calculations {
 
     public void setCc() {
         ccList.clear();
-        for(int i=0;i<40;i++){
-           // System.out.println((char)(i+130));
+        for(int i=0;i<55;i++){
             ccList.add((char)(i+130));
         }
     }
 
     public void setMm() {
         mmList.clear();
-        for(int i=0;i<40;i++) {
-           // System.out.println((char) (i + 170));
-            mmList.add((char) (i + 170));
+        for(int i=0;i<55;i++) {
+            mmList.add((char) (i + 185));
         }
     }
 
@@ -50,7 +48,12 @@ public class Calculations {
         stringStack.clear();
         expression=instance.editTextList.get(outputCardIndex).getText().toString();
 
-        if(!expression.equals("") && !EE.Convert(expression).equals("Not valid") && !EE.Convert(expression).equals("Decimal Mistake")) {
+        //All the errors at one place are checked and displayed after anyone is encountered
+        if(!expression.equals("") &&  !EE.Convert(expression).equals("Decimal Mistake") && !EE.Convert(expression).equals("Invalid")  &&
+                !EE.Convert(expression).equals("Empty Brackets") && (EE.Convert(expression).length()<6 || !EE.Convert(expression).substring(0,6).equals("Matrix")) &&
+                !EE.Convert(expression).equals("Expression too long to evaluate") && !EE.Convert(expression).equals("Brackets Mistake") &&
+                !EE.Convert(expression).equals("Operator Mistake")) {
+
             expression=EE.Convert(expression);
             instance.messageTextviewList.get(outputCardIndex).setText(expression);
 
