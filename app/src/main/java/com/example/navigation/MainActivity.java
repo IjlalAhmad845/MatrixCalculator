@@ -615,6 +615,15 @@ public class MainActivity extends AppCompatActivity {
                 else if (imgbtns[0].isPressed() && cursorIndex>0){
                         editTextList.get(i).setText(str.substring(0,cursorIndex-1)+str.substring(cursorIndex));
 
+                        //removing both brackets when empty
+                        if(cursorIndex<str.length() && str.charAt(cursorIndex-1)=='(' && str.charAt(cursorIndex)==')'){
+
+                            str=editTextList.get(i).getText().toString();
+                            editTextList.get(i).setText(str.substring(0,cursorIndex-1)+str.substring(cursorIndex));
+                        }
+
+
+                        //removing whole function at once from anu backspace location
                         if(Character.isLowerCase(str.charAt(cursorIndex-1))){
 
                             while(cursorIndex>1 && Character.isLowerCase(str.charAt(cursorIndex-2))){
@@ -683,6 +692,28 @@ public class MainActivity extends AppCompatActivity {
                     }
                     else {
                         editTextList.get(i).setText(str.substring(0, cursorIndex) + "pow(,2)" + str.substring(cursorIndex));
+                        editTextList.get(i).setSelection(cursorIndex + 4);
+                    }
+                }
+
+                else if(matrixOperationsButtons[3].isPressed()){
+                    if(cursorIndex>0 && (Character.isLetterOrDigit(str.charAt(cursorIndex-1)) || str.charAt(cursorIndex-1)==')')) {
+                        editTextList.get(i).setText(str.substring(0, cursorIndex) + "·pow(,3)" + str.substring(cursorIndex));
+                        editTextList.get(i).setSelection(cursorIndex+5);
+                    }
+                    else {
+                        editTextList.get(i).setText(str.substring(0, cursorIndex) + "pow(,3)" + str.substring(cursorIndex));
+                        editTextList.get(i).setSelection(cursorIndex + 4);
+                    }
+                }
+
+                else if(matrixOperationsButtons[4].isPressed()){
+                    if(cursorIndex>0 && (Character.isLetterOrDigit(str.charAt(cursorIndex-1)) || str.charAt(cursorIndex-1)==')')) {
+                        editTextList.get(i).setText(str.substring(0, cursorIndex) + "·pow(,)" + str.substring(cursorIndex));
+                        editTextList.get(i).setSelection(cursorIndex+5);
+                    }
+                    else {
+                        editTextList.get(i).setText(str.substring(0, cursorIndex) + "pow(,)" + str.substring(cursorIndex));
                         editTextList.get(i).setSelection(cursorIndex + 4);
                     }
                 }

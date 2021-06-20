@@ -53,6 +53,8 @@ public class ExpressionEvaluator {
             //replacing power String
             if(str.contains("pow")){
 
+                if(str.charAt(str.indexOf("pow")+4)==',')return "Empty Brackets";
+
                 for(int j=1;str.contains("pow");j++){
                     if(Character.isDigit(str.charAt(str.indexOf(",")+1))){
                         powerList.add(String.valueOf(str.charAt(str.indexOf(",")+1)));

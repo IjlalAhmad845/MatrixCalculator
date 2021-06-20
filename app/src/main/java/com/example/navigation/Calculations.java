@@ -14,7 +14,7 @@ public class Calculations {
     ExpressionEvaluator EE=new ExpressionEvaluator();
 
     int outputCardIndex;
-    String expression;
+    String expression,errorCode;
     ArrayList<Character> ccList=new ArrayList<>();
     ArrayList<Character> mmList=new ArrayList<>();
     ArrayList<ArrayList<Double>> Temp =new ArrayList<>();
@@ -50,13 +50,14 @@ public class Calculations {
         setCc();setMm();
         stringStack.clear();
         expression=instance.editTextList.get(outputCardIndex).getText().toString();
+        errorCode=EE.Convert(expression);
 
         //All the errors at one place are checked and displayed after anyone is encountered
-        if(!expression.equals("") &&  !EE.Convert(expression).equals("Decimal Mistake") && !EE.Convert(expression).equals("Invalid")  &&
-                !EE.Convert(expression).equals("Empty Brackets") && (EE.Convert(expression).length()<6 || !EE.Convert(expression).substring(0,6).equals("Matrix")) &&
-                !EE.Convert(expression).equals("Expression too long to evaluate") && !EE.Convert(expression).equals("Brackets Mistake") &&
-                !EE.Convert(expression).equals("Operator Mistake") && !EE.Convert(expression).equals("',' not found") && !EE.Convert(expression).equals("Invalid Power") &&
-                !EE.Convert(expression).equals("Power too large")) {
+        if(!expression.equals("") &&  !errorCode.equals("Decimal Mistake") && !errorCode.equals("Invalid")  &&
+                !errorCode.equals("Empty Brackets") && (errorCode.length()<6 || !errorCode.substring(0,6).equals("Matrix")) &&
+                !errorCode.equals("Expression too long to evaluate") && !errorCode.equals("Brackets Mistake") &&
+                !errorCode.equals("Operator Mistake")  && !errorCode.equals("Invalid Power") &&
+                !errorCode.equals("Power too large")) {
 
             expression=EE.Convert(expression);
             instance.messageTextviewList.get(outputCardIndex).setText(expression);
