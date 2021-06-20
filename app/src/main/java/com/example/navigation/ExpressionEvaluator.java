@@ -41,6 +41,24 @@ public class ExpressionEvaluator {
                     return "Empty Brackets";
             }
 
+            if(str.contains("pow")){
+                //string incoming power
+                char power=str.charAt(str.indexOf(",")+1);
+
+                //power next to ',' must be a integer and all alone within brackets
+                if(str.contains(",") && Character.isDigit(power) && str.charAt(str.indexOf(",")+2)==')') {
+                    //replacing everything in power function to ^()
+                    str = str.replace("pow", "^");
+                    str = str.replace(","+power, "");
+
+                    if (str.charAt(str.indexOf("^") + 2) == ',')
+                        return "Empty Brackets";
+                }
+                else if(!str.contains(","))return "',' not found";
+
+                else if(!(Character.isDigit(power) && str.charAt(str.indexOf(",")+2)==')'))return "Invalid Power";
+            }
+
             if(Character.isUpperCase(str.charAt(i))){
                 if(returnCurrentMatrix(String.valueOf(str.charAt(i))).size()==0)
                     return "Matrix '"+str.charAt(i)+"' doesn't Exist";
@@ -148,7 +166,7 @@ public class ExpressionEvaluator {
         {
             if (((int)str.charAt(i) >= 65 && (int)str.charAt(i) <= 91) || ((int)str.charAt(i) >= 97 && (int)str.charAt(i) <= 123))
                 OperandCount++;
-            if (str.charAt(i) == '^' || str.charAt(i) == '-' || str.charAt(i) == '+' || str.charAt(i) == '·' || str.charAt(i) == '/')
+            if (str.charAt(i) == '-' || str.charAt(i) == '+' || str.charAt(i) == '·' || str.charAt(i) == '/')
                 OperatorCount++;
         }
         return !(OperatorCount + 1 == OperandCount);
@@ -167,12 +185,12 @@ public class ExpressionEvaluator {
                 if (str.charAt(i-1) == ')' && b)
                     return true;
                 else {
-                    boolean c = str.charAt(i - 1) == '^' || str.charAt(i - 1) == '-' || str.charAt(i - 1) == '+' || str.charAt(i - 1) == '·' || str.charAt(i - 1) == '/';
+                    boolean c = str.charAt(i - 1) == '-' || str.charAt(i - 1) == '+' || str.charAt(i - 1) == '·' || str.charAt(i - 1) == '/';
                     if (c && str.charAt(i) == ')')
                         return true;
                     else if (a && b)
                         return true;
-                    else if (c && (str.charAt(i)== '^' || str.charAt(i) == '-' || str.charAt(i) == '+' || str.charAt(i) == '·' ||str.charAt(i) == '/'))
+                    else if (c && (str.charAt(i) == '-' || str.charAt(i) == '+' || str.charAt(i) == '·' ||str.charAt(i) == '/'))
                         return true;
                 }
             }
@@ -225,12 +243,14 @@ public class ExpressionEvaluator {
             case '/':
                 return 2;
 
-            case '^':
-                return 3;
-
-            case '#':
-            case '$':
-            case '~':
+            case '#':   //for determinant
+            case '~':   //for transpose
+            case '^':   //for nth power
+            case '&': //for inverse
+            case '$':  //for trace
+            case '@': //for adjoint
+            case '%': //for minors
+            case '*': //for cofactors
                 return 4;
         }
         return -1;

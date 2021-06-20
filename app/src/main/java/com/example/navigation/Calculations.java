@@ -53,7 +53,7 @@ public class Calculations {
         if(!expression.equals("") &&  !EE.Convert(expression).equals("Decimal Mistake") && !EE.Convert(expression).equals("Invalid")  &&
                 !EE.Convert(expression).equals("Empty Brackets") && (EE.Convert(expression).length()<6 || !EE.Convert(expression).substring(0,6).equals("Matrix")) &&
                 !EE.Convert(expression).equals("Expression too long to evaluate") && !EE.Convert(expression).equals("Brackets Mistake") &&
-                !EE.Convert(expression).equals("Operator Mistake")) {
+                !EE.Convert(expression).equals("Operator Mistake") && !EE.Convert(expression).equals("',' not found") && !EE.Convert(expression).equals("Invalid Power")) {
 
             expression=EE.Convert(expression);
             instance.messageTextviewList.get(outputCardIndex).setText(expression);
@@ -65,7 +65,7 @@ public class Calculations {
                     stringStack.push(c);
                 }
 
-                else if(c=='#' || c=='~'){
+                else if(c=='#' || c=='~' || c=='^'){
                     char c1 = 0;
                     //Error handling of empty function brackets
                     try{
@@ -91,6 +91,19 @@ public class Calculations {
 
                         case '~':
                             Temp=transpose(EE.matrixMap.get(c1),EE.matrixRowsMap.get(c1),EE.matrixColsMap.get(c1));
+                            EE.matrixMap.put(mmList.get(i),Temp);
+
+                            if (Temp.size() > 0) {
+                                EE.matrixRowsMap.put(mmList.get(i), Temp.get(0).size());
+                                EE.matrixColsMap.put(mmList.get(i), Temp.size());
+                            }
+
+                            stringStack.push(mmList.get(i));
+                            break;
+
+                        case '^':
+                            if (EE.matrixMap.get(c1).size() > 0)
+                            Temp=multiplyMatrix(EE.matrixMap.get(c1),EE.matrixMap.get(c1),EE.matrixRowsMap.get(c1),EE.matrixColsMap.get(c1),EE.matrixRowsMap.get(c1),EE.matrixColsMap.get(c1));
                             EE.matrixMap.put(mmList.get(i),Temp);
 
                             if (Temp.size() > 0) {
