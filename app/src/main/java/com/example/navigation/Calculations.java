@@ -1,6 +1,7 @@
 package com.example.navigation;
 
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -19,6 +20,7 @@ public class Calculations {
     ArrayList<ArrayList<Double>> Temp =new ArrayList<>();
     int rows=0,cols=0;
     boolean error=false;
+    int powerIterator=0;
 
     Stack<Character> stringStack=new Stack<>();
 
@@ -44,7 +46,7 @@ public class Calculations {
         this.outputCardIndex = outputCardIndex;
     }
 
-    public void masterControlFunction(){error=false;
+    public void masterControlFunction(){error=false;powerIterator=0;
         setCc();setMm();
         stringStack.clear();
         expression=instance.editTextList.get(outputCardIndex).getText().toString();
@@ -53,7 +55,8 @@ public class Calculations {
         if(!expression.equals("") &&  !EE.Convert(expression).equals("Decimal Mistake") && !EE.Convert(expression).equals("Invalid")  &&
                 !EE.Convert(expression).equals("Empty Brackets") && (EE.Convert(expression).length()<6 || !EE.Convert(expression).substring(0,6).equals("Matrix")) &&
                 !EE.Convert(expression).equals("Expression too long to evaluate") && !EE.Convert(expression).equals("Brackets Mistake") &&
-                !EE.Convert(expression).equals("Operator Mistake") && !EE.Convert(expression).equals("',' not found") && !EE.Convert(expression).equals("Invalid Power")) {
+                !EE.Convert(expression).equals("Operator Mistake") && !EE.Convert(expression).equals("',' not found") && !EE.Convert(expression).equals("Invalid Power") &&
+                !EE.Convert(expression).equals("Power too large")) {
 
             expression=EE.Convert(expression);
             instance.messageTextviewList.get(outputCardIndex).setText(expression);
@@ -102,8 +105,32 @@ public class Calculations {
                             break;
 
                         case '^':
-                            if (EE.matrixMap.get(c1).size() > 0)
-                            Temp=multiplyMatrix(EE.matrixMap.get(c1),EE.matrixMap.get(c1),EE.matrixRowsMap.get(c1),EE.matrixColsMap.get(c1),EE.matrixRowsMap.get(c1),EE.matrixColsMap.get(c1));
+
+                            if (EE.matrixMap.get(c1).size() > 0){
+
+                                if(Integer.parseInt(EE.powerList.get(powerIterator))==0) {
+                                    Temp.clear();
+
+                                    for(int j=0;j<EE.matrixColsMap.get(c1);j++){
+                                        Temp.add(new ArrayList<>());
+                                        for(int k=0;k<EE.matrixRowsMap.get(c1);k++){
+                                            if(j==k)Temp.get(j).add(1.0);
+                                            else Temp.get(j).add(0.0);
+                                        }
+                                    }
+                                }
+                                else if(Integer.parseInt(EE.powerList.get(powerIterator))==1)
+                                    Temp=EE.matrixMap.get(c1);
+                                else{
+                                    Temp=multiplyMatrix(EE.matrixMap.get(c1),EE.matrixMap.get(c1),EE.matrixRowsMap.get(c1),EE.matrixColsMap.get(c1),EE.matrixRowsMap.get(c1),EE.matrixColsMap.get(c1));
+
+                                    for(int pow=2;pow<Integer.parseInt(EE.powerList.get(powerIterator));pow++){
+                                        Temp=multiplyMatrix(Temp,EE.matrixMap.get(c1),EE.matrixRowsMap.get(c1),EE.matrixColsMap.get(c1),Temp.get(0).size(),Temp.size());
+
+                                    }
+                                }
+                                powerIterator++;
+                            }
                             EE.matrixMap.put(mmList.get(i),Temp);
 
                             if (Temp.size() > 0) {

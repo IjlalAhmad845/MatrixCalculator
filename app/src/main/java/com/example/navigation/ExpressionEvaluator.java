@@ -1,5 +1,7 @@
 package com.example.navigation;
 
+import android.os.PowerManager;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -13,6 +15,7 @@ public class ExpressionEvaluator {
     HashMap<Character,ArrayList<ArrayList<Double>>> matrixMap=new HashMap<>();
     HashMap<Character,Integer> matrixColsMap=new HashMap<>();
     HashMap<Character,Integer> matrixRowsMap=new HashMap<>();
+    ArrayList<String> powerList=new ArrayList<>();
 
     /**============================================== FOR REPLACING NUMBERS TO ALPHABETS ==========================================**/
 
@@ -21,7 +24,11 @@ public class ExpressionEvaluator {
         matrixMap.clear();
         matrixRowsMap.clear();
         matrixColsMap.clear();
+        powerList.clear();
+
         if(str.length()==1 && Character.isLowerCase(str.charAt(0)))
+            return "Invalid";
+        if(str.length()<=6 && str.contains(","))
             return "Invalid";
 
         str=str+";;;";
@@ -29,36 +36,45 @@ public class ExpressionEvaluator {
         ArrayList<Double> numList=new ArrayList<>();
         for(int i=0;i<str.length();i++){
 
+            //replacing Determinant String
             if(str.contains("det")){
                 str=str.replace("det","#");
                 if( str.charAt(str.indexOf("#")+2)==')')
                     return "Empty Brackets";
             }
 
+            //replacing Transpose String
             if(str.contains("tps")){
                 str=str.replace("tps","~");
                 if( str.charAt(str.indexOf("~")+2)==')')
                     return "Empty Brackets";
             }
 
+            //replacing power String
             if(str.contains("pow")){
-                //string incoming power
-                char power=str.charAt(str.indexOf(",")+1);
 
-                //power next to ',' must be a integer and all alone within brackets
-                if(str.contains(",") && Character.isDigit(power) && str.charAt(str.indexOf(",")+2)==')') {
-                    //replacing everything in power function to ^()
-                    str = str.replace("pow", "^");
-                    str = str.replace(","+power, "");
+                for(int j=1;str.contains("pow");j++){
+                    if(Character.isDigit(str.charAt(str.indexOf(",")+1))){
+                        powerList.add(String.valueOf(str.charAt(str.indexOf(",")+1)));
+                        if(Character.isDigit(str.charAt(str.indexOf(",")+2)))
+                            powerList.set(powerList.size()-1,powerList.get(powerList.size()-1)+String.valueOf(str.charAt(str.indexOf(",")+2)));
+                    }
 
-                    if (str.charAt(str.indexOf("^") + 2) == ',')
-                        return "Empty Brackets";
+
+                    if(powerList.size()==j) {
+                        if(Integer.parseInt(powerList.get(powerList.size()-1))<=15){
+                            str = str.replaceFirst("pow", "^");
+                            str = str.replaceFirst("," + powerList.get(powerList.size() - 1), "");
+                        }
+                        else return "Power too large";
+                    }
+                    else return "Invalid Power";
                 }
-                else if(!str.contains(","))return "',' not found";
 
-                else if(!(Character.isDigit(power) && str.charAt(str.indexOf(",")+2)==')'))return "Invalid Power";
             }
 
+
+            //Storing matrices in Hashmap
             if(Character.isUpperCase(str.charAt(i))){
                 if(returnCurrentMatrix(String.valueOf(str.charAt(i))).size()==0)
                     return "Matrix '"+str.charAt(i)+"' doesn't Exist";
@@ -69,6 +85,7 @@ public class ExpressionEvaluator {
                 }
             }
 
+            //replacing digits
             if(Character.isDigit(str.charAt(i)) || str.charAt(i)=='.')
                 s=s+str.charAt(i);
 
