@@ -3,6 +3,7 @@ package com.example.navigation;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Stack;
 import java.util.concurrent.TimeoutException;
 
@@ -77,7 +78,8 @@ public class Calculations {
                     if(!error && (Character.isUpperCase(c1) || mmList.contains(c1)))
                     switch (c){
                         case '#':
-                            if(EE.matrixRowsMap.get(c1)==(EE.matrixColsMap.get(c1)))
+                            System.out.println(EE.matrixRowsMap.get(c1));
+                            if(Objects.equals(EE.matrixRowsMap.get(c1), EE.matrixColsMap.get(c1)))
                             EE.charMap.put(ccList.get(i),detN(EE.matrixMap.get(c1),EE.matrixRowsMap.get(c1)));
                             else {
                                 instance.messageTextviewList.get(outputCardIndex).setText("Only Square Matrices are applicable for determinant");
@@ -403,7 +405,7 @@ public class Calculations {
 
     public static Double detN(ArrayList<ArrayList<Double>> A,int n){
         double result=0.0;
-        if(A.size()>=3){
+        if(n>=3){
             int i1=0,j1=0;
 
             ArrayList<ArrayList<Double>> B=new ArrayList<>();
@@ -431,11 +433,13 @@ public class Calculations {
             }
             B.clear();
         }
-        else result=det2(A);
+        else if(n==2)result=det2(A);
+        else result=A.get(0).get(0);
 
         return result;
     }
 
+    /**==================================================== METHOD FOR TRANSPOSE OF MATRIX =====================================================**/
     public ArrayList<ArrayList<Double>> transpose(ArrayList<ArrayList<Double>> A,int rows, int cols){
 
         ArrayList<ArrayList<Double>> B=new ArrayList<>();
