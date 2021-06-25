@@ -718,6 +718,17 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
+                else if(matrixOperationsButtons[7].isPressed()){
+                    if(cursorIndex>0 && (Character.isLetterOrDigit(str.charAt(cursorIndex-1)) || str.charAt(cursorIndex-1)==')')) {
+                        editTextList.get(i).setText(str.substring(0, cursorIndex) + "·adj()" + str.substring(cursorIndex));
+                        editTextList.get(i).setSelection(cursorIndex+5);
+                    }
+                    else {
+                        editTextList.get(i).setText(str.substring(0, cursorIndex) + "adj()" + str.substring(cursorIndex));
+                        editTextList.get(i).setSelection(cursorIndex + 4);
+                    }
+                }
+
                 else if(matrixOperationsButtons[8].isPressed()){
                     if(cursorIndex>0 && (Character.isLetterOrDigit(str.charAt(cursorIndex-1)) || str.charAt(cursorIndex-1)==')')) {
                         editTextList.get(i).setText(str.substring(0, cursorIndex) + "·min()" + str.substring(cursorIndex));

@@ -69,7 +69,7 @@ public class Calculations {
                     stringStack.push(c);
                 }
 
-                else if(c=='#' || c=='~' || c=='^' || c=='%' || c=='*'){
+                else if(c=='#' || c=='~' || c=='^' || c=='%' || c=='*' || c=='@'){
                     char c1 = 0;
                     //Error handling of empty function brackets
                     try{
@@ -176,6 +176,30 @@ public class Calculations {
                             //1x1 cofactor doesn't exist so printing msg when null matrix is returned
                             if(Temp.size()==0){
                                 instance.messageTextviewList.get(outputCardIndex).setText("For 1×1 matrix, there will be no cofactor");
+                            }
+
+                            EE.matrixMap.put(mmList.get(i),Temp);
+
+                            if (Temp.size() > 0) {
+                                EE.matrixRowsMap.put(mmList.get(i), Temp.get(0).size());
+                                EE.matrixColsMap.put(mmList.get(i), Temp.size());
+                            }
+
+                            stringStack.push(mmList.get(i));
+                            break;
+
+                        case '@':
+                            if(Objects.equals(EE.matrixRowsMap.get(c1), EE.matrixColsMap.get(c1)))
+                                Temp=adjoint(EE.matrixMap.get(c1),EE.matrixColsMap.get(c1));
+                            else {
+                                instance.messageTextviewList.get(outputCardIndex).setText("Only Square Matrices are applicable for adjoint");
+                                error=true;
+                            }
+
+                            //1x1 adjoint is always 1 for non zero matrix
+                            if(Temp.size()==0){
+                                Temp.add(new ArrayList<>());
+                                Temp.get(0).add(1.0);
                             }
 
                             EE.matrixMap.put(mmList.get(i),Temp);
@@ -584,13 +608,14 @@ public class Calculations {
 
         for(int i=0;i<n;i++){
             for(int j=0;j<n;j++){
-                B.get(j).set(i,  minors(A,i,j,n));
+                B.get(i).set(j,  minors(A,i,j,n));
             }
         }
 
         return B;
     }
 
+    /**===================================================== METHOD FOR GENERATING COFACTOR  MATRIX =========================================**/
     public  ArrayList<ArrayList<Double>> cofactorMatrix(ArrayList<ArrayList<Double>> A,int n){
         ArrayList<ArrayList<Double>> B=new ArrayList<>();
 
@@ -606,11 +631,24 @@ public class Calculations {
         for(int i=0;i<n;i++){
             for(int j=0;j<n;j++){
                 if((i+j)%2==0)
-                B.get(j).set(i,  minors(A,i,j,n));
+                B.get(i).set(j,  minors(A,i,j,n));
                 else
-                    B.get(j).set(i,  -1*minors(A,i,j,n));
+                    B.get(i).set(j,  -1*minors(A,i,j,n));
             }
         }
+
+        return B;
+    }
+
+    /**===================================================== METHOD FOR GENERATING ADJOINT  MATRIX =========================================**/
+    public ArrayList<ArrayList<Double>> adjoint(ArrayList<ArrayList<Double>> A,int n){
+        ArrayList<ArrayList<Double>> B=new ArrayList<>();
+
+        //for 1x1 matrix returning Null matrix
+        if(n==1)return B;
+
+        B=cofactorMatrix(A,n);
+        B=transpose(B,n,n);
 
         return B;
     }

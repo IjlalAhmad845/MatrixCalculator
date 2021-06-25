@@ -89,6 +89,13 @@ public class ExpressionEvaluator {
                     return "Empty Brackets";
             }
 
+            //replacing adjoint String
+            if(str.contains("adj")){
+                str=str.replace("adj","@");
+                if( str.charAt(str.indexOf("@")+2)==')')
+                    return "Empty Brackets";
+            }
+
 
             //Storing matrices in Hashmap
             if(Character.isUpperCase(str.charAt(i))){
