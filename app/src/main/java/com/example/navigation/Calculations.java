@@ -143,16 +143,18 @@ public class Calculations {
                             break;
 
                         case '%':
-                            if(Objects.equals(EE.matrixRowsMap.get(c1), EE.matrixColsMap.get(c1)))
-                            Temp=minorMatrix(EE.matrixMap.get(c1),EE.matrixColsMap.get(c1));
+                            if(Objects.equals(EE.matrixRowsMap.get(c1), EE.matrixColsMap.get(c1))){
+                                Temp=minorMatrix(EE.matrixMap.get(c1),EE.matrixColsMap.get(c1));
+
+                                //1x1 minor doesn't exist so printing msg when null matrix is returned
+                                if(EE.matrixColsMap.get(c1)==1){
+                                    instance.messageTextviewList.get(outputCardIndex).setText("For 1×1 matrix, there will be no minor");
+                                }
+                            }
+
                             else {
                                 instance.messageTextviewList.get(outputCardIndex).setText("Only Square Matrices are applicable for minors");
                                 error=true;
-                            }
-
-                            //1x1 minor doesn't exist so printing msg when null matrix is returned
-                            if(Temp.size()==0){
-                                instance.messageTextviewList.get(outputCardIndex).setText("For 1×1 matrix, there will be no minor");
                             }
 
                             EE.matrixMap.put(mmList.get(i),Temp);
@@ -166,16 +168,17 @@ public class Calculations {
                             break;
 
                         case '*':
-                            if(Objects.equals(EE.matrixRowsMap.get(c1), EE.matrixColsMap.get(c1)))
+                            if(Objects.equals(EE.matrixRowsMap.get(c1), EE.matrixColsMap.get(c1))){
                                 Temp=cofactorMatrix(EE.matrixMap.get(c1),EE.matrixColsMap.get(c1));
+
+                                //1x1 cofactor doesn't exist so printing msg when null matrix is returned
+                                if(EE.matrixColsMap.get(c1)==1){
+                                    instance.messageTextviewList.get(outputCardIndex).setText("For 1×1 matrix, there will be no cofactor");
+                                }
+                            }
                             else {
                                 instance.messageTextviewList.get(outputCardIndex).setText("Only Square Matrices are applicable for cofactor");
                                 error=true;
-                            }
-
-                            //1x1 cofactor doesn't exist so printing msg when null matrix is returned
-                            if(Temp.size()==0){
-                                instance.messageTextviewList.get(outputCardIndex).setText("For 1×1 matrix, there will be no cofactor");
                             }
 
                             EE.matrixMap.put(mmList.get(i),Temp);
@@ -189,17 +192,18 @@ public class Calculations {
                             break;
 
                         case '@':
-                            if(Objects.equals(EE.matrixRowsMap.get(c1), EE.matrixColsMap.get(c1)))
+                            if(Objects.equals(EE.matrixRowsMap.get(c1), EE.matrixColsMap.get(c1))) {
                                 Temp=adjoint(EE.matrixMap.get(c1),EE.matrixColsMap.get(c1));
+
+                                //1x1 adjoint is always 1 for non zero matrix
+                                if(EE.matrixColsMap.get(c1)==1){
+                                    Temp.add(new ArrayList<>());
+                                    Temp.get(0).add(1.0);
+                                }
+                            }
                             else {
                                 instance.messageTextviewList.get(outputCardIndex).setText("Only Square Matrices are applicable for adjoint");
                                 error=true;
-                            }
-
-                            //1x1 adjoint is always 1 for non zero matrix
-                            if(Temp.size()==0){
-                                Temp.add(new ArrayList<>());
-                                Temp.get(0).add(1.0);
                             }
 
                             EE.matrixMap.put(mmList.get(i),Temp);
@@ -213,18 +217,18 @@ public class Calculations {
                             break;
 
                         case '&':
-                            System.out.println(Temp.size());
-                            if(Objects.equals(EE.matrixRowsMap.get(c1), EE.matrixColsMap.get(c1)))
+                            if(Objects.equals(EE.matrixRowsMap.get(c1), EE.matrixColsMap.get(c1))) {
                                 Temp=inverse(EE.matrixMap.get(c1),EE.matrixColsMap.get(c1));
+
+                                //1x1 inverse is reciprocal of determinant cause adjoint is 1
+                                if(EE.matrixColsMap.get(c1)==1){
+                                    Temp.add(new ArrayList<>());
+                                    Temp.get(0).add(1/detN(EE.matrixMap.get(c1),1));
+                                }
+                            }
                             else {
                                 instance.messageTextviewList.get(outputCardIndex).setText("Only Square Matrices are applicable for inverse");
                                 error=true;
-                            }
-
-                            //1x1 adjoint is always 1 for non zero matrix
-                            if(EE.matrixColsMap.get(c1)==1){
-                                Temp.add(new ArrayList<>());
-                                Temp.get(0).add(1.0/detN(EE.matrixMap.get(c1),1));
                             }
 
                             EE.matrixMap.put(mmList.get(i),Temp);
