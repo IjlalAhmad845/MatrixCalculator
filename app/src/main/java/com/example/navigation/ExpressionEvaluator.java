@@ -75,6 +75,13 @@ public class ExpressionEvaluator {
 
             }
 
+            //replacing minors String
+            if(str.contains("min")){
+                str=str.replace("min","%");
+                if( str.charAt(str.indexOf("%")+2)==')')
+                    return "Empty Brackets";
+            }
+
 
             //Storing matrices in Hashmap
             if(Character.isUpperCase(str.charAt(i))){

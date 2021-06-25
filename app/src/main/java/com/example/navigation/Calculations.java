@@ -69,7 +69,7 @@ public class Calculations {
                     stringStack.push(c);
                 }
 
-                else if(c=='#' || c=='~' || c=='^'){
+                else if(c=='#' || c=='~' || c=='^' || c=='%'){
                     char c1 = 0;
                     //Error handling of empty function brackets
                     try{
@@ -82,7 +82,7 @@ public class Calculations {
                     if(!error && (Character.isUpperCase(c1) || mmList.contains(c1)))
                     switch (c){
                         case '#':
-                            System.out.println(EE.matrixRowsMap.get(c1));
+                            //System.out.println(EE.matrixRowsMap.get(c1));
                             if(Objects.equals(EE.matrixRowsMap.get(c1), EE.matrixColsMap.get(c1)))
                             EE.charMap.put(ccList.get(i),detN(EE.matrixMap.get(c1),EE.matrixRowsMap.get(c1)));
                             else {
@@ -132,6 +132,29 @@ public class Calculations {
                                 }
                                 powerIterator++;
                             }
+                            EE.matrixMap.put(mmList.get(i),Temp);
+
+                            if (Temp.size() > 0) {
+                                EE.matrixRowsMap.put(mmList.get(i), Temp.get(0).size());
+                                EE.matrixColsMap.put(mmList.get(i), Temp.size());
+                            }
+
+                            stringStack.push(mmList.get(i));
+                            break;
+
+                        case '%':
+                            if(Objects.equals(EE.matrixRowsMap.get(c1), EE.matrixColsMap.get(c1)))
+                            Temp=minorMatrix(EE.matrixMap.get(c1),EE.matrixColsMap.get(c1));
+                            else {
+                                instance.messageTextviewList.get(outputCardIndex).setText("Only Square Matrices are applicable for minors");
+                                error=true;
+                            }
+
+                            //1x1 minor doesn't exist so printing msg when null matrix is returned
+                            if(Temp.size()==0){
+                                instance.messageTextviewList.get(outputCardIndex).setText("For 1×1 matrix, there will be no minor");
+                            }
+
                             EE.matrixMap.put(mmList.get(i),Temp);
 
                             if (Temp.size() > 0) {
@@ -379,7 +402,7 @@ public class Calculations {
     }
 
     /**============================================ METHOD FOR ADDING TWO MATRICES =============================================================**/
-    private ArrayList<ArrayList<Double>> addMatrix(ArrayList<ArrayList<Double>> A, ArrayList<ArrayList<Double>> B,int rows1,int cols1,int rows2,int cols2) {
+    public ArrayList<ArrayList<Double>> addMatrix(ArrayList<ArrayList<Double>> A, ArrayList<ArrayList<Double>> B,int rows1,int cols1,int rows2,int cols2) {
         ArrayList<ArrayList<Double>> C=new ArrayList<>();
 
         if(rows1==rows2 && cols1==cols2)
@@ -398,7 +421,7 @@ public class Calculations {
     }
 
     /**============================================ METHOD FOR SUBTRACTING TWO MATRICES =============================================================**/
-    private ArrayList<ArrayList<Double>> subtractMatrix(ArrayList<ArrayList<Double>> A, ArrayList<ArrayList<Double>> B,int rows1,int cols1,int rows2,int cols2) {
+    public ArrayList<ArrayList<Double>> subtractMatrix(ArrayList<ArrayList<Double>> A, ArrayList<ArrayList<Double>> B,int rows1,int cols1,int rows2,int cols2) {
         ArrayList<ArrayList<Double>> C=new ArrayList<>();
 
         if(rows1==rows2 && cols1==cols2)
@@ -417,7 +440,7 @@ public class Calculations {
     }
 
     /**============================================ METHOD FOR MULTIPLYING TWO MATRICES =============================================================**/
-    private ArrayList<ArrayList<Double>> multiplyMatrix(ArrayList<ArrayList<Double>> A, ArrayList<ArrayList<Double>> B,int rows1,int cols1,int rows2,int cols2) {
+    public ArrayList<ArrayList<Double>> multiplyMatrix(ArrayList<ArrayList<Double>> A, ArrayList<ArrayList<Double>> B,int rows1,int cols1,int rows2,int cols2) {
         ArrayList<ArrayList<Double>> C=new ArrayList<>();
 
         if(cols1==rows2)
@@ -440,11 +463,11 @@ public class Calculations {
     }
 
     /**========================================== METHODS FOR CALCULATING DETERMINANT OF MATRIX =========================================================**/
-    public static Double det2(ArrayList<ArrayList<Double>> A){
+    public  Double det2(ArrayList<ArrayList<Double>> A){
         return A.get(0).get(0)*A.get(1).get(1)-A.get(1).get(0)*A.get(0).get(1);
     }
 
-    public static Double detN(ArrayList<ArrayList<Double>> A,int n){
+    public  Double detN(ArrayList<ArrayList<Double>> A,int n){
         double result=0.0;
         if(n>=3){
             int i1=0,j1=0;
@@ -490,6 +513,56 @@ public class Calculations {
             for(int j=0;j<cols;j++)
                 B.get(i).add(A.get(j).get(i));
         }
+        return B;
+    }
+
+    public Double minors(ArrayList<ArrayList<Double>> A,int rows,int cols,int n){
+        ArrayList<ArrayList<Double>> B=new ArrayList<>();
+        int i1=0,j1=0;
+
+        for(int i=0;i<n-1;i++){
+            B.add(new ArrayList<>());
+            for(int j=0;j<n-1;j++)
+                B.get(i).add(0.0);
+        }
+
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                if(i!=rows && j!=cols){
+                    B.get(i1).set(j1,A.get(i).get(j));
+
+                    if(j1==n-2){
+                        if(i1==n-2)
+                            i1=0;
+                        else i1++;
+                        j1=0;
+                    }else j1++;
+
+                }
+
+            }
+        }
+        return detN(B,n-1);
+    }
+
+    public  ArrayList<ArrayList<Double>> minorMatrix(ArrayList<ArrayList<Double>> A,int n){
+        ArrayList<ArrayList<Double>> B=new ArrayList<>();
+
+        //for 1x1 matrix returning Null matrix
+        if(n==1)return B;
+
+        for(int i=0;i<n;i++){
+            B.add(new ArrayList<>());
+            for(int j=0;j<n;j++)
+                B.get(i).add(0.0);
+        }
+
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                B.get(j).set(i,  minors(A,i,j,n));
+            }
+        }
+
         return B;
     }
 }
