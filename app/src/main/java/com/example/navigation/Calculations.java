@@ -69,7 +69,7 @@ public class Calculations {
                     stringStack.push(c);
                 }
 
-                else if(c=='#' || c=='~' || c=='^' || c=='%' || c=='*' || c=='@' || c=='&'){
+                else if(c=='#' || c=='~' || c=='^' || c=='%' || c=='*' || c=='@' || c=='&' || c=='$'){
                     char c1 = 0;
                     //Error handling of empty function brackets
                     try{
@@ -239,6 +239,17 @@ public class Calculations {
                             }
 
                             stringStack.push(mmList.get(i));
+                            break;
+
+                        case '$':
+                            if(Objects.equals(EE.matrixRowsMap.get(c1), EE.matrixColsMap.get(c1)))
+                                EE.charMap.put(ccList.get(i),trace(EE.matrixMap.get(c1),EE.matrixRowsMap.get(c1)));
+                            else {
+                                instance.messageTextviewList.get(outputCardIndex).setText("Only Square Matrices are applicable for trace");
+                                error=true;
+                            }
+
+                            stringStack.push(ccList.get(i));
                             break;
                     }
                     else {
@@ -705,4 +716,13 @@ public class Calculations {
         return B;
     }
 
+    /**===================================================== METHOD FOR CALCULATING TRACE OF  MATRIX =========================================**/
+    public Double trace(ArrayList<ArrayList<Double>> A,int n){
+        double trace=0;
+
+        for(int i=0;i<n;i++){
+            trace+=A.get(i).get(i);
+        }
+        return trace;
+    }
 }

@@ -103,6 +103,13 @@ public class ExpressionEvaluator {
                     return "Empty Brackets";
             }
 
+            //replacing trace String
+            if(str.contains("trc")){
+                str=str.replace("trc","$");
+                if( str.charAt(str.indexOf("$")+2)==')')
+                    return "Empty Brackets";
+            }
+
 
             //Storing matrices in Hashmap
             if(Character.isUpperCase(str.charAt(i))){

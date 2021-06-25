@@ -718,7 +718,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
-
                 else if(matrixOperationsButtons[5].isPressed()){
                     if(cursorIndex>0 && (Character.isLetterOrDigit(str.charAt(cursorIndex-1)) || str.charAt(cursorIndex-1)==')')) {
                         editTextList.get(i).setText(str.substring(0, cursorIndex) + "·inv()" + str.substring(cursorIndex));
@@ -730,6 +729,16 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
+                else if(matrixOperationsButtons[6].isPressed()){
+                    if(cursorIndex>0 && (Character.isLetterOrDigit(str.charAt(cursorIndex-1)) || str.charAt(cursorIndex-1)==')')) {
+                        editTextList.get(i).setText(str.substring(0, cursorIndex) + "·trc()" + str.substring(cursorIndex));
+                        editTextList.get(i).setSelection(cursorIndex+5);
+                    }
+                    else {
+                        editTextList.get(i).setText(str.substring(0, cursorIndex) + "trc()" + str.substring(cursorIndex));
+                        editTextList.get(i).setSelection(cursorIndex + 4);
+                    }
+                }
 
                 else if(matrixOperationsButtons[7].isPressed()){
                     if(cursorIndex>0 && (Character.isLetterOrDigit(str.charAt(cursorIndex-1)) || str.charAt(cursorIndex-1)==')')) {
