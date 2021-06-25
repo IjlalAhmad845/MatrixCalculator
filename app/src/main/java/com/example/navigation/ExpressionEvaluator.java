@@ -82,6 +82,13 @@ public class ExpressionEvaluator {
                     return "Empty Brackets";
             }
 
+            //replacing cofactor String
+            if(str.contains("cof")){
+                str=str.replace("cof","*");
+                if( str.charAt(str.indexOf("*")+2)==')')
+                    return "Empty Brackets";
+            }
+
 
             //Storing matrices in Hashmap
             if(Character.isUpperCase(str.charAt(i))){
