@@ -96,6 +96,13 @@ public class ExpressionEvaluator {
                     return "Empty Brackets";
             }
 
+            //replacing inverse String
+            if(str.contains("inv")){
+                str=str.replace("inv","&");
+                if( str.charAt(str.indexOf("&")+2)==')')
+                    return "Empty Brackets";
+            }
+
 
             //Storing matrices in Hashmap
             if(Character.isUpperCase(str.charAt(i))){

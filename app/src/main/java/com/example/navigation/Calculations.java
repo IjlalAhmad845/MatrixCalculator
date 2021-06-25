@@ -69,7 +69,7 @@ public class Calculations {
                     stringStack.push(c);
                 }
 
-                else if(c=='#' || c=='~' || c=='^' || c=='%' || c=='*' || c=='@'){
+                else if(c=='#' || c=='~' || c=='^' || c=='%' || c=='*' || c=='@' || c=='&'){
                     char c1 = 0;
                     //Error handling of empty function brackets
                     try{
@@ -200,6 +200,31 @@ public class Calculations {
                             if(Temp.size()==0){
                                 Temp.add(new ArrayList<>());
                                 Temp.get(0).add(1.0);
+                            }
+
+                            EE.matrixMap.put(mmList.get(i),Temp);
+
+                            if (Temp.size() > 0) {
+                                EE.matrixRowsMap.put(mmList.get(i), Temp.get(0).size());
+                                EE.matrixColsMap.put(mmList.get(i), Temp.size());
+                            }
+
+                            stringStack.push(mmList.get(i));
+                            break;
+
+                        case '&':
+                            System.out.println(Temp.size());
+                            if(Objects.equals(EE.matrixRowsMap.get(c1), EE.matrixColsMap.get(c1)))
+                                Temp=inverse(EE.matrixMap.get(c1),EE.matrixColsMap.get(c1));
+                            else {
+                                instance.messageTextviewList.get(outputCardIndex).setText("Only Square Matrices are applicable for inverse");
+                                error=true;
+                            }
+
+                            //1x1 adjoint is always 1 for non zero matrix
+                            if(EE.matrixColsMap.get(c1)==1){
+                                Temp.add(new ArrayList<>());
+                                Temp.get(0).add(1.0/detN(EE.matrixMap.get(c1),1));
                             }
 
                             EE.matrixMap.put(mmList.get(i),Temp);
@@ -652,4 +677,28 @@ public class Calculations {
 
         return B;
     }
+
+    /**===================================================== METHOD FOR GENERATING INVERSE  MATRIX =========================================**/
+    public ArrayList<ArrayList<Double>> inverse(ArrayList<ArrayList<Double>> A,int n){
+        ArrayList<ArrayList<Double>> B=new ArrayList<>();
+
+        if(detN(A,n)!=0) {
+            if(n==1)return B;
+
+            B = adjoint(A, n);
+
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    B.get(i).set(j, B.get(i).get(j) / detN(A, n));
+                }
+            }
+        }
+        else{
+            instance.messageTextviewList.get(outputCardIndex).setText("Singular Matrices do not have inverse");
+            error=true;
+        }
+
+        return B;
+    }
+
 }
