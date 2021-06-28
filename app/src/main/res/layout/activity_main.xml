@@ -39,7 +39,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="170dp"
-                    android:layout_height="200dp"
+                    android:layout_height="match_parent"
                     android:visibility="invisible" />
             </LinearLayout>
 

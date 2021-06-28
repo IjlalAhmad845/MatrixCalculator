@@ -133,6 +133,17 @@ public class MainActivity extends AppCompatActivity {
     /**=================================================== DYNAMIC MATRIX PREVIEW CARDS =======================================================**/
     public void addCards(View v){
 
+        CardView cardView = new CardView(this);
+
+        LinearLayout.LayoutParams matrixCardsParams = new LinearLayout.LayoutParams(
+                linearLayout.getWidth()/linearLayout.getChildCount()-linearLayout.getWidth()/linearLayout.getChildCount()/10,
+                linearLayout.getHeight()-linearLayout.getHeight()/5
+        );
+        matrixCardsParams.setMargins(linearLayout.getWidth()/linearLayout.getChildCount()/20, linearLayout.getHeight()/10, linearLayout.getWidth()/linearLayout.getChildCount()/20,linearLayout.getHeight()/10);
+
+        cardView.setLayoutParams(matrixCardsParams);
+
+
         ConstraintLayout Cl=new ConstraintLayout(this);
         ImageButton removeButton=new ImageButton(this);
         removeButton.setId(View.generateViewId());
@@ -197,9 +208,9 @@ public class MainActivity extends AppCompatActivity {
                         ViewGroup.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT
                 );
-                params.setMargins((int) (4 * scale + 0.5f), (int) (0 * scale + 0.5f), (int) (4 * scale + 0.5f), (int) (0 * scale + 0.5f));
+                params.setMargins(matrixCardsParams.width/48, 0,matrixCardsParams.width/48,0);
 
-                matrixPreviewTextviewArray.setTextSize(15f);
+                matrixPreviewTextviewArray.setTextSize((float) Math.sqrt(Math.pow(matrixCardsParams.width,2)+Math.pow(matrixCardsParams.height,2))/32);
                 matrixPreviewTextviewArray.setLayoutParams(params);
                 matrixPreviewTextviewArray.setText("0");
                 matrixPreviewLLArray.addView(matrixPreviewTextviewArray);
@@ -235,32 +246,23 @@ public class MainActivity extends AppCompatActivity {
         //connecting different Constraints programmatically on Constraint layout
         ConstraintSet set=new ConstraintSet();
         set.clone(Cl);
-        set.connect(removeButton.getId(),ConstraintSet.RIGHT,ConstraintSet.PARENT_ID,ConstraintSet.RIGHT,12);
+        set.connect(removeButton.getId(),ConstraintSet.RIGHT,ConstraintSet.PARENT_ID,ConstraintSet.RIGHT,matrixCardsParams.width/24);
         set.connect(removeButton.getId(),ConstraintSet.TOP,ConstraintSet.PARENT_ID,ConstraintSet.TOP,0);
 
-        set.connect(editButton.getId(),ConstraintSet.RIGHT,ConstraintSet.PARENT_ID,ConstraintSet.RIGHT,12);
+        set.connect(editButton.getId(),ConstraintSet.RIGHT,ConstraintSet.PARENT_ID,ConstraintSet.RIGHT,matrixCardsParams.width/24);
         set.connect(editButton.getId(),ConstraintSet.BOTTOM,ConstraintSet.PARENT_ID,ConstraintSet.BOTTOM,0);
 
-        set.connect(matrixName.getId(),ConstraintSet.RIGHT,ConstraintSet.PARENT_ID,ConstraintSet.RIGHT,54);
+        set.connect(matrixName.getId(),ConstraintSet.RIGHT,ConstraintSet.PARENT_ID,ConstraintSet.RIGHT,matrixCardsParams.width/8);
         set.connect(matrixName.getId(),ConstraintSet.LEFT,ConstraintSet.PARENT_ID,ConstraintSet.LEFT,0);
-        set.connect(matrixName.getId(),ConstraintSet.TOP,ConstraintSet.PARENT_ID,ConstraintSet.TOP,20);
+        set.connect(matrixName.getId(),ConstraintSet.TOP,ConstraintSet.PARENT_ID,ConstraintSet.TOP,matrixCardsParams.height/24);
 
 
         set.connect(matrixPreviewContainerLL.getId(),ConstraintSet.LEFT,ConstraintSet.PARENT_ID,ConstraintSet.LEFT,0);
-        set.connect(matrixPreviewContainerLL.getId(),ConstraintSet.RIGHT,ConstraintSet.PARENT_ID,ConstraintSet.RIGHT,54);
+        set.connect(matrixPreviewContainerLL.getId(),ConstraintSet.RIGHT,ConstraintSet.PARENT_ID,ConstraintSet.RIGHT,matrixCardsParams.width/8);
         set.connect(matrixPreviewContainerLL.getId(),ConstraintSet.BOTTOM,ConstraintSet.PARENT_ID,ConstraintSet.BOTTOM,0);
         set.connect(matrixPreviewContainerLL.getId(),ConstraintSet.TOP,ConstraintSet.PARENT_ID,ConstraintSet.TOP,0);
         set.applyTo(Cl);
 
-
-        CardView cardView = new CardView(this);
-        final float scale = cardView.getContext().getResources().getDisplayMetrics().density;
-
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                (int) (150 * scale + 0.5f),
-                (int) (200 * scale + 0.5f)
-        );
-        params.setMargins((int) (10 * scale + 0.5f), (int) (20 * scale + 0.5f), (int) (10 * scale + 0.5f), (int) (10 * scale + 0.5f));
 
 
 
@@ -270,7 +272,7 @@ public class MainActivity extends AppCompatActivity {
         cardView.setAlpha(0f);
 
         //adding upcoming cards to horizontal scroll view
-        linearLayout.addView(cardView,linearLayout.getChildCount()-1,params);
+        linearLayout.addView(cardView,linearLayout.getChildCount()-1);
 
         cardView.animate().alpha(1.0f).setDuration(200).setListener(null);
         scrollView.fullScroll(View.FOCUS_RIGHT);
