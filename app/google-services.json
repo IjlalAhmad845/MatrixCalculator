@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "432033169457",
+    "project_id": "navigation-c3c79",
+    "storage_bucket": "navigation-c3c79.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:432033169457:android:0e76f3bf5cd1f7a5545510",
+        "android_client_info": {
+          "package_name": "com.example.navigation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "432033169457-lgu3ulfoocgndkhj7vgr2its6qcitfp3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqP4FxfqkAOi0hguBk_xoYkt6u0ozX3mo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "432033169457-lgu3ulfoocgndkhj7vgr2its6qcitfp3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -202,7 +202,6 @@ public class MainActivity extends AppCompatActivity {
             //rows
             for(int j=0;j<5;j++){
                 TextView matrixPreviewTextviewArray=new TextView(this);
-                final float scale = matrixPreviewTextviewArray.getContext().getResources().getDisplayMetrics().density;
 
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                         ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -373,7 +372,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 /**=================================================== DYNAMIC TEXT FIELDS =======================================================**/
-    public void addtextfield(){
+    public void addResultField(){
 
         ConstraintLayout Cl=new ConstraintLayout(this);
         ImageButton removeButton=new ImageButton(this);
@@ -480,15 +479,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         CardView cardView = new CardView(this);
-        final float scale2= cardView.getContext().getResources().getDisplayMetrics().density;
 
-        LinearLayout.LayoutParams cardparams = new LinearLayout.LayoutParams(
+        LinearLayout.LayoutParams resultCardParams = new LinearLayout.LayoutParams(
                ViewGroup.LayoutParams.MATCH_PARENT,
-                (int) (160 * scale2 + 0.5f)
+                verticalLL.getHeight()/verticalLL.getChildCount()-verticalLL.getHeight()/verticalLL.getChildCount()/10
         );
-        cardparams.setMargins((int) (10 * scale2 + 0.5f), (int) (20 * scale2 + 0.5f), (int) (10 * scale2 + 0.5f), (int) (0 * scale2 + 0.5f));
+        resultCardParams.setMargins(verticalLL.getWidth()/50, verticalLL.getHeight()/verticalLL.getChildCount()/20,verticalLL.getWidth()/50, 0);
 
-
+        System.out.println(verticalLL.getHeight());
 
         cardView.setElevation(20f);
         cardView.setRadius(10f);
@@ -497,7 +495,7 @@ public class MainActivity extends AppCompatActivity {
         cardView.addView(Cl);
         cardView.setAlpha(0f);
 
-        verticalLL.addView(cardView,verticalLL.getChildCount()-2,cardparams);
+        verticalLL.addView(cardView,verticalLL.getChildCount()-2,resultCardParams);
         cardView.animate().alpha(1.0f).setDuration(200).setListener(null);
         scrollView2.fullScroll(View.FOCUS_DOWN);
 
@@ -517,7 +515,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         if(verticalLL.getChildAt(verticalLL.getChildCount()-3)==cardView)
-                            scrollView2.smoothScrollBy(0, (int) (-185 * scale2 + 0.5f));
+                            scrollView2.smoothScrollBy(0, -verticalLL.getHeight()/verticalLL.getChildCount());
                         if(verticalLL.getChildCount()<=3)
                             keyboardCard.setVisibility(View.VISIBLE);
 
@@ -547,7 +545,6 @@ public class MainActivity extends AppCompatActivity {
     /**================================================ HOMEPAGE'S KEYBOARD FUNCTIONALITY ==============================**/
     public void KeyboardInput(View v){
         String str;
-        String removed;
         int cursorIndex;
 
         for(int i=0;i<editTextList.size();i++) {
@@ -788,6 +785,7 @@ public class MainActivity extends AppCompatActivity {
         calculations.masterControlFunction();
     }
 
+    /**===================================== METHOD FOR INITIAL HOME SCREEN SETUP ===========================================**/
     public void initializeWidgets(){
 
         Toolbar toolbar=findViewById(R.id.toolbar);
@@ -803,11 +801,11 @@ public class MainActivity extends AppCompatActivity {
         CardView cardView = new CardView(this);
         final float scale = cardView.getContext().getResources().getDisplayMetrics().density;
 
-        LinearLayout.LayoutParams cardparams = new LinearLayout.LayoutParams(
+        LinearLayout.LayoutParams addCardParams = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                (int) (160 * scale + 0.5f)
+                (int)(140*scale+0.5f)
         );
-        cardparams.setMargins((int) (10 * scale + 0.5f), (int) (20 * scale + 0.5f), (int) (10 * scale + 0.5f), (int) (20 * scale + 0.5f));
+        addCardParams.setMargins((int)(8*scale+0.5f),(int)(10*scale+0.5f),(int)(10*scale+0.5f), (int)(8*scale+0.5f));
 
         cardView.setElevation(20f);
         cardView.setRadius(10f);
@@ -823,7 +821,7 @@ public class MainActivity extends AppCompatActivity {
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addtextfield();
+                addResultField();
             }
         });
 
@@ -831,7 +829,7 @@ public class MainActivity extends AppCompatActivity {
        //cardView.animate().alpha(1.0f).setDuration(200).setListener(null);
         //scrollView2.fullScroll(View.FOCUS_DOWN);
 
-                verticalLL.addView(cardView, verticalLL.getChildCount() - 1, cardparams);
+                verticalLL.addView(cardView, verticalLL.getChildCount() - 1, addCardParams);
 
 
         buttons[0]=findViewById(R.id.button0);
