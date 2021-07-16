@@ -5,6 +5,8 @@ import androidx.cardview.widget.CardView;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,7 +27,7 @@ public class MatrixInput extends AppCompatActivity {
 
     int index;
     int row=2,col=2,focusX=0,focusY=0;
-    int p=0;
+    boolean isMatrixEmpty=true;
     String currentSpinnerValue;
 
     MaterialButton rowUp,rowDown,colUp,colDown;
@@ -291,6 +293,38 @@ public class MatrixInput extends AppCompatActivity {
         colDown=findViewById(R.id.coldown);
 
 
+        findViewById(R.id.backButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isMatrixEmpty=true;
+                for(int i=0;i<5;i++)
+                    for(int j=0;j<5;j++)
+                        if(!matrixFields[i][j].getText().toString().isEmpty()) {
+                            isMatrixEmpty=false;
+                            break;
+                        }
+
+                if(!isMatrixEmpty)
+                        new AlertDialog.Builder(MatrixInput.this)
+                        .setTitle("Back")
+                        .setMessage("You will loose your matrix")
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                back();
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }).show();
+                else back();
+            }
+
+        });
+
 
 
         matrixFields[0][0]=findViewById(R.id.et00);
@@ -432,7 +466,7 @@ public class MatrixInput extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    public void back(View v) {
+    public void back() {
         super.onBackPressed();
     }
 
@@ -446,7 +480,32 @@ public class MatrixInput extends AppCompatActivity {
                     super.onAnimationEnd(animation);
                 }
             });
-        else
-        super.onBackPressed();
+        else {
+            isMatrixEmpty=true;
+            for(int i=0;i<5;i++)
+                for(int j=0;j<5;j++)
+                    if(!matrixFields[i][j].getText().toString().isEmpty()) {
+                        isMatrixEmpty=false;
+                        break;
+                    }
+
+            if(!isMatrixEmpty)
+                new AlertDialog.Builder(MatrixInput.this)
+                        .setTitle("Back")
+                        .setMessage("You will loose your matrix")
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                back();
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }).show();
+            else back();
+        }
     }
 }
