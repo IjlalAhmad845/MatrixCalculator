@@ -114,18 +114,37 @@ public class MatrixInput extends AppCompatActivity {
 
     }
 
-    public void showHideKeyboard(View v){
+    public void showHideKeyboard(){
 
-        if(p==1){
-            keyboardcard.animate().alpha(1.0f).setDuration(70).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    keyboardcard.setVisibility(View.VISIBLE);
-                    super.onAnimationEnd(animation);
-                }
-            });
+        for(int i=0;i<5;i++)
+            for(int j=0;j<5;j++) {
+                matrixFields[i][j].setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        keyboardcard.animate().alpha(1.0f).setDuration(70).setListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                keyboardcard.setVisibility(View.VISIBLE);
+                                super.onAnimationEnd(animation);
+                            }
+                        });
+                    }
+                });
+                matrixFields[i][j].setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        keyboardcard.animate().alpha(1.0f).setDuration(70).setListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                keyboardcard.setVisibility(View.VISIBLE);
+                                super.onAnimationEnd(animation);
+                            }
+                        });
+                    }
+                });
+            }
 
-        }
+        /*
         else if(p==0){
             keyboardcard.animate().alpha(0.0f).setDuration(150).setListener(new AnimatorListenerAdapter() {
                 @Override
@@ -136,7 +155,7 @@ public class MatrixInput extends AppCompatActivity {
             });
 
         }
-        p=1-p;
+        p=1-p;*/
 
     }
 
@@ -181,7 +200,7 @@ public class MatrixInput extends AppCompatActivity {
                 if(matrixFields[i][j].isFocused()) {
                     focusX=j;focusY=i;
                 }
-        System.out.println(focusY);
+        //System.out.println(focusY);
 
                 //UP button
         if(imgbtns[1].isPressed() && focusY>0){
@@ -335,6 +354,7 @@ public class MatrixInput extends AppCompatActivity {
         matrixFields[4][3].setShowSoftInputOnFocus(false);
         matrixFields[4][4].setShowSoftInputOnFocus(false);
 
+        showHideKeyboard();
 
         //layouts
         textInputLayouts[0][0]=findViewById(R.id.L00);
@@ -416,5 +436,17 @@ public class MatrixInput extends AppCompatActivity {
         super.onBackPressed();
     }
 
-
+    @Override
+    public void onBackPressed() {
+        if(keyboardcard.getVisibility()==View.VISIBLE)
+            keyboardcard.animate().alpha(0.0f).setDuration(150).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    keyboardcard.setVisibility(View.GONE);
+                    super.onAnimationEnd(animation);
+                }
+            });
+        else
+        super.onBackPressed();
+    }
 }

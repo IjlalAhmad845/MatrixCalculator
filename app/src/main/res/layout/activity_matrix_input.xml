@@ -115,8 +115,8 @@
         android:id="@+id/imageButton"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:onClick="back"
         app:layout_constraintStart_toStartOf="parent"
@@ -127,8 +127,8 @@
         android:id="@+id/imageButton2"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:onClick="sendData"
         app:layout_constraintEnd_toEndOf="parent"
@@ -144,7 +144,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.128">
+        app:layout_constraintVertical_bias="0.08">
 
         <LinearLayout
             android:id="@+id/LL"
@@ -181,8 +181,7 @@
                         android:hint="0"
                         android:inputType="numberDecimal"
                         android:minEms="2"
-                        android:textSize="22dp"
-
+                        android:textSize="20dp"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -203,7 +202,7 @@
                         android:hint="0"
                         android:inputType="numberDecimal"
                         android:minEms="2"
-                        android:textSize="22dp" />
+                        android:textSize="20dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -223,7 +222,7 @@
                         android:hint="0"
                         android:inputType="numberDecimal"
                         android:minEms="2"
-                        android:textSize="22dp" />
+                        android:textSize="20dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -244,7 +243,7 @@
                         android:hint="0"
                         android:inputType="numberDecimal"
                         android:minEms="2"
-                        android:textSize="22dp" />
+                        android:textSize="20dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -264,7 +263,7 @@
                         android:hint="0"
                         android:inputType="numberDecimal"
                         android:minEms="2"
-                        android:textSize="22dp" />
+                        android:textSize="20dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
@@ -290,7 +289,7 @@
                         android:hint="0"
                         android:inputType="numberDecimal"
                         android:minEms="2"
-                        android:textSize="22dp" />
+                        android:textSize="20dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -310,7 +309,7 @@
                         android:hint="0"
                         android:inputType="numberDecimal"
                         android:minEms="2"
-                        android:textSize="22dp" />
+                        android:textSize="20dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -330,7 +329,7 @@
                         android:hint="0"
                         android:inputType="numberDecimal"
                         android:minEms="2"
-                        android:textSize="22dp" />
+                        android:textSize="20dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
                 >
@@ -351,7 +350,7 @@
                         android:hint="0"
                         android:inputType="numberDecimal"
                         android:minEms="2"
-                        android:textSize="22dp" />
+                        android:textSize="20dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -371,7 +370,7 @@
                         android:hint="0"
                         android:inputType="numberDecimal"
                         android:minEms="2"
-                        android:textSize="22dp" />
+                        android:textSize="20dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
@@ -398,7 +397,7 @@
                         android:hint="0"
                         android:inputType="numberDecimal"
                         android:minEms="2"
-                        android:textSize="22dp" />
+                        android:textSize="20dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -418,7 +417,7 @@
                         android:hint="0"
                         android:inputType="numberDecimal"
                         android:minEms="2"
-                        android:textSize="22dp" />
+                        android:textSize="20dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -438,7 +437,7 @@
                         android:hint="0"
                         android:inputType="numberDecimal"
                         android:minEms="2"
-                        android:textSize="22dp" />
+                        android:textSize="20dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
                 >
@@ -459,7 +458,7 @@
                         android:hint="0"
                         android:inputType="numberDecimal"
                         android:minEms="2"
-                        android:textSize="22dp" />
+                        android:textSize="20dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -479,7 +478,7 @@
                         android:hint="0"
                         android:inputType="numberDecimal"
                         android:minEms="2"
-                        android:textSize="22dp" />
+                        android:textSize="20dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
@@ -506,7 +505,7 @@
                         android:hint="0"
                         android:inputType="numberDecimal"
                         android:minEms="2"
-                        android:textSize="22dp" />
+                        android:textSize="20dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -526,7 +525,7 @@
                         android:hint="0"
                         android:inputType="numberDecimal"
                         android:minEms="2"
-                        android:textSize="22dp" />
+                        android:textSize="20dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -546,7 +545,7 @@
                         android:hint="0"
                         android:inputType="numberDecimal"
                         android:minEms="2"
-                        android:textSize="22dp" />
+                        android:textSize="20dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
                 >
@@ -567,7 +566,7 @@
                         android:hint="0"
                         android:inputType="numberDecimal"
                         android:minEms="2"
-                        android:textSize="22dp" />
+                        android:textSize="20dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -587,7 +586,7 @@
                         android:hint="0"
                         android:inputType="numberDecimal"
                         android:minEms="2"
-                        android:textSize="22dp" />
+                        android:textSize="20dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
@@ -614,7 +613,7 @@
                         android:hint="0"
                         android:inputType="numberDecimal"
                         android:minEms="2"
-                        android:textSize="22dp" />
+                        android:textSize="20dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -634,7 +633,7 @@
                         android:hint="0"
                         android:inputType="numberDecimal"
                         android:minEms="2"
-                        android:textSize="22dp" />
+                        android:textSize="20dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -654,7 +653,7 @@
                         android:hint="0"
                         android:inputType="numberDecimal"
                         android:minEms="2"
-                        android:textSize="22dp" />
+                        android:textSize="20dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -674,7 +673,7 @@
                         android:hint="0"
                         android:inputType="numberDecimal"
                         android:minEms="2"
-                        android:textSize="22dp" />
+                        android:textSize="20dp" />
 
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -695,7 +694,7 @@
                         android:hint="0"
                         android:inputType="numberDecimal"
                         android:minEms="2"
-                        android:textSize="22dp" />
+                        android:textSize="20dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -706,60 +705,43 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ImageButton
-        android:id="@+id/keyboardbutton"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="8dp"
-        android:background="#E3F2FD"
-        android:onClick="showHideKeyboard"
-        app:layout_constraintBottom_toTopOf="@+id/numpadCard"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.053"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_keyboard" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/menu"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="110dp"
         android:layout_height="55dp"
+
         android:background="@android:color/transparent"
         android:hint="Name"
-
+        app:errorEnabled="true"
         app:layout_constraintBottom_toTopOf="@+id/coldown"
         app:layout_constraintEnd_toStartOf="@+id/rowdown"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:errorEnabled="true"
-        app:layout_constraintStart_toStartOf="@+id/keyboardbutton">
+        app:layout_constraintHorizontal_bias=".3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rowdown">
 
         <AutoCompleteTextView
             android:id="@+id/textfield"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="none"
-            android:textSize="12dp"
-            />
+            android:textSize="12dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/numpadCard"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:elevation="20dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent=".25"
+        android:layout_margin="5dp"
+        android:elevation="10dp"
         app:cardCornerRadius="5dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -989,7 +971,6 @@
 
             </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
 
