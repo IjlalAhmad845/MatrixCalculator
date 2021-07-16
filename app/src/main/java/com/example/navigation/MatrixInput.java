@@ -5,6 +5,8 @@ import androidx.cardview.widget.CardView;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,7 +27,7 @@ public class MatrixInput extends AppCompatActivity {
 
     int index;
     int row=2,col=2,focusX=0,focusY=0;
-    int p=0;
+    boolean isMatrixEmpty=true;
     String currentSpinnerValue;
 
     MaterialButton rowUp,rowDown,colUp,colDown;
@@ -114,18 +116,39 @@ public class MatrixInput extends AppCompatActivity {
 
     }
 
-    public void showHideKeyboard(View v){
+    public void showHideKeyboard(){
 
-        if(p==1){
-            keyboardcard.animate().alpha(1.0f).setDuration(70).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    keyboardcard.setVisibility(View.VISIBLE);
-                    super.onAnimationEnd(animation);
-                }
-            });
+        for(int i=0;i<=row;i++)
+            for(int j=0;j<=col;j++) {
+                matrixFields[i][j].setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
 
-        }
+                        if(!(rowUp.isPressed() || rowDown.isPressed() || colUp.isPressed() || colDown.isPressed()))
+                        keyboardcard.animate().alpha(1.0f).setDuration(70).setListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                keyboardcard.setVisibility(View.VISIBLE);
+                                super.onAnimationEnd(animation);
+                            }
+                        });
+                    }
+                });
+                matrixFields[i][j].setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        keyboardcard.animate().alpha(1.0f).setDuration(70).setListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                keyboardcard.setVisibility(View.VISIBLE);
+                                super.onAnimationEnd(animation);
+                            }
+                        });
+                    }
+                });
+            }
+
+        /*
         else if(p==0){
             keyboardcard.animate().alpha(0.0f).setDuration(150).setListener(new AnimatorListenerAdapter() {
                 @Override
@@ -136,7 +159,7 @@ public class MatrixInput extends AppCompatActivity {
             });
 
         }
-        p=1-p;
+        p=1-p;*/
 
     }
 
@@ -181,7 +204,7 @@ public class MatrixInput extends AppCompatActivity {
                 if(matrixFields[i][j].isFocused()) {
                     focusX=j;focusY=i;
                 }
-        System.out.println(focusY);
+        //System.out.println(focusY);
 
                 //UP button
         if(imgbtns[1].isPressed() && focusY>0){
@@ -272,6 +295,38 @@ public class MatrixInput extends AppCompatActivity {
         colDown=findViewById(R.id.coldown);
 
 
+        findViewById(R.id.backButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isMatrixEmpty=true;
+                for(int i=0;i<=row;i++)
+                    for(int j=0;j<=col;j++)
+                        if(!matrixFields[i][j].getText().toString().isEmpty()) {
+                            isMatrixEmpty=false;
+                            break;
+                        }
+
+                if(!isMatrixEmpty)
+                        new AlertDialog.Builder(MatrixInput.this)
+                        .setTitle("Back")
+                        .setMessage("You will loose your matrix")
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                back();
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }).show();
+                else back();
+            }
+
+        });
+
 
 
         matrixFields[0][0]=findViewById(R.id.et00);
@@ -335,6 +390,7 @@ public class MatrixInput extends AppCompatActivity {
         matrixFields[4][3].setShowSoftInputOnFocus(false);
         matrixFields[4][4].setShowSoftInputOnFocus(false);
 
+        showHideKeyboard();
 
         //layouts
         textInputLayouts[0][0]=findViewById(R.id.L00);
@@ -412,9 +468,46 @@ public class MatrixInput extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    public void back(View v) {
+    public void back() {
         super.onBackPressed();
     }
 
+    @Override
+    public void onBackPressed() {
+        if(keyboardcard.getVisibility()==View.VISIBLE)
+            keyboardcard.animate().alpha(0.0f).setDuration(150).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    keyboardcard.setVisibility(View.GONE);
+                    super.onAnimationEnd(animation);
+                }
+            });
+        else {
+            isMatrixEmpty=true;
+            for(int i=0;i<=row;i++)
+                for(int j=0;j<=col;j++)
+                    if(!matrixFields[i][j].getText().toString().isEmpty()) {
+                        isMatrixEmpty=false;
+                        break;
+                    }
 
+            if(!isMatrixEmpty)
+                new AlertDialog.Builder(MatrixInput.this)
+                        .setTitle("Back")
+                        .setMessage("You will loose your matrix")
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                back();
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }).show();
+            else back();
+        }
+    }
 }

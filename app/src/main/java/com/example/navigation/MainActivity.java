@@ -210,9 +210,10 @@ public class MainActivity extends AppCompatActivity {
                 params.setMargins(matrixCardsParams.width/48, 0,matrixCardsParams.width/48,0);
 
                 matrixPreviewTextviewArray.setTextSize((float) Math.sqrt(Math.pow(matrixCardsParams.width,2)+Math.pow(matrixCardsParams.height,2))/32);
-                matrixPreviewTextviewArray.setLayoutParams(params);
+               // matrixPreviewTextviewArray.setLayoutParams(params);
                 matrixPreviewTextviewArray.setText("0");
-                matrixPreviewLLArray.addView(matrixPreviewTextviewArray);
+                //matrixPreviewTextviewArray.setTextSize(matrixCardsParams.width/42);
+                matrixPreviewLLArray.addView(matrixPreviewTextviewArray,params);
 
                 matrixPreviewTextviewList.get(counter1).get(i).add(matrixPreviewTextviewArray);
 
