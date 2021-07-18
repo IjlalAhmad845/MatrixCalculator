@@ -298,31 +298,41 @@ public class MatrixInput extends AppCompatActivity {
         findViewById(R.id.backButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isMatrixEmpty=true;
-                for(int i=0;i<=row;i++)
-                    for(int j=0;j<=col;j++)
-                        if(!matrixFields[i][j].getText().toString().isEmpty()) {
-                            isMatrixEmpty=false;
-                            break;
+                if(keyboardcard.getVisibility()==View.VISIBLE)
+                    keyboardcard.animate().alpha(0.0f).setDuration(150).setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            keyboardcard.setVisibility(View.GONE);
+                            super.onAnimationEnd(animation);
                         }
+                    });
+                else {
+                    isMatrixEmpty=true;
+                    for(int i=0;i<=row;i++)
+                        for(int j=0;j<=col;j++)
+                            if(!matrixFields[i][j].getText().toString().isEmpty()) {
+                                isMatrixEmpty=false;
+                                break;
+                            }
 
-                if(!isMatrixEmpty)
+                    if(!isMatrixEmpty)
                         new AlertDialog.Builder(MatrixInput.this)
-                        .setTitle("Back")
-                        .setMessage("You will loose your matrix")
-                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                back();
-                            }
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        }).show();
-                else back();
+                                .setTitle("Back")
+                                .setMessage("You will loose your matrix")
+                                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        back();
+                                    }
+                                })
+                                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                }).show();
+                    else back();
+                }
             }
 
         });
