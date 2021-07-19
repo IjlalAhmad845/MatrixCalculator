@@ -62,6 +62,7 @@ public class Calculations {
             expression=EE.Convert(expression);
             instance.messageTextviewList.get(outputCardIndex).setText(expression);
 
+            //Postfix Calculator loop
             for(int i=0;i<expression.length();i++){
                 char c=expression.charAt(i);
 
@@ -81,6 +82,7 @@ public class Calculations {
 
                     if(!error && (Character.isUpperCase(c1) || mmList.contains(c1)))
                     switch (c){
+                        //for determinant
                         case '#':
                             //System.out.println(EE.matrixRowsMap.get(c1));
                             if(Objects.equals(EE.matrixRowsMap.get(c1), EE.matrixColsMap.get(c1)))
@@ -93,6 +95,7 @@ public class Calculations {
                             stringStack.push(ccList.get(i));
                             break;
 
+                        //for transpose
                         case '~':
                             Temp=transpose(EE.matrixMap.get(c1),EE.matrixRowsMap.get(c1),EE.matrixColsMap.get(c1));
                             EE.matrixMap.put(mmList.get(i),Temp);
@@ -105,6 +108,7 @@ public class Calculations {
                             stringStack.push(mmList.get(i));
                             break;
 
+                        //for nth power
                         case '^':
 
                             if (EE.matrixMap.get(c1).size() > 0){
@@ -120,8 +124,17 @@ public class Calculations {
                                         }
                                     }
                                 }
-                                else if(Integer.parseInt(EE.powerList.get(powerIterator))==1)
-                                    Temp=EE.matrixMap.get(c1);
+                                else if(Integer.parseInt(EE.powerList.get(powerIterator))==1){
+                                    Temp.clear();
+
+                                    for(int j=0;j<EE.matrixColsMap.get(c1);j++){
+                                        Temp.add(new ArrayList<>());
+                                        for(int k=0;k<EE.matrixRowsMap.get(c1);k++)
+                                            Temp.get(j).add(EE.matrixMap.get(c1).get(i).get(j));
+
+                                    }
+                                }
+
                                 else{
                                     Temp=multiplyMatrix(EE.matrixMap.get(c1),EE.matrixMap.get(c1),EE.matrixRowsMap.get(c1),EE.matrixColsMap.get(c1),EE.matrixRowsMap.get(c1),EE.matrixColsMap.get(c1));
 
@@ -142,6 +155,7 @@ public class Calculations {
                             stringStack.push(mmList.get(i));
                             break;
 
+                        //for minor matrix
                         case '%':
                             if(Objects.equals(EE.matrixRowsMap.get(c1), EE.matrixColsMap.get(c1))){
                                 Temp=minorMatrix(EE.matrixMap.get(c1),EE.matrixColsMap.get(c1));
@@ -167,6 +181,7 @@ public class Calculations {
                             stringStack.push(mmList.get(i));
                             break;
 
+                        //for cofactor matrix
                         case '*':
                             if(Objects.equals(EE.matrixRowsMap.get(c1), EE.matrixColsMap.get(c1))){
                                 Temp=cofactorMatrix(EE.matrixMap.get(c1),EE.matrixColsMap.get(c1));
@@ -191,6 +206,7 @@ public class Calculations {
                             stringStack.push(mmList.get(i));
                             break;
 
+                        //for adjoint
                         case '@':
                             if(Objects.equals(EE.matrixRowsMap.get(c1), EE.matrixColsMap.get(c1))) {
                                 Temp=adjoint(EE.matrixMap.get(c1),EE.matrixColsMap.get(c1));
@@ -216,6 +232,7 @@ public class Calculations {
                             stringStack.push(mmList.get(i));
                             break;
 
+                        //for inverse
                         case '&':
                             if(Objects.equals(EE.matrixRowsMap.get(c1), EE.matrixColsMap.get(c1))) {
                                 Temp=inverse(EE.matrixMap.get(c1),EE.matrixColsMap.get(c1));
@@ -241,6 +258,7 @@ public class Calculations {
                             stringStack.push(mmList.get(i));
                             break;
 
+                        //for trace
                         case '$':
                             if(Objects.equals(EE.matrixRowsMap.get(c1), EE.matrixColsMap.get(c1)))
                                 EE.charMap.put(ccList.get(i),trace(EE.matrixMap.get(c1),EE.matrixRowsMap.get(c1)));

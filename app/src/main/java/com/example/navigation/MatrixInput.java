@@ -319,7 +319,7 @@ public class MatrixInput extends AppCompatActivity {
                     if(!isMatrixEmpty)
                         new AlertDialog.Builder(MatrixInput.this)
                                 .setTitle("Back")
-                                .setMessage("You will loose your matrix")
+                                .setMessage("You will Loose your Changes")
                                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -550,7 +550,7 @@ public class MatrixInput extends AppCompatActivity {
             if(!isMatrixEmpty)
                 new AlertDialog.Builder(MatrixInput.this)
                         .setTitle("Back")
-                        .setMessage("You will loose your matrix")
+                        .setMessage("You will Loose your Changes")
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
