@@ -27,6 +27,7 @@ public class MatrixInput extends AppCompatActivity {
 
     int index;
     int row=2,col=2,focusX=0,focusY=0;
+    int matrixTextSize=0,matrixValueSign=0;
     boolean isMatrixEmpty=true;
     String currentSpinnerValue;
 
@@ -461,21 +462,42 @@ public class MatrixInput extends AppCompatActivity {
 
     /**============================================ SENDING MATRIX DATA BACK TO HOME PAGE==================================**/
     public void sendData(View v){
-
+        matrixTextSize=0;matrixValueSign=0;
         matrixList.clear();
         for(int i=0;i<=row;i++){
             matrixList.add(new ArrayList<>());
-            for(int j=0;j<=col;j++)
-                if(!matrixFields[j][i].getText().toString().equals(""))
-                matrixList.get(i).add(String.valueOf(matrixFields[j][i].getText()));
+            for(int j=0;j<=col;j++) {
+                if (!matrixFields[j][i].getText().toString().equals(""))
+                    matrixList.get(i).add(String.valueOf(matrixFields[j][i].getText()));
                 else
                     matrixList.get(i).add("0");
 
+                if (matrixTextSize < matrixList.get(i).get(j).length()){
+                    matrixTextSize = matrixList.get(i).get(j).length();
+                    if(matrixTextSize==4 && matrixList.get(i).get(j).charAt(0)=='-')
+                        matrixValueSign=1;
+                }
+            }
+        }
+        System.out.println(matrixTextSize);
+
+        if((matrixTextSize<=3 && matrixValueSign==0) || (matrixTextSize<=4 && matrixValueSign==1)){
+            MainActivity.getInstance().inittextviews(index,matrixList, currentSpinnerValue,matrixTextSize);
+            super.onBackPressed();
+        }
+        else {
+            new AlertDialog.Builder(MatrixInput.this)
+                    .setTitle("Alert")
+                    .setMessage("Matrix value must lie between -999 to 999")
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    }).show();
         }
 
-        MainActivity.getInstance().inittextviews(index,matrixList, currentSpinnerValue);
 
-        super.onBackPressed();
     }
 
     public void back() {

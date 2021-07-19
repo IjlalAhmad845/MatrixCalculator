@@ -69,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Integer> matrixOutputIDList =new ArrayList<>();
     ArrayList<TextView> messageTextviewList=new ArrayList<>();
 
+
+    LinearLayout.LayoutParams matrixCardsParams;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     /**=================================================== REVERTING BACK TO MATRIX PREVIEW CARDS =======================================================**/
-    public void inittextviews(int index,ArrayList<ArrayList<String>> s1,String matrixName){
+    public void inittextviews(int index,ArrayList<ArrayList<String>> s1,String matrixName,int matrixTextSize){
 
 
         for(int i=0;i<5;i++)
@@ -109,6 +112,19 @@ public class MainActivity extends AppCompatActivity {
             for(int j=0;j<s1.get(0).size();j++){
                 matrixPreviewTextviewList.get(index).get(i).get(j).setText(s1.get(i).get(j));
                 matrixPreviewTextviewList.get(index).get(i).get(j).setVisibility(View.VISIBLE);
+            }
+
+
+        for(int i=0;i<s1.size();i++)
+            for(int j=0;j<s1.get(0).size();j++){
+                if(matrixTextSize==1)
+                matrixPreviewTextviewList.get(index).get(i).get(j).setTextSize(matrixCardsParams.width/20);
+                else if(matrixTextSize==2)
+                    matrixPreviewTextviewList.get(index).get(i).get(j).setTextSize(matrixCardsParams.width/24);
+                else if(matrixTextSize==3)
+                    matrixPreviewTextviewList.get(index).get(i).get(j).setTextSize(matrixCardsParams.width/32);
+                else if(matrixTextSize==4)
+                    matrixPreviewTextviewList.get(index).get(i).get(j).setTextSize(matrixCardsParams.width/40);
             }
 
 
@@ -135,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
 
         CardView cardView = new CardView(this);
 
-        LinearLayout.LayoutParams matrixCardsParams = new LinearLayout.LayoutParams(
+        matrixCardsParams = new LinearLayout.LayoutParams(
                 linearLayout.getWidth()/linearLayout.getChildCount()-linearLayout.getWidth()/linearLayout.getChildCount()/10,
                 linearLayout.getHeight()-linearLayout.getHeight()/5
         );
@@ -211,8 +227,8 @@ public class MainActivity extends AppCompatActivity {
 
                 matrixPreviewTextviewArray.setTextSize((float) Math.sqrt(Math.pow(matrixCardsParams.width,2)+Math.pow(matrixCardsParams.height,2))/32);
                // matrixPreviewTextviewArray.setLayoutParams(params);
-                matrixPreviewTextviewArray.setText("0000");
-                matrixPreviewTextviewArray.setTextSize(matrixCardsParams.width/40);
+                matrixPreviewTextviewArray.setText("0");
+                //matrixPreviewTextviewArray.setTextSize(matrixCardsParams.width/40);
                 matrixPreviewLLArray.addView(matrixPreviewTextviewArray,params);
 
                 matrixPreviewTextviewList.get(counter1).get(i).add(matrixPreviewTextviewArray);
