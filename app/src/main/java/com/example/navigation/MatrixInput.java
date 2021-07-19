@@ -27,7 +27,7 @@ public class MatrixInput extends AppCompatActivity {
 
     int index;
     int row=2,col=2,focusX=0,focusY=0;
-    int matrixTextSize=0,matrixValueSign=0;
+    float matrixTextSize=0, matrixDimensionControl =0;
     boolean isMatrixEmpty=true;
     String currentSpinnerValue;
 
@@ -462,8 +462,11 @@ public class MatrixInput extends AppCompatActivity {
 
     /**============================================ SENDING MATRIX DATA BACK TO HOME PAGE==================================**/
     public void sendData(View v){
-        matrixTextSize=0;matrixValueSign=0;
+        matrixTextSize=0;
+        matrixDimensionControl =0;
         matrixList.clear();
+
+        //Writing data on reverting matrix
         for(int i=0;i<=row;i++){
             matrixList.add(new ArrayList<>());
             for(int j=0;j<=col;j++) {
@@ -471,30 +474,51 @@ public class MatrixInput extends AppCompatActivity {
                     matrixList.get(i).add(String.valueOf(matrixFields[j][i].getText()));
                 else
                     matrixList.get(i).add("0");
-
-                if (matrixTextSize < matrixList.get(i).get(j).length()){
-                    matrixTextSize = matrixList.get(i).get(j).length();
-                    if(matrixTextSize==4 && matrixList.get(i).get(j).charAt(0)=='-')
-                        matrixValueSign=1;
                 }
             }
+
+        //matrix text size control
+        int max=0;
+        for(int i=0;i<=row;i++){
+            for(int j=0;j<=col;j++) {
+                if (max < matrixList.get(i).get(j).length())
+                    //'-' and '.' will not affect text size
+                    if(matrixList.get(i).get(j).charAt(0)=='-' || (matrixList.get(i).get(j).charAt(0)=='-' && matrixList.get(i).get(j).contains(".")) )
+                        max=matrixList.get(i).get(j).length()-1;
+                    else
+                        max = matrixList.get(i).get(j).length();
+            }
+            //every columns maximum value in recorded for text size
+            matrixTextSize= (float) (matrixTextSize+Math.log10(max*10)*Math.log10(max*10));max=0;
         }
+
+        matrixTextSize+=4-row;
         System.out.println(matrixTextSize);
 
-        if((matrixTextSize<=3 && matrixValueSign==0) || (matrixTextSize<=4 && matrixValueSign==1)){
+
+        //permissible limit of text size control variable
+        if(matrixTextSize<=11){
             MainActivity.getInstance().inittextviews(index,matrixList, currentSpinnerValue,matrixTextSize);
             super.onBackPressed();
         }
         else {
+            //Alert Dialog otherwise
             new AlertDialog.Builder(MatrixInput.this)
                     .setTitle("Alert")
-                    .setMessage("Matrix value must lie between -999 to 999")
-                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    .setMessage("Higher Values can Reduce Matrix Text Size")
+                    .setPositiveButton("FIX", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
                         }
-                    }).show();
+                    })
+                    .setNegativeButton("continue", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    MainActivity.getInstance().inittextviews(index,matrixList, currentSpinnerValue,matrixTextSize);
+                    back();
+                }
+            }).show();
         }
 
 

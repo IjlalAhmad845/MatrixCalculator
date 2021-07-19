@@ -74,7 +74,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Rows"
+        android:text="Columns"
         app:layout_constraintEnd_toStartOf="@+id/rowup"
         app:layout_constraintStart_toEndOf="@+id/rowdown"
         app:layout_constraintTop_toTopOf="@+id/rowup" />
@@ -83,7 +83,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Columns"
+        android:text="Rows"
         app:layout_constraintEnd_toStartOf="@+id/colup"
         app:layout_constraintStart_toEndOf="@+id/coldown"
         app:layout_constraintTop_toTopOf="@+id/coldown" />

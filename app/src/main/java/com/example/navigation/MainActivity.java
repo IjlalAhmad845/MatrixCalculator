@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     /**=================================================== REVERTING BACK TO MATRIX PREVIEW CARDS =======================================================**/
-    public void inittextviews(int index,ArrayList<ArrayList<String>> s1,String matrixName,int matrixTextSize){
+    public void inittextviews(int index,ArrayList<ArrayList<String>> s1,String matrixName,float matrixTextSize){
 
 
         for(int i=0;i<5;i++)
@@ -116,16 +116,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         for(int i=0;i<s1.size();i++)
-            for(int j=0;j<s1.get(0).size();j++){
-                if(matrixTextSize==1)
-                matrixPreviewTextviewList.get(index).get(i).get(j).setTextSize(matrixCardsParams.width/20);
-                else if(matrixTextSize==2)
-                    matrixPreviewTextviewList.get(index).get(i).get(j).setTextSize(matrixCardsParams.width/24);
-                else if(matrixTextSize==3)
-                    matrixPreviewTextviewList.get(index).get(i).get(j).setTextSize(matrixCardsParams.width/32);
-                else if(matrixTextSize==4)
-                    matrixPreviewTextviewList.get(index).get(i).get(j).setTextSize(matrixCardsParams.width/40);
-            }
+            for(int j=0;j<s1.get(0).size();j++)
+                matrixPreviewTextviewList.get(index).get(i).get(j).setTextSize(matrixCardsParams.width/4/matrixTextSize);
+
 
 
         matrixRows.set(index,s1.get(0).size());
@@ -223,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
                         ViewGroup.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT
                 );
-                params.setMargins(matrixCardsParams.width/48, 0,matrixCardsParams.width/48,0);
+                params.setMargins(matrixCardsParams.width/32, 0,matrixCardsParams.width/32,0);
 
                 matrixPreviewTextviewArray.setTextSize((float) Math.sqrt(Math.pow(matrixCardsParams.width,2)+Math.pow(matrixCardsParams.height,2))/32);
                // matrixPreviewTextviewArray.setLayoutParams(params);
