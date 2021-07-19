@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     LinearLayout.LayoutParams matrixCardsParams;
+    LinearLayout.LayoutParams resultCardsParams;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -384,6 +385,16 @@ public class MainActivity extends AppCompatActivity {
 /**=================================================== DYNAMIC TEXT FIELDS =======================================================**/
     public void addResultField(){
 
+        CardView cardView = new CardView(this);
+
+        resultCardsParams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                verticalLL.getHeight()/verticalLL.getChildCount()-verticalLL.getHeight()/verticalLL.getChildCount()/10
+        );
+        resultCardsParams.setMargins(verticalLL.getWidth()/50, verticalLL.getHeight()/verticalLL.getChildCount()/20,verticalLL.getWidth()/50, verticalLL.getHeight()/verticalLL.getChildCount()/20);
+
+        cardView.setLayoutParams(resultCardsParams);
+
         ConstraintLayout Cl=new ConstraintLayout(this);
         ImageButton removeButton=new ImageButton(this);
         removeButton.setId(View.generateViewId());
@@ -398,7 +409,7 @@ public class MainActivity extends AppCompatActivity {
 
         final float scale1 = editText.getContext().getResources().getDisplayMetrics().density;
         LinearLayout.LayoutParams editTextparams = new LinearLayout.LayoutParams(
-                verticalLL.getWidth()-(int) (160 * scale1 + 0.5f),
+                (int) (verticalLL.getHeight()/verticalLL.getChildCount()*1.4),
                 ViewGroup.LayoutParams.WRAP_CONTENT
         );
 
@@ -438,12 +449,11 @@ public class MainActivity extends AppCompatActivity {
                         ViewGroup.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT
                 );
-                params.setMargins((int) (4 * scale + 0.5f), (int) (0 * scale + 0.5f), (int) (4 * scale + 0.5f), (int) (0 * scale + 0.5f));
-
-                matrixPreviewTextviewArray.setTextSize(15f);
-                matrixPreviewTextviewArray.setLayoutParams(params);
+                params.setMargins(resultCardsParams.height/32, 0,resultCardsParams.height/32, 0);
+                //matrixPreviewTextviewArray.setTextSize(15f);
+                //matrixPreviewTextviewArray.setLayoutParams(params);
                 matrixPreviewTextviewArray.setText("0");
-                matrixPreviewLLArray.addView(matrixPreviewTextviewArray);
+                matrixPreviewLLArray.addView(matrixPreviewTextviewArray,params);
 
                 matrixOutputTextviewList.get(counter2).get(i).add(matrixPreviewTextviewArray);
 
@@ -472,31 +482,21 @@ public class MainActivity extends AppCompatActivity {
         ConstraintSet set=new ConstraintSet();
         set.clone(Cl);
         set.connect(removeButton.getId(),ConstraintSet.TOP,ConstraintSet.PARENT_ID,ConstraintSet.TOP,0);
-        set.connect(removeButton.getId(),ConstraintSet.RIGHT,ConstraintSet.PARENT_ID,ConstraintSet.RIGHT,24);
+        set.connect(removeButton.getId(),ConstraintSet.RIGHT,ConstraintSet.PARENT_ID,ConstraintSet.RIGHT,resultCardsParams.height/20);
 
-        set.connect(editText.getId(),ConstraintSet.LEFT,ConstraintSet.PARENT_ID,ConstraintSet.LEFT,16);
-        set.connect(editText.getId(),ConstraintSet.TOP,ConstraintSet.PARENT_ID,ConstraintSet.TOP,12);
+        set.connect(editText.getId(),ConstraintSet.LEFT,ConstraintSet.PARENT_ID,ConstraintSet.LEFT,resultCardsParams.height/24);
+        set.connect(editText.getId(),ConstraintSet.TOP,ConstraintSet.PARENT_ID,ConstraintSet.TOP,resultCardsParams.height/32);
 
-        set.connect(messageTextview.getId(),ConstraintSet.LEFT,ConstraintSet.PARENT_ID,ConstraintSet.LEFT,16);
-        set.connect(messageTextview.getId(),ConstraintSet.TOP,editText.getId(),ConstraintSet.BOTTOM,12);
+        set.connect(messageTextview.getId(),ConstraintSet.LEFT,ConstraintSet.PARENT_ID,ConstraintSet.LEFT,resultCardsParams.height/16);
+        set.connect(messageTextview.getId(),ConstraintSet.TOP,editText.getId(),ConstraintSet.BOTTOM,resultCardsParams.height/32);
 
-        set.connect(matrixPreviewContainerLL.getId(),ConstraintSet.RIGHT,ConstraintSet.PARENT_ID,ConstraintSet.RIGHT,100);
+        set.connect(matrixPreviewContainerLL.getId(),ConstraintSet.RIGHT,ConstraintSet.PARENT_ID,ConstraintSet.RIGHT,resultCardsParams.height/3);
         set.connect(matrixPreviewContainerLL.getId(),ConstraintSet.TOP,ConstraintSet.PARENT_ID,ConstraintSet.TOP,0);
         set.connect(matrixPreviewContainerLL.getId(),ConstraintSet.BOTTOM,ConstraintSet.PARENT_ID,ConstraintSet.BOTTOM,0);
 
         set.applyTo(Cl);
 
 
-
-        CardView cardView = new CardView(this);
-
-        LinearLayout.LayoutParams resultCardParams = new LinearLayout.LayoutParams(
-               ViewGroup.LayoutParams.MATCH_PARENT,
-                verticalLL.getHeight()/verticalLL.getChildCount()-verticalLL.getHeight()/verticalLL.getChildCount()/10
-        );
-        resultCardParams.setMargins(verticalLL.getWidth()/50, verticalLL.getHeight()/verticalLL.getChildCount()/20,verticalLL.getWidth()/50, verticalLL.getHeight()/verticalLL.getChildCount()/20);
-
-        System.out.println(verticalLL.getHeight());
 
         cardView.setElevation(20f);
         cardView.setRadius(10f);
@@ -505,7 +505,7 @@ public class MainActivity extends AppCompatActivity {
         cardView.addView(Cl);
         cardView.setAlpha(0f);
 
-        verticalLL.addView(cardView,verticalLL.getChildCount()-2,resultCardParams);
+        verticalLL.addView(cardView,verticalLL.getChildCount()-2);
         cardView.animate().alpha(1.0f).setDuration(200).setListener(null);
         scrollView2.fullScroll(View.FOCUS_DOWN);
 

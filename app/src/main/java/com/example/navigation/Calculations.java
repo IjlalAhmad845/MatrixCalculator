@@ -19,6 +19,7 @@ public class Calculations {
     ArrayList<Character> mmList=new ArrayList<>();
     ArrayList<ArrayList<Double>> Temp =new ArrayList<>();
     int rows=0,cols=0;
+    float matrixTextSize=0;
     boolean error=false;
     int powerIterator=0;
 
@@ -400,7 +401,7 @@ public class Calculations {
                     }
             }
             //loop ended AND the final result is present in STACK
-
+/**==========================================EXTRACTION OF FINAL RESULT FROM STACK=======================================**/
             //condition for all the chars present in the expression
             if(!error && stringStack.size()>0 && (Character.isLowerCase(stringStack.elementAt(stringStack.size()-1)) || ccList.contains(stringStack.elementAt(stringStack.size()-1)))){
 
@@ -425,6 +426,8 @@ public class Calculations {
             //condition if any matrix is present in expression
             else if(!error && stringStack.size()>0 && (Character.isUpperCase(stringStack.elementAt(stringStack.size()-1)) || mmList.contains(stringStack.elementAt(stringStack.size()-1)))){
                 cols=rows=0;
+                int max=0;
+                matrixTextSize=0;
 
                 //extracted matrix from hashmap by last stack element
                 Temp=EE.matrixMap.get(stringStack.pop());
@@ -445,6 +448,7 @@ public class Calculations {
                         instance.matrixOutputTextviewList.get(outputCardIndex).get(i).get(j).setVisibility(View.GONE);
                 }
                 double result;
+
                 for(int i=0;i<cols;i++){
                     for(int j=0;j<rows;j++) {
                         instance.matrixOutputTextviewList.get(outputCardIndex).get(i).get(j).setVisibility(View.VISIBLE);
@@ -453,11 +457,41 @@ public class Calculations {
                         result=Temp.get(i).get(j);
                         result=Math.round(result*100.0)/100.0;
 
-                        if(result==(int)result)
-                        instance.matrixOutputTextviewList.get(outputCardIndex).get(i).get(j).setText((int)result+"");
-                        else instance.matrixOutputTextviewList.get(outputCardIndex).get(i).get(j).setText(result+"");
+                        if(result==(int)result){
+                            instance.matrixOutputTextviewList.get(outputCardIndex).get(i).get(j).setText((int)result+"");
+
+                            if (max < String.valueOf((int)result).length())
+                                //'-' and '.' will not affect text size
+                                if(String.valueOf((int)result).charAt(0)=='-' || (String.valueOf((int)result).charAt(0)=='-' && String.valueOf((int)result).contains(".")) )
+                                    max=String.valueOf((int)result).length()-1;
+                                else
+                                    max = String.valueOf((int)result).length();
+
+                        }
+                        else {
+                            instance.matrixOutputTextviewList.get(outputCardIndex).get(i).get(j).setText(result+"");
+
+
+                            if (max < String.valueOf(result).length())
+                                //'-' and '.' will not affect text size
+                                if(String.valueOf(result).charAt(0)=='-' || (String.valueOf(result).charAt(0)=='-' && String.valueOf(result).contains(".")) )
+                                    max=String.valueOf(result).length()-1;
+                                else
+                                    max = String.valueOf(result).length();
+
+                        }
                     }
+                    //every columns maximum value in recorded for text size
+                    matrixTextSize= (float) (matrixTextSize+Math.log10(max*10)*Math.log10(max*10));max=0;
+
                 }
+
+                matrixTextSize+=5-cols;
+                System.out.println(instance.resultCardsParams.height/3.5/matrixTextSize);
+
+                for(int i=0;i<cols;i++)
+                    for(int j=0;j<rows;j++)
+                        instance.matrixOutputTextviewList.get(outputCardIndex).get(i).get(j).setTextSize((float) (instance.resultCardsParams.height/3.5/matrixTextSize));
             }
             else if(error){
                 for(int i=0;i<5;i++){

@@ -27,7 +27,7 @@ public class MatrixInput extends AppCompatActivity {
 
     int index;
     int row=2,col=2,focusX=0,focusY=0;
-    float matrixTextSize=0, matrixDimensionControl =0;
+    float matrixTextSize=0;
     boolean isMatrixEmpty=true;
     String currentSpinnerValue;
 
@@ -463,7 +463,6 @@ public class MatrixInput extends AppCompatActivity {
     /**============================================ SENDING MATRIX DATA BACK TO HOME PAGE==================================**/
     public void sendData(View v){
         matrixTextSize=0;
-        matrixDimensionControl =0;
         matrixList.clear();
 
         //Writing data on reverting matrix
@@ -493,7 +492,7 @@ public class MatrixInput extends AppCompatActivity {
         }
 
         matrixTextSize+=4-row;
-        System.out.println(matrixTextSize);
+        //System.out.println(matrixTextSize);
 
 
         //permissible limit of text size control variable
