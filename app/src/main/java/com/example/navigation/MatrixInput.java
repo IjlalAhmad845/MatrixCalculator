@@ -257,7 +257,7 @@ public class MatrixInput extends AppCompatActivity {
     public void writeMatrix(ArrayList<ArrayList<String>> matrixList,ArrayList<String> occupiedNames){
         for(int i=0;i<=row;i++)
             for(int j=0;j<=col;j++)
-                if(Integer.parseInt(matrixList.get(i).get(j).toString())!=0)
+                if(Double.parseDouble(matrixList.get(i).get(j).toString())!=0)
                 matrixFields[j][i].setText(matrixList.get(i).get(j));
 
                 //Sets Names in spinner Except those which are used by occupiedNames list(other matrices in home page)
