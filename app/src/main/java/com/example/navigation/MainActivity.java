@@ -210,9 +210,10 @@ public class MainActivity extends AppCompatActivity {
                 params.setMargins(matrixCardsParams.width/48, 0,matrixCardsParams.width/48,0);
 
                 matrixPreviewTextviewArray.setTextSize((float) Math.sqrt(Math.pow(matrixCardsParams.width,2)+Math.pow(matrixCardsParams.height,2))/32);
-                matrixPreviewTextviewArray.setLayoutParams(params);
-                matrixPreviewTextviewArray.setText("0");
-                matrixPreviewLLArray.addView(matrixPreviewTextviewArray);
+               // matrixPreviewTextviewArray.setLayoutParams(params);
+                matrixPreviewTextviewArray.setText("0000");
+                matrixPreviewTextviewArray.setTextSize(matrixCardsParams.width/40);
+                matrixPreviewLLArray.addView(matrixPreviewTextviewArray,params);
 
                 matrixPreviewTextviewList.get(counter1).get(i).add(matrixPreviewTextviewArray);
 
@@ -484,7 +485,7 @@ public class MainActivity extends AppCompatActivity {
                ViewGroup.LayoutParams.MATCH_PARENT,
                 verticalLL.getHeight()/verticalLL.getChildCount()-verticalLL.getHeight()/verticalLL.getChildCount()/10
         );
-        resultCardParams.setMargins(verticalLL.getWidth()/50, verticalLL.getHeight()/verticalLL.getChildCount()/20,verticalLL.getWidth()/50, 0);
+        resultCardParams.setMargins(verticalLL.getWidth()/50, verticalLL.getHeight()/verticalLL.getChildCount()/20,verticalLL.getWidth()/50, verticalLL.getHeight()/verticalLL.getChildCount()/20);
 
         System.out.println(verticalLL.getHeight());
 
@@ -805,7 +806,7 @@ public class MainActivity extends AppCompatActivity {
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 (int)(140*scale+0.5f)
         );
-        addCardParams.setMargins((int)(8*scale+0.5f),(int)(10*scale+0.5f),(int)(10*scale+0.5f), (int)(8*scale+0.5f));
+        addCardParams.setMargins((int)(8*scale+0.5f),(int)(10*scale+0.5f),(int)(8*scale+0.5f), (int)(10*scale+0.5f));
 
         cardView.setElevation(20f);
         cardView.setRadius(10f);
