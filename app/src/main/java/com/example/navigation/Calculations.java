@@ -19,6 +19,7 @@ public class Calculations {
     ArrayList<Character> mmList=new ArrayList<>();
     ArrayList<ArrayList<Double>> Temp =new ArrayList<>();
     int rows=0,cols=0;
+    float matrixTextSize=0;
     boolean error=false;
     int powerIterator=0;
 
@@ -113,37 +114,47 @@ public class Calculations {
 
                             if (EE.matrixMap.get(c1).size() > 0){
 
-                                if(Integer.parseInt(EE.powerList.get(powerIterator))==0) {
-                                    Temp.clear();
+                                //Only square matrices raise to some power
+                               if(EE.matrixRowsMap.get(c1).equals(EE.matrixColsMap.get(c1))) {
 
-                                    for(int j=0;j<EE.matrixColsMap.get(c1);j++){
-                                        Temp.add(new ArrayList<>());
-                                        for(int k=0;k<EE.matrixRowsMap.get(c1);k++){
-                                            if(j==k)Temp.get(j).add(1.0);
-                                            else Temp.get(j).add(0.0);
-                                        }
-                                    }
-                                }
-                                else if(Integer.parseInt(EE.powerList.get(powerIterator))==1){
-                                    Temp.clear();
+                                   if (Integer.parseInt(EE.powerList.get(powerIterator)) == 0) {
+                                       Temp.clear();
 
-                                    for(int j=0;j<EE.matrixColsMap.get(c1);j++){
-                                        Temp.add(new ArrayList<>());
-                                        for(int k=0;k<EE.matrixRowsMap.get(c1);k++)
-                                            Temp.get(j).add(EE.matrixMap.get(c1).get(i).get(j));
+                                       for (int j = 0; j < EE.matrixColsMap.get(c1); j++) {
+                                           Temp.add(new ArrayList<>());
+                                           for (int k = 0; k < EE.matrixRowsMap.get(c1); k++) {
+                                               if (j == k) Temp.get(j).add(1.0);
+                                               else Temp.get(j).add(0.0);
+                                           }
+                                       }
+                                   } else if (Integer.parseInt(EE.powerList.get(powerIterator)) == 1) {
+                                       //copy whole matrix as at as in Hashmap
+                                       Temp = EE.matrixMap.get(c1);
 
-                                    }
-                                }
+                                       //trimming of matrix acc. to rows and cols
+                                       int j = 0;
+                                       while (Temp.size() > EE.matrixColsMap.get(c1)) {
+                                           Temp.remove((int) EE.matrixColsMap.get(c1));
+                                           //Arraylists have tendency to reduce shift their indexes by 1 when a element is removed
+                                           while (Temp.get(j).size() > EE.matrixRowsMap.get(c1))
+                                               Temp.get(j).remove((int) EE.matrixRowsMap.get(c1));
+                                           j++;
+                                       }
 
-                                else{
-                                    Temp=multiplyMatrix(EE.matrixMap.get(c1),EE.matrixMap.get(c1),EE.matrixRowsMap.get(c1),EE.matrixColsMap.get(c1),EE.matrixRowsMap.get(c1),EE.matrixColsMap.get(c1));
+                                   } else {
+                                       Temp = multiplyMatrix(EE.matrixMap.get(c1), EE.matrixMap.get(c1), EE.matrixRowsMap.get(c1), EE.matrixColsMap.get(c1), EE.matrixRowsMap.get(c1), EE.matrixColsMap.get(c1));
 
-                                    for(int pow=2;pow<Integer.parseInt(EE.powerList.get(powerIterator));pow++){
-                                        Temp=multiplyMatrix(Temp,EE.matrixMap.get(c1),EE.matrixRowsMap.get(c1),EE.matrixColsMap.get(c1),Temp.get(0).size(),Temp.size());
+                                       for (int pow = 2; pow < Integer.parseInt(EE.powerList.get(powerIterator)); pow++) {
+                                           Temp = multiplyMatrix(Temp, EE.matrixMap.get(c1), EE.matrixRowsMap.get(c1), EE.matrixColsMap.get(c1), Temp.get(0).size(), Temp.size());
 
-                                    }
-                                }
-                                powerIterator++;
+                                       }
+                                   }
+                                   powerIterator++;
+                               }
+                               else {
+                                   instance.messageTextviewList.get(outputCardIndex).setText("Only Square Matrices are applicable for power");
+                                   error=true;
+                               }
                             }
                             EE.matrixMap.put(mmList.get(i),Temp);
 
@@ -400,7 +411,7 @@ public class Calculations {
                     }
             }
             //loop ended AND the final result is present in STACK
-
+/**==========================================EXTRACTION OF FINAL RESULT FROM STACK=======================================**/
             //condition for all the chars present in the expression
             if(!error && stringStack.size()>0 && (Character.isLowerCase(stringStack.elementAt(stringStack.size()-1)) || ccList.contains(stringStack.elementAt(stringStack.size()-1)))){
 
@@ -425,6 +436,8 @@ public class Calculations {
             //condition if any matrix is present in expression
             else if(!error && stringStack.size()>0 && (Character.isUpperCase(stringStack.elementAt(stringStack.size()-1)) || mmList.contains(stringStack.elementAt(stringStack.size()-1)))){
                 cols=rows=0;
+                int max=0;
+                matrixTextSize=0;
 
                 //extracted matrix from hashmap by last stack element
                 Temp=EE.matrixMap.get(stringStack.pop());
@@ -445,6 +458,7 @@ public class Calculations {
                         instance.matrixOutputTextviewList.get(outputCardIndex).get(i).get(j).setVisibility(View.GONE);
                 }
                 double result;
+
                 for(int i=0;i<cols;i++){
                     for(int j=0;j<rows;j++) {
                         instance.matrixOutputTextviewList.get(outputCardIndex).get(i).get(j).setVisibility(View.VISIBLE);
@@ -453,11 +467,41 @@ public class Calculations {
                         result=Temp.get(i).get(j);
                         result=Math.round(result*100.0)/100.0;
 
-                        if(result==(int)result)
-                        instance.matrixOutputTextviewList.get(outputCardIndex).get(i).get(j).setText((int)result+"");
-                        else instance.matrixOutputTextviewList.get(outputCardIndex).get(i).get(j).setText(result+"");
+                        if(result==(int)result){
+                            instance.matrixOutputTextviewList.get(outputCardIndex).get(i).get(j).setText((int)result+"");
+
+                            if (max < String.valueOf((int)result).length())
+                                //'-' and '.' will not affect text size
+                                if(String.valueOf((int)result).charAt(0)=='-' || (String.valueOf((int)result).charAt(0)=='-' && String.valueOf((int)result).contains(".")) )
+                                    max=String.valueOf((int)result).length()-1;
+                                else
+                                    max = String.valueOf((int)result).length();
+
+                        }
+                        else {
+                            instance.matrixOutputTextviewList.get(outputCardIndex).get(i).get(j).setText(result+"");
+
+
+                            if (max < String.valueOf(result).length())
+                                //'-' and '.' will not affect text size
+                                if(String.valueOf(result).charAt(0)=='-' || (String.valueOf(result).charAt(0)=='-' && String.valueOf(result).contains(".")) )
+                                    max=String.valueOf(result).length()-1;
+                                else
+                                    max = String.valueOf(result).length();
+
+                        }
                     }
+                    //every columns maximum value in recorded for text size
+                    matrixTextSize= (float) (matrixTextSize+Math.log10(max*10)*Math.log10(max*10));max=0;
+
                 }
+
+                matrixTextSize+=5-cols;
+                //System.out.println(instance.resultCardsParams.height/3.5/matrixTextSize);
+
+                for(int i=0;i<cols;i++)
+                    for(int j=0;j<rows;j++)
+                        instance.matrixOutputTextviewList.get(outputCardIndex).get(i).get(j).setTextSize((float) (instance.resultCardsParams.height/3.5/matrixTextSize));
             }
             else if(error){
                 for(int i=0;i<5;i++){

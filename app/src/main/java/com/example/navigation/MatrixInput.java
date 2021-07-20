@@ -15,6 +15,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -27,8 +28,8 @@ public class MatrixInput extends AppCompatActivity {
 
     int index;
     int row=2,col=2,focusX=0,focusY=0;
-    float matrixTextSize=0, matrixDimensionControl =0;
-    boolean isMatrixEmpty=true;
+    float matrixTextSize=0;
+    boolean isMatrixEmpty=true,matrixCheck=true;
     String currentSpinnerValue;
 
     MaterialButton rowUp,rowDown,colUp,colDown;
@@ -318,8 +319,8 @@ public class MatrixInput extends AppCompatActivity {
 
                     if(!isMatrixEmpty)
                         new AlertDialog.Builder(MatrixInput.this)
-                                .setTitle("Back")
-                                .setMessage("You will Loose your Changes")
+                                .setTitle("")
+                                .setMessage("Discard Changes")
                                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -463,7 +464,7 @@ public class MatrixInput extends AppCompatActivity {
     /**============================================ SENDING MATRIX DATA BACK TO HOME PAGE==================================**/
     public void sendData(View v){
         matrixTextSize=0;
-        matrixDimensionControl =0;
+        matrixCheck=true;
         matrixList.clear();
 
         //Writing data on reverting matrix
@@ -474,6 +475,10 @@ public class MatrixInput extends AppCompatActivity {
                     matrixList.get(i).add(String.valueOf(matrixFields[j][i].getText()));
                 else
                     matrixList.get(i).add("0");
+
+                //checking validity of matrix values
+                if(matrixList.get(i).get(j).equals("-") || matrixList.get(i).get(j).equals("."))
+                    matrixCheck=false;
                 }
             }
 
@@ -493,20 +498,24 @@ public class MatrixInput extends AppCompatActivity {
         }
 
         matrixTextSize+=4-row;
-        System.out.println(matrixTextSize);
+        //System.out.println(matrixTextSize);
 
 
         //permissible limit of text size control variable
         if(matrixTextSize<=11){
-            MainActivity.getInstance().inittextviews(index,matrixList, currentSpinnerValue,matrixTextSize);
-            super.onBackPressed();
+            if(matrixCheck){
+                MainActivity.getInstance().inittextviews(index,matrixList, currentSpinnerValue,matrixTextSize);
+                super.onBackPressed();
+            }
+            else Toast.makeText(this, "Invalid Matrix Value", Toast.LENGTH_SHORT).show();
+
         }
         else {
             //Alert Dialog otherwise
             new AlertDialog.Builder(MatrixInput.this)
-                    .setTitle("Alert")
-                    .setMessage("Higher Values can Reduce Matrix Text Size")
-                    .setPositiveButton("FIX", new DialogInterface.OnClickListener() {
+                    .setTitle("")
+                    .setMessage("Higher Values will Reduce Matrix Text Size")
+                    .setPositiveButton("edit", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -549,8 +558,8 @@ public class MatrixInput extends AppCompatActivity {
 
             if(!isMatrixEmpty)
                 new AlertDialog.Builder(MatrixInput.this)
-                        .setTitle("Back")
-                        .setMessage("You will Loose your Changes")
+                        .setTitle("")
+                        .setMessage("Discard Changes")
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
