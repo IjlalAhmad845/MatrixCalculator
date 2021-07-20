@@ -2,6 +2,8 @@ package com.example.navigation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
@@ -15,11 +17,14 @@ public class SettingsActivity extends AppCompatActivity {
     TextView rowIndex,colIndex;
     RadioButton matrixStateRadio1,matrixStateRadio2;
 
+    boolean settingsStateChanged = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+        settingsStateChanged = false;
         initialize();
 
         Bundle bundle=getIntent().getExtras();
@@ -27,6 +32,7 @@ public class SettingsActivity extends AppCompatActivity {
         setData(bundle);
     }
 
+    /**==================================================== WRITING DATA IN SETTINGS ACTIVITY ========================================**/
     public void setData(Bundle bundle){
 
         rowSeekbar.setProgress((Integer) bundle.getSerializable("com.example.navigation.matrixRows")-1);
@@ -39,25 +45,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
 
-    public void initialize(){
-        findViewById(R.id.backButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                back();
-            }
-        });
-
-        rowSeekbar=findViewById(R.id.rowsSeek);
-        colSeekbar=findViewById(R.id.colsSeek);
-        rowIndex=findViewById(R.id.rowIndex);
-        colIndex=findViewById(R.id.colIndex);
-        setSeekbars();
-
-        matrixStateRadio1=findViewById(R.id.matrixStateRadio1);
-        matrixStateRadio2=findViewById(R.id.matrixStateRadio2);
-
-    }
-
+    /**========================================== IDENTITY MATRIX RADIO BUTTON STATE CONTROL ==================================================**/
     public void ControlMatrixStateRadio2() {
         if (rowIndex.getText().equals(colIndex.getText()))
             matrixStateRadio2.setEnabled(true);
@@ -67,6 +55,7 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
+    /**========================================================== SEEKBARS CONTROL METHOD ==================================================**/
     public void setSeekbars(){
         rowSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -74,6 +63,8 @@ public class SettingsActivity extends AppCompatActivity {
                 rowIndex.setText(String.valueOf(progress+1));
 
                 ControlMatrixStateRadio2();
+                settingsStateChanged =true;
+
             }
 
             @Override
@@ -93,6 +84,7 @@ public class SettingsActivity extends AppCompatActivity {
                 colIndex.setText(String.valueOf(progress+1));
 
                 ControlMatrixStateRadio2();
+                settingsStateChanged =true;
             }
 
             @Override
@@ -107,12 +99,103 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
+    /**======================================== INITIALIZING WIDGETS IN SETTINGS ACTIVITY =============================================**/
+    public void initialize(){
+        findViewById(R.id.backButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(!settingsStateChanged)
+                    settingsStateChanged=matrixStateRadio2.isChecked();
+
+                if(settingsStateChanged)
+                new AlertDialog.Builder(SettingsActivity.this)
+                        .setTitle("")
+                        .setMessage("Discard Changes")
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                back();
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }).show();
+                else back();
+
+            }
+        });
+
+        rowSeekbar=findViewById(R.id.rowsSeek);
+        colSeekbar=findViewById(R.id.colsSeek);
+        rowIndex=findViewById(R.id.rowIndex);
+        colIndex=findViewById(R.id.colIndex);
+        setSeekbars();
+
+        matrixStateRadio1=findViewById(R.id.matrixStateRadio1);
+        matrixStateRadio2=findViewById(R.id.matrixStateRadio2);
+
+    }
+
+    /**==================================================== SENDING DATA TO HOME ACTIVITY ========================================**/
     public void SendData(View v){
-        MainActivity.getInstance().initMatrixSettings(Integer.parseInt(rowIndex.getText().toString()),Integer.parseInt(colIndex.getText().toString()),matrixStateRadio1.isChecked());
-        super.onBackPressed();
+
+        if(!settingsStateChanged)
+            settingsStateChanged=matrixStateRadio2.isChecked();
+
+        if(settingsStateChanged)
+            new AlertDialog.Builder(SettingsActivity.this)
+                    .setTitle("")
+                    .setMessage("Save Changes")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            MainActivity.getInstance().initMatrixSettings(
+                                    Integer.parseInt(rowIndex.getText().toString()),
+                                    Integer.parseInt(colIndex.getText().toString()),
+                                    matrixStateRadio1.isChecked());
+                            back();
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    }).show();
+        else back();
+
     }
 
     public void back() {
+        super.onBackPressed();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(!settingsStateChanged)
+            settingsStateChanged=matrixStateRadio2.isChecked();
+
+        if(settingsStateChanged)
+            new AlertDialog.Builder(SettingsActivity.this)
+                    .setTitle("")
+                    .setMessage("Discard Changes")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            back();
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    }).show();
+        else
         super.onBackPressed();
     }
 }
