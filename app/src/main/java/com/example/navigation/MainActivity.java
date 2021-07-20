@@ -48,12 +48,15 @@ public class MainActivity extends AppCompatActivity {
     HorizontalScrollView scrollView;
     ScrollView scrollView2;
     int counter1=0,counter2=0;
-    int matrixCols=5,matrixRows=5;
 
     CardView keyboardCard;
     Button[] buttons =new Button[16];
     ImageButton[] imgbtns=new ImageButton[3];
     CardView[] matrixOperationsButtons=new CardView[10];
+
+    //variables controlled from settings
+    int matrixCols=5,matrixRows=5;
+    boolean matricesState=true;
 
 
     //Arraylists Related to Matrix preview cards
@@ -105,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         initializeWidgets();
 
     }
-    /**=================================================== REVERTING BACK TO MATRIX PREVIEW CARDS =======================================================**/
+    /**=================================================== REVERTING BACK TO MATRIX PREVIEW CARDS ===============================================**/
     public void inittextviews(int index,ArrayList<ArrayList<String>> s1,String matrixName,float matrixTextSize){
 
 
@@ -139,9 +142,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void initmatrixdimensions(int rows,int cols){
+    /**=================================================== REVERTING BACK SETTINGS TO HOME ACTIVITY ===============================================**/
+    public void initMatrixSettings(int rows, int cols, boolean State){
         matrixRows=rows;
         matrixCols=cols;
+        matricesState=State;
+        System.out.println(State);
     }
 
     /**=================================================== For linking Main Activity to Matrix Activity**/
@@ -230,7 +236,12 @@ public class MainActivity extends AppCompatActivity {
 
                 matrixPreviewTextviewArray.setTextSize((float) Math.sqrt(Math.pow(matrixCardsParams.width,2)+Math.pow(matrixCardsParams.height,2))/32);
                // matrixPreviewTextviewArray.setLayoutParams(params);
+                if(matricesState)
                 matrixPreviewTextviewArray.setText("0");
+                else{
+                    if(i==j)matrixPreviewTextviewArray.setText("1");
+                    else matrixPreviewTextviewArray.setText("0");
+                }
                 //matrixPreviewTextviewArray.setTextSize(matrixCardsParams.width/40);
                 matrixPreviewLLArray.addView(matrixPreviewTextviewArray,params);
 
@@ -827,7 +838,7 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-
+/**------------------------------------------------------------ Navigation Drawer --------------------------------------------------------------------**/
         nav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -839,6 +850,7 @@ public class MainActivity extends AppCompatActivity {
                         Bundle bundle=new Bundle();
                         bundle.putSerializable("com.example.navigation.matrixCols",matrixCols);
                         bundle.putSerializable("com.example.navigation.matrixRows",matrixRows);
+                        bundle.putSerializable("com.example.navigation.matricesState",matricesState);
                         intent.putExtras(bundle);
                         startActivity(intent);
                         drawerLayout.closeDrawer(GravityCompat.START);

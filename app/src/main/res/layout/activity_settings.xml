@@ -65,7 +65,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:max="4"
-                android:progress="4" />
+                android:progress="4"
+                android:onClick="setRowSeekbar"/>
 
             <TextView
                 android:id="@+id/rowIndex"
@@ -110,6 +111,51 @@
                 android:layout_marginBottom="6dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"/>
+        </LinearLayout>
+
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="?android:attr/listDivider" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add New Matrices as:"
+            android:textSize="24dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="6dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/matrixStateRadio1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Null Matrices"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:layout_marginStart="6dp"
+                    />
+
+                <RadioButton
+                    android:id="@+id/matrixStateRadio2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Identity Matrices"
+                    android:layout_weight="1"/>
+
+            </RadioGroup>
         </LinearLayout>
     </LinearLayout>
 
