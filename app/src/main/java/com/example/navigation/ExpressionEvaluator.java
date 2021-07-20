@@ -1,7 +1,5 @@
 package com.example.navigation;
 
-import android.os.PowerManager;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -189,10 +187,10 @@ public class ExpressionEvaluator {
     }
 
     public int returnCurrentMatRows(String MatName){
-            return instance.matrixRows.get(instance.matrixNamesStringList.indexOf(MatName));
+            return instance.matrixRowsList.get(instance.matrixNamesStringList.indexOf(MatName));
     }
     public int returnCurrentMatCols(String MatName){
-        return instance.matrixCols.get(instance.matrixNamesStringList.indexOf(MatName));
+        return instance.matrixColsList.get(instance.matrixNamesStringList.indexOf(MatName));
     }
 
     /**============================================== FOR CHECKING VALIDITY OF EXPRESSION ==========================================**/

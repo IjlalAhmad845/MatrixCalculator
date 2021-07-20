@@ -1,12 +1,10 @@
 package com.example.navigation;
 
 import android.view.View;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Stack;
-import java.util.concurrent.TimeoutException;
 
 public class Calculations {
 
@@ -444,8 +442,8 @@ public class Calculations {
 
                 //if only single matrix is present in the expression field then it will show its original dimensions at first time
                 if(expression.length()==1){
-                    rows=instance.matrixRows.get(instance.matrixNamesStringList.indexOf(expression));
-                    cols=instance.matrixCols.get(instance.matrixNamesStringList.indexOf(expression));
+                    rows=instance.matrixRowsList.get(instance.matrixNamesStringList.indexOf(expression));
+                    cols=instance.matrixColsList.get(instance.matrixNamesStringList.indexOf(expression));
                 }
                 else if(Temp.size()>0){
                     cols=Temp.size();

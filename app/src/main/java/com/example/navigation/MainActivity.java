@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     HorizontalScrollView scrollView;
     ScrollView scrollView2;
     int counter1=0,counter2=0;
+    int matrixCols=5,matrixRows=5;
 
     CardView keyboardCard;
     Button[] buttons =new Button[16];
@@ -59,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Integer> matrixPreviewIDList =new ArrayList<>();
     ArrayList<ArrayList<ArrayList<TextView>>> matrixPreviewTextviewList= new ArrayList<>();
     ArrayList<ArrayList<String>> matrixPreviewStringList= new ArrayList<>();
-    ArrayList<Integer> matrixRows=new ArrayList<>();
-    ArrayList<Integer> matrixCols=new ArrayList<>();
+    ArrayList<Integer> matrixRowsList =new ArrayList<>();
+    ArrayList<Integer> matrixColsList =new ArrayList<>();
     ArrayList<String> matrixNamesStringList =new ArrayList<>();
     ArrayList<TextView> matrixNamesTextviewList=new ArrayList<>();
 
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Integer> matrixOutputIDList =new ArrayList<>();
     ArrayList<TextView> messageTextviewList=new ArrayList<>();
 
-
+    //Layout Params of preview and result matrix cards
     LinearLayout.LayoutParams matrixCardsParams;
     LinearLayout.LayoutParams resultCardsParams;
 
@@ -125,8 +126,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        matrixRows.set(index,s1.get(0).size());
-        matrixCols.set(index,s1.size());
+        matrixRowsList.set(index,s1.get(0).size());
+        matrixColsList.set(index,s1.size());
 
         //Updating matrix names on preview cards given by matrix making page
         matrixNamesStringList.set(index,matrixName);
@@ -136,6 +137,11 @@ public class MainActivity extends AppCompatActivity {
             if(editTextList.get(i).isFocused())
                 sendToCalculations(i);
 
+    }
+
+    public void initmatrixdimensions(int rows,int cols){
+        matrixRows=rows;
+        matrixCols=cols;
     }
 
     /**=================================================== For linking Main Activity to Matrix Activity**/
@@ -184,8 +190,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Setting dimensions of each matrix
-        matrixRows.add(5);
-        matrixCols.add(5);
+        matrixRowsList.add(matrixRows);
+        matrixColsList.add(matrixCols);
 
 
         //Linear Layout Container of Whole matrix skeleton
@@ -233,6 +239,16 @@ public class MainActivity extends AppCompatActivity {
             }
 
             matrixPreviewContainerLL.addView(matrixPreviewLLArray);
+        }
+
+        for(int i=0;i<5;i++){
+            for(int j=0;j<5;j++)
+            matrixPreviewTextviewList.get(counter1).get(i).get(j).setVisibility(View.GONE);
+        }
+
+        for(int i=0;i<matrixCols;i++){
+            for(int j=0;j<matrixRows;j++)
+                matrixPreviewTextviewList.get(counter1).get(i).get(j).setVisibility(View.VISIBLE);
         }
 
 
@@ -300,8 +316,8 @@ public class MainActivity extends AppCompatActivity {
 
                         //removing by index retrieved by Ids of container LL
                         matrixPreviewTextviewList.remove(matrixPreviewIDList.indexOf(matrixPreviewContainerLL.getId()));
-                        matrixRows.remove(matrixPreviewIDList.indexOf(matrixPreviewContainerLL.getId()));
-                        matrixCols.remove(matrixPreviewIDList.indexOf(matrixPreviewContainerLL.getId()));
+                        matrixRowsList.remove(matrixPreviewIDList.indexOf(matrixPreviewContainerLL.getId()));
+                        matrixColsList.remove(matrixPreviewIDList.indexOf(matrixPreviewContainerLL.getId()));
 
                         //removing by item of current linked card
                         matrixNamesStringList.remove(matrixName.getText().toString());
@@ -327,9 +343,9 @@ public class MainActivity extends AppCompatActivity {
         editButton.setOnClickListener(v1 -> {
             //ArrayList<TextView> object = new ArrayList<>();
             matrixPreviewStringList.clear();
-            for(int i = 0; i<matrixCols.get(matrixPreviewIDList.indexOf(matrixPreviewContainerLL.getId())); i++){
+            for(int i = 0; i< matrixColsList.get(matrixPreviewIDList.indexOf(matrixPreviewContainerLL.getId())); i++){
                 matrixPreviewStringList.add(new ArrayList<>());
-                for(int j = 0; j<matrixRows.get(matrixPreviewIDList.indexOf(matrixPreviewContainerLL.getId())); j++)
+                for(int j = 0; j< matrixRowsList.get(matrixPreviewIDList.indexOf(matrixPreviewContainerLL.getId())); j++)
                     matrixPreviewStringList.get(i).add(matrixPreviewTextviewList.get(matrixPreviewIDList.indexOf(matrixPreviewContainerLL.getId())).get(i).get(j).getText().toString());
             }
 
@@ -820,6 +836,10 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.settings:
                         //Toast.makeText(MainActivity.this, "settings clicked", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(),SettingsActivity.class);
+                        Bundle bundle=new Bundle();
+                        bundle.putSerializable("com.example.navigation.matrixCols",matrixCols);
+                        bundle.putSerializable("com.example.navigation.matrixRows",matrixRows);
+                        intent.putExtras(bundle);
                         startActivity(intent);
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
