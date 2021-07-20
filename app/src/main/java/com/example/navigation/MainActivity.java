@@ -846,28 +846,33 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.settings:
                         //Toast.makeText(MainActivity.this, "settings clicked", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(),SettingsActivity.class);
+                        Intent settingsIntent = new Intent(getApplicationContext(),SettingsActivity.class);
                         Bundle bundle=new Bundle();
                         bundle.putSerializable("com.example.navigation.matrixCols",matrixCols);
                         bundle.putSerializable("com.example.navigation.matrixRows",matrixRows);
                         bundle.putSerializable("com.example.navigation.matricesState",matricesState);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
+                        settingsIntent.putExtras(bundle);
+                        startActivity(settingsIntent);
+
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
 
-                    case R.id.htu:
-                        Toast.makeText(MainActivity.this, "how to use clicked", Toast.LENGTH_SHORT).show();
+                    case R.id.how_to_use:
+                        Toast.makeText(MainActivity.this, "How to use clicked", Toast.LENGTH_SHORT).show();
+
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
 
                     case R.id.feedback:
                         Toast.makeText(MainActivity.this, "feedback clicked", Toast.LENGTH_SHORT).show();
+
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
 
                     case R.id.about:
-                        Toast.makeText(MainActivity.this, "about clicked", Toast.LENGTH_SHORT).show();
+                        Intent aboutIntent = new Intent(getApplicationContext(),AboutActivity.class);
+                        startActivity(aboutIntent);
+
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
                 }

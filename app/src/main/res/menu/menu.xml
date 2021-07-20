@@ -9,7 +9,7 @@
 
         <item
             android:title="How to Use"
-            android:id="@+id/htu"
+            android:id="@+id/how_to_use"
             android:icon="@drawable/ic_howtouse"/>
 </group>
 
