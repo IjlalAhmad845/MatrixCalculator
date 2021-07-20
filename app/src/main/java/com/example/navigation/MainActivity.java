@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
 
         for(int i=0;i<s1.size();i++)
             for(int j=0;j<s1.get(0).size();j++)
-                matrixPreviewTextviewList.get(index).get(i).get(j).setTextSize(matrixCardsParams.width/4/matrixTextSize);
+                matrixPreviewTextviewList.get(index).get(i).get(j).setTextSize(matrixCardsParams.width/5/matrixTextSize);
 
 
 
@@ -234,15 +234,15 @@ public class MainActivity extends AppCompatActivity {
                 );
                 params.setMargins(matrixCardsParams.width/32, 0,matrixCardsParams.width/32,0);
 
-                matrixPreviewTextviewArray.setTextSize((float) Math.sqrt(Math.pow(matrixCardsParams.width,2)+Math.pow(matrixCardsParams.height,2))/32);
-               // matrixPreviewTextviewArray.setLayoutParams(params);
+                matrixPreviewTextviewArray.setTextSize(matrixCardsParams.width/5/5);
+
                 if(matricesState)
                 matrixPreviewTextviewArray.setText("0");
                 else{
                     if(i==j)matrixPreviewTextviewArray.setText("1");
                     else matrixPreviewTextviewArray.setText("0");
                 }
-                //matrixPreviewTextviewArray.setTextSize(matrixCardsParams.width/40);
+
                 matrixPreviewLLArray.addView(matrixPreviewTextviewArray,params);
 
                 matrixPreviewTextviewList.get(counter1).get(i).add(matrixPreviewTextviewArray);
@@ -864,7 +864,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.feedback:
-                        Toast.makeText(MainActivity.this, "feedback clicked", Toast.LENGTH_SHORT).show();
+                        Intent feedbackIntent = new Intent(getApplicationContext(),FeedbackActivity.class);
+                        startActivity(feedbackIntent);
 
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
