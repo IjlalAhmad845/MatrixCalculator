@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Description">(App name) is a high performance Matrix Calculator.It can Evaluate simple as well as complex nested Expressions.
+        It has the ability to store multiple matrices so you can work on several matrices at the same time. </string>
+</resources>
