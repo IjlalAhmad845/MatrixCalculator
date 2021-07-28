@@ -16,6 +16,7 @@ public class SettingsActivity extends AppCompatActivity {
     SeekBar rowSeekbar,colSeekbar;
     TextView rowIndex,colIndex;
     RadioButton matrixStateRadio1,matrixStateRadio2;
+    boolean stateRadio=true;
 
     boolean settingsStateChanged = false;
 
@@ -41,7 +42,10 @@ public class SettingsActivity extends AppCompatActivity {
         rowIndex.setText(String.valueOf(rowSeekbar.getProgress()+1));
         colIndex.setText(String.valueOf(colSeekbar.getProgress()+1));
 
-        matrixStateRadio1.setSelected((Boolean)bundle.getSerializable("com.example.navigation.matricesState"));
+        matrixStateRadio1.setChecked((Boolean)bundle.getSerializable("com.example.navigation.matricesState"));
+        matrixStateRadio2.setChecked(!(Boolean)bundle.getSerializable("com.example.navigation.matricesState"));
+        stateRadio=(Boolean)bundle.getSerializable("com.example.navigation.matricesState");
+
     }
 
 
@@ -106,7 +110,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if(!settingsStateChanged)
-                    settingsStateChanged=matrixStateRadio2.isChecked();
+                    settingsStateChanged=(stateRadio==matrixStateRadio2.isChecked());
 
                 if(settingsStateChanged)
                 new AlertDialog.Builder(SettingsActivity.this)
@@ -144,7 +148,7 @@ public class SettingsActivity extends AppCompatActivity {
     public void SendData(View v){
 
         if(!settingsStateChanged)
-            settingsStateChanged=matrixStateRadio2.isChecked();
+           settingsStateChanged=(stateRadio==matrixStateRadio2.isChecked());
 
         if(settingsStateChanged)
             new AlertDialog.Builder(SettingsActivity.this)
@@ -177,7 +181,7 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if(!settingsStateChanged)
-            settingsStateChanged=matrixStateRadio2.isChecked();
+            settingsStateChanged=(stateRadio==matrixStateRadio2.isChecked());
 
         if(settingsStateChanged)
             new AlertDialog.Builder(SettingsActivity.this)
