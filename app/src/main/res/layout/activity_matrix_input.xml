@@ -137,13 +137,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="370dp"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.08">
+        app:layout_constraintVertical_bias="0.15">
 
         <HorizontalScrollView
             android:layout_width="wrap_content"
@@ -183,7 +184,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
-                            android:textSize="20dp" />
+                            android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -203,7 +204,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
-                            android:textSize="20dp" />
+                            android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -223,7 +224,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
-                            android:textSize="20dp" />
+                            android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -244,7 +245,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
-                            android:textSize="20dp" />
+                            android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -264,7 +265,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
-                            android:textSize="20dp" />
+                            android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
@@ -290,7 +291,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
-                            android:textSize="20dp" />
+                            android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -310,7 +311,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
-                            android:textSize="20dp" />
+                            android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -330,7 +331,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
-                            android:textSize="20dp" />
+                            android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
                     >
@@ -351,7 +352,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
-                            android:textSize="20dp" />
+                            android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -371,7 +372,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
-                            android:textSize="20dp" />
+                            android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
@@ -398,7 +399,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
-                            android:textSize="20dp" />
+                            android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -418,7 +419,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
-                            android:textSize="20dp" />
+                            android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -438,7 +439,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
-                            android:textSize="20dp" />
+                            android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
                     >
@@ -459,7 +460,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
-                            android:textSize="20dp" />
+                            android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -479,7 +480,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
-                            android:textSize="20dp" />
+                            android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
@@ -506,7 +507,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
-                            android:textSize="20dp" />
+                            android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -526,7 +527,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
-                            android:textSize="20dp" />
+                            android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -546,7 +547,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
-                            android:textSize="20dp" />
+                            android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
                     >
@@ -567,7 +568,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
-                            android:textSize="20dp" />
+                            android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -587,7 +588,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
-                            android:textSize="20dp" />
+                            android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
@@ -614,7 +615,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
-                            android:textSize="20dp" />
+                            android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -634,7 +635,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
-                            android:textSize="20dp" />
+                            android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -654,7 +655,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
-                            android:textSize="20dp" />
+                            android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -674,7 +675,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
-                            android:textSize="20dp" />
+                            android:textSize="22dp" />
 
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -695,7 +696,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
-                            android:textSize="20dp" />
+                            android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 

@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
 
         for(int i=0;i<s1.size();i++)
             for(int j=0;j<s1.get(0).size();j++)
-                matrixPreviewTextviewList.get(index).get(i).get(j).setTextSize(matrixCardsParams.width/5/matrixTextSize);
+                matrixPreviewTextviewList.get(index).get(i).get(j).setTextSize(matrixCardsParams.width/6/matrixTextSize);
 
 
 
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println(State);
     }
 
-    /**=================================================== For linking Main Activity to Matrix Activity**/
+    /**=================================================== For linking Main Activity to Matrix Activity ====================================================**/
     public static MainActivity getInstance() {
         return instance;
     }
@@ -238,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
                     );
                     params.setMargins(matrixCardsParams.width / 32, 0, matrixCardsParams.width / 32, 0);
 
-                    matrixPreviewTextviewArray.setTextSize(matrixCardsParams.width / 5 / 5);
+                    matrixPreviewTextviewArray.setTextSize((float) (matrixCardsParams.width / 6 / 5));
 
                     if (matricesState)
                         matrixPreviewTextviewArray.setText("0");
@@ -441,7 +441,7 @@ public class MainActivity extends AppCompatActivity {
 
         final float scale1 = editText.getContext().getResources().getDisplayMetrics().density;
         LinearLayout.LayoutParams editTextparams = new LinearLayout.LayoutParams(
-                (int) (verticalLL.getHeight()/verticalLL.getChildCount()*1.4),
+                (int) (verticalLL.getHeight()/verticalLL.getChildCount()*1.6),
                 ViewGroup.LayoutParams.WRAP_CONTENT
         );
 
@@ -522,7 +522,7 @@ public class MainActivity extends AppCompatActivity {
         set.connect(messageTextview.getId(),ConstraintSet.LEFT,ConstraintSet.PARENT_ID,ConstraintSet.LEFT,resultCardsParams.height/16);
         set.connect(messageTextview.getId(),ConstraintSet.TOP,editText.getId(),ConstraintSet.BOTTOM,resultCardsParams.height/32);
 
-        set.connect(matrixPreviewContainerLL.getId(),ConstraintSet.RIGHT,ConstraintSet.PARENT_ID,ConstraintSet.RIGHT,resultCardsParams.height/3);
+        set.connect(matrixPreviewContainerLL.getId(),ConstraintSet.RIGHT,ConstraintSet.PARENT_ID,ConstraintSet.RIGHT,resultCardsParams.height/4);
         set.connect(matrixPreviewContainerLL.getId(),ConstraintSet.TOP,ConstraintSet.PARENT_ID,ConstraintSet.TOP,0);
         set.connect(matrixPreviewContainerLL.getId(),ConstraintSet.BOTTOM,ConstraintSet.PARENT_ID,ConstraintSet.BOTTOM,0);
 

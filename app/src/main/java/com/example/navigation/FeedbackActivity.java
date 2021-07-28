@@ -20,8 +20,8 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class FeedbackActivity extends AppCompatActivity {
 
-    TextInputEditText Name,Content;
-    TextInputLayout nameLayout,contentLayout;
+    TextInputEditText Content;
+    TextInputLayout contentLayout;
 
     RadioButton bugRadio,featureRadio;
 
@@ -41,7 +41,7 @@ public class FeedbackActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(!Name.getText().toString().equals("") || !Content.getText().toString().equals(""))
+                if(!Content.getText().toString().trim().equals(""))
                 new AlertDialog.Builder(FeedbackActivity.this)
                         .setTitle("")
                         .setMessage("Discard Feedback")
@@ -64,10 +64,9 @@ public class FeedbackActivity extends AppCompatActivity {
         bugRadio=findViewById(R.id.radioButton1);
         featureRadio=findViewById(R.id.radioButton2);
 
-        Name=findViewById(R.id.feedbackNameField);
         Content=findViewById(R.id.feedbackContentField);
 
-        nameLayout=findViewById(R.id.nameLayout);
+
         contentLayout=findViewById(R.id.contentLayout);
 
         findViewById(R.id.joinButton).setOnClickListener(new View.OnClickListener() {
@@ -83,17 +82,14 @@ public class FeedbackActivity extends AppCompatActivity {
 
     public void SendFeedback(View v){
 
-        if(Name.getText().toString().equals(""))
-            nameLayout.setError("*Required");
-        else
-            nameLayout.setError(null);
+
 
         if(Content.getText().toString().equals(""))
             contentLayout.setError("*Required");
         else
             contentLayout.setError(null);
 
-        feedbackFields=Name.getText().toString().equals("")  || Content.getText().toString().equals("");
+        feedbackFields=Content.getText().toString().equals("");
         if(!feedbackFields) {
             Intent intent = new Intent(Intent.ACTION_SENDTO);
 
@@ -106,7 +102,7 @@ public class FeedbackActivity extends AppCompatActivity {
             else if(featureRadio.isChecked())
                 intent.putExtra(Intent.EXTRA_SUBJECT, "Feature Request");
 
-            intent.putExtra(Intent.EXTRA_TEXT,Name.getText().toString()+"-\n\n"+Content.getText().toString());
+            intent.putExtra(Intent.EXTRA_TEXT,Content.getText().toString());
             startActivity(intent);
 
         }
@@ -120,7 +116,7 @@ public class FeedbackActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        if(!Name.getText().toString().equals("") || !Content.getText().toString().equals(""))
+        if(!Content.getText().toString().equals(""))
         new AlertDialog.Builder(FeedbackActivity.this)
                 .setTitle("")
                 .setMessage("Discard Feedback")
