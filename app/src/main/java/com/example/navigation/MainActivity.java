@@ -860,7 +860,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.how_to_use:
-                        Toast.makeText(MainActivity.this, "How to use clicked", Toast.LENGTH_SHORT).show();
+                        Intent HtuIntent = new Intent(getApplicationContext(),HtuActivity.class);
+                        startActivity(HtuIntent);
 
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;

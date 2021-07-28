@@ -59,7 +59,8 @@ public class Calculations {
                 !errorCode.equals("Power too large")) {
 
             expression=EE.Convert(expression);
-            instance.messageTextviewList.get(outputCardIndex).setText(expression);
+            //instance.messageTextviewList.get(outputCardIndex).setText(expression);
+            instance.messageTextviewList.get(outputCardIndex).setText("");
 
             //Postfix Calculator loop
             for(int i=0;i<expression.length();i++){

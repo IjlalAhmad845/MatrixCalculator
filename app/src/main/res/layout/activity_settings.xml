@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:text="Settings"
         android:textSize="32sp"
-        android:textStyle="normal"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/feedbackIcon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
