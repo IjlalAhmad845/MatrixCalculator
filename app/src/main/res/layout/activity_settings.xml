@@ -18,6 +18,31 @@
         app:srcCompat="@drawable/ic_back_arrow" />
 
     <ImageButton
+        android:id="@+id/feedbackIcon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="@+id/backButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintStart_toEndOf="@+id/backButton"
+        app:layout_constraintTop_toTopOf="@+id/backButton"
+        app:srcCompat="@drawable/ic_settings" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        android:textSize="32sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="@+id/feedbackIcon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/feedbackIcon"
+        app:layout_constraintTop_toTopOf="@+id/feedbackIcon" />
+
+    <ImageButton
         android:id="@+id/imageButton2"
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -34,6 +59,7 @@
         android:layout_height="0dp"
         android:orientation="vertical"
         android:layout_marginTop="12dp"
+        android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
