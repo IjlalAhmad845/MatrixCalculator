@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:id="@+id/drawer"
-    tools:openDrawer="start">
+
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -23,6 +24,42 @@
             app:titleTextColor="@color/white"
             tools:layout_editor_absoluteX="0dp" />
 
+
+        <LinearLayout
+            android:id="@+id/hintLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintWidth_percent=".7"
+            app:layout_constraintHeight_percent=".2"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/scrollview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tap "
+                android:textStyle="bold"
+                android:textSize="22sp"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/ic_addmat"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" To Add Matrices"
+                android:textStyle="bold"
+                android:textSize="22sp"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
 
         <HorizontalScrollView
             android:id="@+id/scrollview"
