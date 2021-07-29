@@ -937,8 +937,6 @@ public class MainActivity extends AppCompatActivity {
         buttons[14]=findViewById(R.id.buttonBracketStart);
         buttons[15]=findViewById(R.id.buttonBracketEnd);
 
-        buttons[11].setEnabled(false);
-
         imgbtns[0]=findViewById(R.id.backspace);
         imgbtns[1]=findViewById(R.id.left);
         imgbtns[2]=findViewById(R.id.right);
