@@ -7,13 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.method.LinkMovementMethod;
-import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.RadioButton;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -32,10 +27,10 @@ public class FeedbackActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
 
-        initialize();
+        Initialize();
     }
 
-    public void initialize(){
+    public void Initialize(){
 
         findViewById(R.id.backButton).setOnClickListener(new View.OnClickListener() {
             @Override

@@ -107,11 +107,11 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
-        initializeWidgets();
+        InitializeWidgets();
 
     }
     /**=================================================== REVERTING BACK TO MATRIX PREVIEW CARDS ===============================================**/
-    public void inittextviews(int index,ArrayList<ArrayList<String>> s1,String matrixName,float matrixTextSize){
+    public void initTextViews(int index, ArrayList<ArrayList<String>> s1, String matrixName, float matrixTextSize){
 
 
         for(int i=0;i<5;i++)
@@ -830,7 +830,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**===================================== METHOD FOR INITIAL HOME SCREEN SETUP ===========================================**/
-    public void initializeWidgets(){
+    public void InitializeWidgets(){
 
         Toolbar toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

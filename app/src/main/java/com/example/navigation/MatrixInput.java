@@ -34,7 +34,7 @@ public class MatrixInput extends AppCompatActivity {
 
     MaterialButton rowUp,rowDown,colUp,colDown;
 
-    Button[] btns=new Button[11];
+    Button[] btns=new Button[12];
     ImageButton[] imgbtns=new ImageButton[5];
 
 
@@ -76,14 +76,14 @@ public class MatrixInput extends AppCompatActivity {
         currentSpinnerValue = (String) bundle.getSerializable("com.example.navigation.matrixName");
         ArrayList<String> names = (ArrayList<String>) bundle.getSerializable("com.example.navigation.matrixNames");
 
-        initializewidgets();
+        InitializeWidgets();
 
         writeMatrix(matrixList,names);
 
     }
 
     /**============================================== UPDATING ROWS & COLS TEXT ===========================================**/
-    public void controlmatrixsize(View v){
+    public void controlMatrixSize(View v){
         if(rowUp.isPressed() && row<4)
             rowText.setText(String.valueOf(++row+1));
 
@@ -118,6 +118,7 @@ public class MatrixInput extends AppCompatActivity {
 
     }
 
+    /**============================================== METHOD FOR SHOWING AND HIDING NUMPAD ===========================================**/
     public void showHideKeyboard(){
 
         for(int i=0;i<=row;i++)
@@ -150,22 +151,10 @@ public class MatrixInput extends AppCompatActivity {
                 });
             }
 
-        /*
-        else if(p==0){
-            keyboardcard.animate().alpha(0.0f).setDuration(150).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    keyboardcard.setVisibility(View.GONE);
-                    super.onAnimationEnd(animation);
-                }
-            });
-
-        }
-        p=1-p;*/
-
     }
 
-    public void numpad(View v){
+    /**============================================== METHOD FOR GETTING INPUT FROM NUMPAD ===========================================**/
+    public void Numpad(View v){
         String str;
         int cursorindex;
 
@@ -187,19 +176,25 @@ public class MatrixInput extends AppCompatActivity {
                                 matrixFields[i][j].setSelection(cursorindex+1);
                             }
 
+                            else if(btns[11].isPressed() && matrixFields[i][j].getText().toString().equals("")){
+                                matrixFields[i][j].setText(str.substring(0,cursorindex)+"-"+str.substring(cursorindex));
+                                matrixFields[i][j].setSelection(cursorindex+1);
+                            }
+
                             else if (imgbtns[0].isPressed() && cursorindex>0){
                                 matrixFields[i][j].setText(str.substring(0,cursorindex-1)+str.substring(cursorindex));
                                 matrixFields[i][j].setSelection(cursorindex-1);
                             }
                             else if (imgbtns[0].isPressed() && cursorindex==0){
-                                movefocus(v);
+                                moveFocus(v);
                             }
 
                         }
         //Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
     }
 
-    public void movefocus(View v){
+    /**============================================== METHOD FOR MOVE FOCUS IN MATRIX FIELDS ===========================================**/
+    public void moveFocus(View v){
 
         for(int i=0;i<5;i++)
             for(int j=0;j<5;j++)
@@ -290,7 +285,8 @@ public class MatrixInput extends AppCompatActivity {
         });
     }
 
-    public void initializewidgets(){
+    /**============================================== INITIALIZING VARIABLES  ===========================================**/
+    public void InitializeWidgets(){
         rowUp=findViewById(R.id.rowup);
         rowDown=findViewById(R.id.rowdown);
         colUp=findViewById(R.id.colup);
@@ -447,6 +443,7 @@ public class MatrixInput extends AppCompatActivity {
         btns[8]=findViewById(R.id.btn8);
         btns[9]=findViewById(R.id.btn9);
         btns[10]=findViewById(R.id.btndot);
+        btns[11]=findViewById(R.id.btnMinus);
 
         imgbtns[0]=findViewById(R.id.backspace);
         imgbtns[1]=findViewById(R.id.up);
@@ -504,7 +501,7 @@ public class MatrixInput extends AppCompatActivity {
         //permissible limit of text size control variable
         if(matrixTextSize<=11){
             if(matrixCheck){
-                MainActivity.getInstance().inittextviews(index,matrixList, currentSpinnerValue,matrixTextSize);
+                MainActivity.getInstance().initTextViews(index,matrixList, currentSpinnerValue,matrixTextSize);
                 super.onBackPressed();
             }
             else Toast.makeText(this, "Invalid Matrix Value", Toast.LENGTH_SHORT).show();
@@ -524,7 +521,7 @@ public class MatrixInput extends AppCompatActivity {
                     .setNegativeButton("continue", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    MainActivity.getInstance().inittextviews(index,matrixList, currentSpinnerValue,matrixTextSize);
+                    MainActivity.getInstance().initTextViews(index,matrixList, currentSpinnerValue,matrixTextSize);
                     back();
                 }
             }).show();

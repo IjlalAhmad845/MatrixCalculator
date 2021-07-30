@@ -26,7 +26,7 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
 
         settingsStateChanged = false;
-        initialize();
+        Initialize();
 
         Bundle bundle=getIntent().getExtras();
 
@@ -104,7 +104,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     /**======================================== INITIALIZING WIDGETS IN SETTINGS ACTIVITY =============================================**/
-    public void initialize(){
+    public void Initialize(){
         findViewById(R.id.backButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

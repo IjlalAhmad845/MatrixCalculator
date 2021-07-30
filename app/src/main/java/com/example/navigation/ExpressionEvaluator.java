@@ -160,7 +160,7 @@ public class ExpressionEvaluator {
             return "Expression too long to evaluate";
 
         else if(Valid_Arithmetic(str,str.length())==0)
-            return  infixToPostfix(str);
+            return  InfixToPostfix(str);
         else if(Valid_Arithmetic(str,str.length())==1)
             return "Brackets Mistake";
         else if(Valid_Arithmetic(str,str.length())==2)
@@ -311,7 +311,7 @@ public class ExpressionEvaluator {
     // The main method that converts
     // given infix expression
     // to postfix expression.
-    public String infixToPostfix(String exp)
+    public String InfixToPostfix(String exp)
     {
         // initializing empty String for result
         StringBuilder result = new StringBuilder();
