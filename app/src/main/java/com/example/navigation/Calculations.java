@@ -498,9 +498,11 @@ public class Calculations {
                 matrixTextSize+=5-cols;
                 //System.out.println(instance.resultCardsParams.height/3.5/matrixTextSize);
 
+                final float density = instance.getResources().getDisplayMetrics().density;
+
                 for(int i=0;i<cols;i++)
                     for(int j=0;j<rows;j++)
-                        instance.matrixOutputTextviewList.get(outputCardIndex).get(i).get(j).setTextSize((float) (instance.resultCardsParams.height/5/matrixTextSize));
+                        instance.matrixOutputTextviewList.get(outputCardIndex).get(i).get(j).setTextSize((float) (instance.resultCardsParams.height/1.8/density/matrixTextSize));
             }
             else if(error){
                 for(int i=0;i<5;i++){

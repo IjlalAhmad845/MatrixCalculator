@@ -124,10 +124,10 @@ public class MainActivity extends AppCompatActivity {
                 matrixPreviewTextviewList.get(index).get(i).get(j).setVisibility(View.VISIBLE);
             }
 
-
+        final float density = getResources().getDisplayMetrics().density;
         for(int i=0;i<s1.size();i++)
             for(int j=0;j<s1.get(0).size();j++)
-                matrixPreviewTextviewList.get(index).get(i).get(j).setTextSize(matrixCardsParams.width/6/matrixTextSize);
+                matrixPreviewTextviewList.get(index).get(i).get(j).setTextSize(matrixCardsParams.width/2/density/matrixTextSize);
 
 
 
@@ -214,7 +214,8 @@ public class MainActivity extends AppCompatActivity {
 
             matrixPreviewTextviewList.add(new ArrayList<>());
 
-
+            final float density = getResources().getDisplayMetrics().density;
+            System.out.println(density);
             //loop for adding Vertical Linear layouts in above Container
             //Columns
             for (int i = 0; i < 5; i++) {
@@ -238,7 +239,7 @@ public class MainActivity extends AppCompatActivity {
                     );
                     params.setMargins(matrixCardsParams.width / 32, 0, matrixCardsParams.width / 32, 0);
 
-                    matrixPreviewTextviewArray.setTextSize((float) (matrixCardsParams.width / 6 / 5));
+                    matrixPreviewTextviewArray.setTextSize(matrixCardsParams.width / 2/density / 5);
 
                     if (matricesState)
                         matrixPreviewTextviewArray.setText("0");
@@ -439,7 +440,8 @@ public class MainActivity extends AppCompatActivity {
         editText.setId(View.generateViewId());
         editText.setHint("Tap on Matrix Cards");
 
-        final float scale1 = editText.getContext().getResources().getDisplayMetrics().density;
+        //final float scale1 = getResources().getDisplayMetrics().density;
+        //System.out.println(scale1);
         LinearLayout.LayoutParams editTextparams = new LinearLayout.LayoutParams(
                 (int) (verticalLL.getHeight()/verticalLL.getChildCount()*1.6),
                 ViewGroup.LayoutParams.WRAP_CONTENT
