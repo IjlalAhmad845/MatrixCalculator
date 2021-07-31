@@ -215,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
             matrixPreviewTextviewList.add(new ArrayList<>());
 
             final float density = getResources().getDisplayMetrics().density;
-            System.out.println(density);
+            //System.out.println(density);
             //loop for adding Vertical Linear layouts in above Container
             //Columns
             for (int i = 0; i < 5; i++) {
@@ -524,7 +524,7 @@ public class MainActivity extends AppCompatActivity {
         set.connect(messageTextview.getId(),ConstraintSet.LEFT,ConstraintSet.PARENT_ID,ConstraintSet.LEFT,resultCardsParams.height/16);
         set.connect(messageTextview.getId(),ConstraintSet.TOP,editText.getId(),ConstraintSet.BOTTOM,resultCardsParams.height/32);
 
-        set.connect(matrixPreviewContainerLL.getId(),ConstraintSet.RIGHT,ConstraintSet.PARENT_ID,ConstraintSet.RIGHT,resultCardsParams.height/4);
+        set.connect(matrixPreviewContainerLL.getId(),ConstraintSet.RIGHT,ConstraintSet.PARENT_ID,ConstraintSet.RIGHT,resultCardsParams.height/3);
         set.connect(matrixPreviewContainerLL.getId(),ConstraintSet.TOP,ConstraintSet.PARENT_ID,ConstraintSet.TOP,0);
         set.connect(matrixPreviewContainerLL.getId(),ConstraintSet.BOTTOM,ConstraintSet.PARENT_ID,ConstraintSet.BOTTOM,0);
 

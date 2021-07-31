@@ -740,7 +740,7 @@
         android:layout_height="0dp"
         android:layout_margin="5dp"
         android:elevation="10dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:cardCornerRadius="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

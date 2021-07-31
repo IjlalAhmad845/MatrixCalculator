@@ -502,7 +502,7 @@ public class Calculations {
 
                 for(int i=0;i<cols;i++)
                     for(int j=0;j<rows;j++)
-                        instance.matrixOutputTextviewList.get(outputCardIndex).get(i).get(j).setTextSize((float) (instance.resultCardsParams.height/1.8/density/matrixTextSize));
+                        instance.matrixOutputTextviewList.get(outputCardIndex).get(i).get(j).setTextSize((float) (instance.resultCardsParams.height/1.9/density/matrixTextSize));
             }
             else if(error){
                 for(int i=0;i<5;i++){

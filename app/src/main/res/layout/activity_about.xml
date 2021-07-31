@@ -43,82 +43,181 @@
       app:layout_constraintStart_toEndOf="@+id/feedbackIcon"
       app:layout_constraintTop_toTopOf="@+id/feedbackIcon" />
 
-  <LinearLayout
+  <ScrollView
       android:layout_width="match_parent"
       android:layout_height="0dp"
-      android:orientation="vertical"
-      android:padding="6dp"
+
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHeight_percent=".5"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/backButton"
-      app:layout_constraintVertical_bias="0.0">
+      app:layout_constraintTop_toBottomOf="@+id/backButton">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="6dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="@string/app_name"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:orientation="vertical"
+        android:padding="6dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight=".2"
-        android:text="Description :"
-        android:textSize="16sp" />
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="6dp"
+          android:layout_weight="1"
+          android:gravity="center"
+          android:text="@string/app_name"
+          android:textSize="24sp"
+          android:textStyle="bold" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@string/Description" />
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight=".2"
+          android:text="Description :"
+          android:textStyle="bold"
+          android:textSize="16sp" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="?android:attr/listDivider" />
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="10dp"
+          android:layout_weight="1" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight=".1"
-        android:text="Sources :"
-        android:textSize="16sp"
-        android:layout_marginTop="6dp"/>
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="@string/Description" />
 
-    <TextView
-        android:id="@+id/link1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight=".1"
-        android:text="@string/hyperlink1" />
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="10dp"
+          android:layout_weight="1" />
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight=".2"
+          android:text="Features :"
+          android:textSize="16sp"
+          android:textStyle="bold"/>
 
-    <TextView
-        android:id="@+id/link2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight=".1"
-        android:text="@string/hyperlink2"
-        android:layout_marginBottom="6dp"/>
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="10dp"
+          android:layout_weight="1" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="?android:attr/listDivider" />
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="@string/MultipleMatrices" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight=".1"
-        android:text="Version - 0.0.1 (BETA)"
-        android:layout_marginTop="6dp"/>
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="10dp"
+          android:layout_weight="1" />
+
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="@string/MultipleResultCards" />
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="10dp"
+          android:layout_weight="1" />
+
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="@string/MatrixOperations" />
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="10dp"
+          android:layout_weight="1" />
+
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="@string/MatrixNavigation" />
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="10dp"
+          android:layout_weight="1" />
+
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="@string/MatrixLaws" />
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="10dp"
+          android:layout_weight="1" />
+
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="@string/Calculator" />
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="10dp"
+          android:layout_weight="1" />
+
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="@string/Offline" />
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="2dp"
+          android:background="?android:attr/listDivider" />
+
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="6dp"
+          android:layout_weight=".1"
+          android:text="Sources :"
+          android:textSize="16sp" />
+
+      <TextView
+          android:id="@+id/link1"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight=".1"
+          android:text="@string/hyperlink1" />
+
+      <TextView
+          android:id="@+id/link2"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="6dp"
+          android:layout_weight=".1"
+          android:text="@string/hyperlink2" />
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="2dp"
+          android:background="?android:attr/listDivider" />
+
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="6dp"
+          android:layout_weight=".1"
+          android:text="Version - 0.0.1 (BETA)" />
 
 
-  </LinearLayout>
+    </LinearLayout>
+  </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="Description">Matscape is a high performance Matrix Calculator.It can Evaluate simple as well as complex nested Expressions.
+    <string name="app_name">Matscape</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="Description"><b>Matscape</b> is a high performance Matrix Calculator.It can Evaluate simple as well as complex nested Expressions.
         It has the ability to store multiple matrices so you can work on several matrices at the same time. </string>
+    <string name="hyperlink1"><a href="https://developer.android.com/">developer.android.com</a></string>
+    <string name="hyperlink2"><a href="https://material.io/">material.io</a></string>
+    <string name="MultipleMatrices"><b>Multiple Matrices:</b> You can work with Multiple Matrices from A to Z at the same time with Matrices of any dimensions. The size of the displayed Matrix will depend on your input.</string>
+    <string name="MultipleResultCards"><b>Multiple Outputs:</b> You can enter as many expressions as you want without any limit. And there is also no limit how nested you want to enter your expressions. Until you enter valid expressions. In case you have entered something Wrong or Invalid ,the result cards will display automativally display a message for better understanding.</string>
+    <string name="MatrixOperations"><b>Matrix Operations:</b> There are a variety of different Matrix Operations you can play with like <b>Determinant</b>,
+        <b>Transpose</b>, <b>Power</b>, <b>Trace</b>, <b>Adjoint</b>, <b>Inverse</b> and many more coming in Future Updates.</string>
+    <string name="MatrixNavigation"><b>Matrix Navigation:</b> When settings Matrix values, you can easliy navigate between them</string>
+    <string name="MatrixLaws"><b>Matrix Laws:</b> This Calculator fully obeys each and every matrix law like A[k]=kA[], A|k|=kⁿA| |, Inv(A)A=AInv(A)=I</string>
+    <string name="Calculator"><b>Numerical Calculator:</b> This app also have an Inbuilt Numerical calculator, so you don\'t have to go anywhere while doing Normal calculations also.</string>
+    <string name="Offline"><b>Offline:</b> No internet Required</string>
+
 </resources>
