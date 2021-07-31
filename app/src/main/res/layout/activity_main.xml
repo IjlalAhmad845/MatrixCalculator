@@ -20,7 +20,7 @@
             app:layout_constraintHeight_percent=".065"
             android:background="@android:color/transparent"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="TOOLBAR"
+            app:title=" "
             app:titleTextColor="@color/white"
             tools:layout_editor_absoluteX="0dp" />
 

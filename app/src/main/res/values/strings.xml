@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">navigation</string>
+    <string name="app_name">Matscape</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
-    <string name="Description">(App name) is a high performance Matrix Calculator.It can Evaluate simple as well as complex nested Expressions.
+    <string name="Description">Matscape is a high performance Matrix Calculator.It can Evaluate simple as well as complex nested Expressions.
         It has the ability to store multiple matrices so you can work on several matrices at the same time. </string>
     <string name="hyperlink1"><a href="https://developer.android.com/">developer.android.com</a></string>
     <string name="hyperlink2"><a href="https://material.io/">material.io</a></string>
