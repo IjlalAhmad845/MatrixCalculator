@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.navigation">
+    package="com.example.MatrixCalculator">
 
     <application
         android:allowBackup="true"
@@ -8,12 +8,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_icon_round"
         android:theme="@style/Theme.Navigation">
-        <activity android:name=".HtuActivity"/>
-        <activity android:name=".FeedbackActivity" />
-        <activity android:name=".AboutActivity" />
-        <activity android:name=".SettingsActivity" />
-        <activity android:name=".MatrixInput" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.MatrixCalculator.HtuActivity"/>
+        <activity android:name="com.example.MatrixCalculator.FeedbackActivity" />
+        <activity android:name="com.example.MatrixCalculator.AboutActivity" />
+        <activity android:name="com.example.MatrixCalculator.SettingsActivity" />
+        <activity android:name="com.example.MatrixCalculator.MatrixInput" />
+        <activity android:name="com.example.MatrixCalculator.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

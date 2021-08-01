@@ -1,4 +1,4 @@
-package com.example.navigation;
+package com.example.MatrixCalculator;
 
 import java.util.ArrayList;
 import java.util.Collections;

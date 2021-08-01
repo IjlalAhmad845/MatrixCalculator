@@ -1,4 +1,4 @@
-package com.example.navigation;
+package com.example.MatrixCalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;

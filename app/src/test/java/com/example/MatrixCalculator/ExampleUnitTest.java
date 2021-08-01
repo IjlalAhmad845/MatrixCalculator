@@ -1,4 +1,4 @@
-package com.example.navigation;
+package com.example.MatrixCalculator;
 
 import org.junit.Test;
 

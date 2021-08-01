@@ -1,4 +1,4 @@
-package com.example.navigation;
+package com.example.MatrixCalculator;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -14,7 +14,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -35,7 +34,6 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -370,12 +368,12 @@ public class MainActivity extends AppCompatActivity {
                 //sending all the data from home to page matrix making page through a large bundle
                 Intent intent = new Intent(getApplicationContext(), MatrixInput.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("com.example.navigation.index", matrixPreviewIDList.indexOf(matrixPreviewContainerLL.getId()));
-                bundle.putSerializable("com.example.navigation.String_list", matrixPreviewStringList);
-                bundle.putSerializable("com.example.navigation.columns", matrixPreviewStringList.get(0).size());
-                bundle.putSerializable("com.example.navigation.rows", matrixPreviewStringList.size());
-                bundle.putSerializable("com.example.navigation.matrixName", matrixNamesStringList.get(matrixPreviewIDList.indexOf(matrixPreviewContainerLL.getId())));
-                bundle.putSerializable("com.example.navigation.matrixNames", matrixNamesStringList);
+                bundle.putSerializable("com.example.MatrixCalculator.index", matrixPreviewIDList.indexOf(matrixPreviewContainerLL.getId()));
+                bundle.putSerializable("com.example.MatrixCalculator.String_list", matrixPreviewStringList);
+                bundle.putSerializable("com.example.MatrixCalculator.columns", matrixPreviewStringList.get(0).size());
+                bundle.putSerializable("com.example.MatrixCalculator.rows", matrixPreviewStringList.size());
+                bundle.putSerializable("com.example.MatrixCalculator.matrixName", matrixNamesStringList.get(matrixPreviewIDList.indexOf(matrixPreviewContainerLL.getId())));
+                bundle.putSerializable("com.example.MatrixCalculator.matrixNames", matrixNamesStringList);
                 intent.putExtras(bundle);
                 startActivity(intent);
 
@@ -858,9 +856,9 @@ public class MainActivity extends AppCompatActivity {
                         //Toast.makeText(MainActivity.this, "settings clicked", Toast.LENGTH_SHORT).show();
                         Intent settingsIntent = new Intent(getApplicationContext(),SettingsActivity.class);
                         Bundle bundle=new Bundle();
-                        bundle.putSerializable("com.example.navigation.matrixCols",matrixCols);
-                        bundle.putSerializable("com.example.navigation.matrixRows",matrixRows);
-                        bundle.putSerializable("com.example.navigation.matricesState",matricesState);
+                        bundle.putSerializable("com.example.MatrixCalculator.matrixCols",matrixCols);
+                        bundle.putSerializable("com.example.MatrixCalculator.matrixRows",matrixRows);
+                        bundle.putSerializable("com.example.MatrixCalculator.matricesState",matricesState);
                         settingsIntent.putExtras(bundle);
                         startActivity(settingsIntent);
 

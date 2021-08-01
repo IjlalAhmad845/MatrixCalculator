@@ -1,4 +1,4 @@
-package com.example.navigation;
+package com.example.MatrixCalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -66,15 +66,15 @@ public class MatrixInput extends AppCompatActivity {
 
         //Taking Input from Intent through a large bundle
         Bundle bundle=getIntent().getExtras();
-        index= (int) bundle.getSerializable("com.example.navigation.index");
+        index= (int) bundle.getSerializable("com.example.MatrixCalculator.index");
 
-        matrixList= (ArrayList<ArrayList<String>>) bundle.getSerializable("com.example.navigation.String_list");
+        matrixList= (ArrayList<ArrayList<String>>) bundle.getSerializable("com.example.MatrixCalculator.String_list");
 
-        row= (int) bundle.getSerializable("com.example.navigation.rows")-1;
-        col= (int) bundle.getSerializable("com.example.navigation.columns")-1;
+        row= (int) bundle.getSerializable("com.example.MatrixCalculator.rows")-1;
+        col= (int) bundle.getSerializable("com.example.MatrixCalculator.columns")-1;
 
-        currentSpinnerValue = (String) bundle.getSerializable("com.example.navigation.matrixName");
-        ArrayList<String> names = (ArrayList<String>) bundle.getSerializable("com.example.navigation.matrixNames");
+        currentSpinnerValue = (String) bundle.getSerializable("com.example.MatrixCalculator.matrixName");
+        ArrayList<String> names = (ArrayList<String>) bundle.getSerializable("com.example.MatrixCalculator.matrixNames");
 
         InitializeWidgets();
 

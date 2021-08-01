@@ -1,4 +1,4 @@
-package com.example.navigation;
+package com.example.MatrixCalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -36,15 +36,15 @@ public class SettingsActivity extends AppCompatActivity {
     /**==================================================== WRITING DATA IN SETTINGS ACTIVITY ========================================**/
     public void setData(Bundle bundle){
 
-        rowSeekbar.setProgress((Integer) bundle.getSerializable("com.example.navigation.matrixRows")-1);
-        colSeekbar.setProgress((Integer) bundle.getSerializable("com.example.navigation.matrixCols")-1);
+        rowSeekbar.setProgress((Integer) bundle.getSerializable("com.example.MatrixCalculator.matrixRows")-1);
+        colSeekbar.setProgress((Integer) bundle.getSerializable("com.example.MatrixCalculator.matrixCols")-1);
 
         rowIndex.setText(String.valueOf(rowSeekbar.getProgress()+1));
         colIndex.setText(String.valueOf(colSeekbar.getProgress()+1));
 
-        matrixStateRadio1.setChecked((Boolean)bundle.getSerializable("com.example.navigation.matricesState"));
-        matrixStateRadio2.setChecked(!(Boolean)bundle.getSerializable("com.example.navigation.matricesState"));
-        stateRadio=(Boolean)bundle.getSerializable("com.example.navigation.matricesState");
+        matrixStateRadio1.setChecked((Boolean)bundle.getSerializable("com.example.MatrixCalculator.matricesState"));
+        matrixStateRadio2.setChecked(!(Boolean)bundle.getSerializable("com.example.MatrixCalculator.matricesState"));
+        stateRadio=(Boolean)bundle.getSerializable("com.example.MatrixCalculator.matricesState");
 
     }
 
