@@ -3,6 +3,7 @@ package com.example.navigation;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -13,6 +14,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -33,6 +35,7 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -109,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
         InitializeWidgets();
 
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
     }
     /**=================================================== REVERTING BACK TO MATRIX PREVIEW CARDS ===============================================**/
     public void initTextViews(int index, ArrayList<ArrayList<String>> s1, String matrixName, float matrixTextSize){
@@ -439,6 +443,8 @@ public class MainActivity extends AppCompatActivity {
         editText.setShowSoftInputOnFocus(false);
         editText.setId(View.generateViewId());
         editText.setHint("Tap on Matrix Cards");
+        /*editText.setTextColor(getResources().getColor(R.color.materialField_Color));
+        editText.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.materialField_Color)));*/
 
         //final float scale1 = getResources().getDisplayMetrics().density;
         //System.out.println(scale1);
@@ -963,6 +969,6 @@ public class MainActivity extends AppCompatActivity {
         else if(keyboardCard.getVisibility()==View.VISIBLE && verticalLL.getChildCount()>2)
             keyboardCard.setVisibility(View.GONE);
         else
-        super.onBackPressed();
+            Toast.makeText(getApplicationContext(), "Back Button is Blocked", Toast.LENGTH_SHORT).show();
     }
 }

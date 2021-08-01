@@ -15,5 +15,7 @@
     <string name="MatrixLaws"><b>Matrix Laws:</b> This Calculator fully obeys each and every matrix law like A[k]=kA[], A|k|=kⁿA| |, Inv(A)A=AInv(A)=I</string>
     <string name="Calculator"><b>Numerical Calculator:</b> This app also have an Inbuilt Numerical calculator, so you don\'t have to go anywhere while doing Normal calculations also.</string>
     <string name="Offline"><b>Offline:</b> No internet Required</string>
+    <string name="TOS">Terms of Service</string>
+    <string name="privacyPolicy">Privacy Policy</string>
 
 </resources>

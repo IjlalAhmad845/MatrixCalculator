@@ -483,6 +483,7 @@
                                 android:layout_marginStart="1dp"
                                 android:layout_marginEnd="1dp"
                                 android:layout_weight="1"
+                                android:backgroundTint="@color/button_backgroundTint"
                                 android:onClick="KeyboardInput"
                                 android:padding="0px"
                                 android:text="1" />
@@ -494,6 +495,7 @@
                                 android:layout_marginStart="1dp"
                                 android:layout_marginEnd="1dp"
                                 android:layout_weight="1"
+                                android:backgroundTint="@color/button_backgroundTint"
                                 android:onClick="KeyboardInput"
                                 android:padding="0px"
                                 android:text="2" />
@@ -505,6 +507,7 @@
                                 android:layout_marginStart="1dp"
                                 android:layout_marginEnd="1dp"
                                 android:layout_weight="1"
+                                android:backgroundTint="@color/button_backgroundTint"
                                 android:onClick="KeyboardInput"
                                 android:padding="0px"
                                 android:text="3" />
@@ -516,6 +519,7 @@
                                 android:layout_marginStart="1dp"
                                 android:layout_marginEnd="1dp"
                                 android:layout_weight="1"
+                                android:backgroundTint="@color/button_backgroundTint"
                                 android:onClick="KeyboardInput"
                                 android:padding="0px"
                                 android:text="x"
@@ -535,6 +539,7 @@
                                 android:layout_marginStart="1dp"
                                 android:layout_marginEnd="1dp"
                                 android:layout_weight="1"
+                                android:backgroundTint="@color/button_backgroundTint"
                                 android:onClick="KeyboardInput"
                                 android:padding="0px"
                                 android:text="4" />
@@ -546,6 +551,7 @@
                                 android:layout_marginStart="1dp"
                                 android:layout_marginEnd="1dp"
                                 android:layout_weight="1"
+                                android:backgroundTint="@color/button_backgroundTint"
                                 android:onClick="KeyboardInput"
                                 android:padding="0px"
                                 android:text="5" />
@@ -557,6 +563,7 @@
                                 android:layout_marginStart="1dp"
                                 android:layout_marginEnd="1dp"
                                 android:layout_weight="1"
+                                android:backgroundTint="@color/button_backgroundTint"
                                 android:onClick="KeyboardInput"
                                 android:padding="0px"
                                 android:text="6" />
@@ -568,6 +575,7 @@
                                 android:layout_marginStart="1dp"
                                 android:layout_marginEnd="1dp"
                                 android:layout_weight="1"
+                                android:backgroundTint="@color/button_backgroundTint"
                                 android:onClick="KeyboardInput"
                                 android:padding="0px"
                                 android:text="+" />
@@ -587,6 +595,7 @@
                                 android:layout_marginStart="1dp"
                                 android:layout_marginEnd="1dp"
                                 android:layout_weight="1"
+                                android:backgroundTint="@color/button_backgroundTint"
                                 android:onClick="KeyboardInput"
                                 android:padding="0px"
                                 android:text="7" />
@@ -598,6 +607,7 @@
                                 android:layout_marginStart="1dp"
                                 android:layout_marginEnd="1dp"
                                 android:layout_weight="1"
+                                android:backgroundTint="@color/button_backgroundTint"
                                 android:onClick="KeyboardInput"
                                 android:padding="0px"
                                 android:text="8" />
@@ -609,6 +619,7 @@
                                 android:layout_marginStart="1dp"
                                 android:layout_marginEnd="1dp"
                                 android:layout_weight="1"
+                                android:backgroundTint="@color/button_backgroundTint"
                                 android:onClick="KeyboardInput"
                                 android:padding="0px"
                                 android:text="9" />
@@ -620,6 +631,7 @@
                                 android:layout_marginStart="1dp"
                                 android:layout_marginEnd="1dp"
                                 android:layout_weight="1"
+                                android:backgroundTint="@color/button_backgroundTint"
                                 android:onClick="KeyboardInput"
                                 android:padding="0px"
                                 android:text="-" />
@@ -639,6 +651,7 @@
                                 android:layout_marginStart="1dp"
                                 android:layout_marginEnd="1dp"
                                 android:layout_weight="1"
+                                android:backgroundTint="@color/button_backgroundTint"
                                 android:onClick="KeyboardInput"
                                 android:padding="0px"
                                 android:text="." />
@@ -650,6 +663,7 @@
                                 android:layout_marginStart="1dp"
                                 android:layout_marginEnd="1dp"
                                 android:layout_weight="1"
+                                android:backgroundTint="@color/button_backgroundTint"
                                 android:onClick="KeyboardInput"
                                 android:padding="0px"
                                 android:text="0" />
@@ -678,6 +692,7 @@
                                 android:layout_marginStart="4dp"
                                 android:layout_marginEnd="2dp"
                                 android:layout_weight="1"
+                                android:backgroundTint="@color/button_backgroundTint"
                                 android:onClick="KeyboardInput"
                                 android:padding="0px"
                                 android:text="(" />
@@ -689,6 +704,7 @@
                                 android:layout_marginStart="2dp"
                                 android:layout_marginEnd="4dp"
                                 android:layout_weight="1"
+                                android:backgroundTint="@color/button_backgroundTint"
                                 android:onClick="KeyboardInput"
                                 android:padding="0px"
                                 android:text=")" />

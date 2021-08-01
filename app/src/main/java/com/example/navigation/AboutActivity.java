@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 public class AboutActivity extends AppCompatActivity {
 
-    TextView link1,link2;
+    TextView link1,link2, TermsOfService, privacyPolicy;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +26,13 @@ public class AboutActivity extends AppCompatActivity {
 
         link1.setMovementMethod(LinkMovementMethod.getInstance());
         link2.setMovementMethod(LinkMovementMethod.getInstance());
+
+        TermsOfService =findViewById(R.id.TOS);
+        privacyPolicy =findViewById(R.id.privacyPolicy);
+
+        TermsOfService.setMovementMethod(LinkMovementMethod.getInstance());
+        privacyPolicy.setMovementMethod(LinkMovementMethod.getInstance());
+
     }
 
     private void back() {
