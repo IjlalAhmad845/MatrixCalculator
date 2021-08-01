@@ -77,16 +77,16 @@
                 android:id="@+id/radioButton1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Bug"
+                android:layout_weight="1"
                 android:checked="true"
-                android:layout_weight="1"/>
+                android:text="Bug" />
 
             <RadioButton
                 android:id="@+id/radioButton2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Feature"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:text="Feature" />
         </RadioGroup>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -161,6 +161,7 @@
         android:id="@+id/joinButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/button_backgroundTint"
         android:padding="-10dp"
         android:text="Join"
         app:layout_constraintBottom_toBottomOf="parent"

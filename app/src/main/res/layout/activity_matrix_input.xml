@@ -15,6 +15,7 @@
         android:text="-"
         android:textSize="24sp"
         android:textStyle="bold"
+        app:backgroundTint="@color/button_backgroundTint"
         app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias=".45"
@@ -30,6 +31,7 @@
         android:text="-"
         android:textSize="24sp"
         android:textStyle="bold"
+        app:backgroundTint="@color/button_backgroundTint"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,6 +49,7 @@
         android:text="+"
         android:textSize="24sp"
         android:textStyle="bold"
+        app:backgroundTint="@color/button_backgroundTint"
         app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias=".90"
@@ -62,6 +65,7 @@
         android:text="+"
         android:textSize="24sp"
         android:textStyle="bold"
+        app:backgroundTint="@color/button_backgroundTint"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -185,6 +189,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
+                            android:textColor="@color/materialField_Color"
                             android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -205,6 +210,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
+                            android:textColor="@color/materialField_Color"
                             android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -225,6 +231,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
+                            android:textColor="@color/materialField_Color"
                             android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -246,6 +253,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
+                            android:textColor="@color/materialField_Color"
                             android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -266,6 +274,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
+                            android:textColor="@color/materialField_Color"
                             android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -292,7 +301,8 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
-                            android:textSize="22dp" />
+                            android:textColor="@color/materialField_Color"
+                            android:textSize="22dp"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -312,6 +322,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
+                            android:textColor="@color/materialField_Color"
                             android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -332,10 +343,10 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
+                            android:textColor="@color/materialField_Color"
                             android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
-                    >
 
                     <com.google.android.material.textfield.TextInputLayout
 
@@ -353,6 +364,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
+                            android:textColor="@color/materialField_Color"
                             android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -373,6 +385,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
+                            android:textColor="@color/materialField_Color"
                             android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -400,6 +413,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
+                            android:textColor="@color/materialField_Color"
                             android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -420,6 +434,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
+                            android:textColor="@color/materialField_Color"
                             android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -440,10 +455,10 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
+                            android:textColor="@color/materialField_Color"
                             android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
-                    >
 
                     <com.google.android.material.textfield.TextInputLayout
 
@@ -461,6 +476,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
+                            android:textColor="@color/materialField_Color"
                             android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -481,6 +497,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
+                            android:textColor="@color/materialField_Color"
                             android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -508,6 +525,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
+                            android:textColor="@color/materialField_Color"
                             android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -528,6 +546,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
+                            android:textColor="@color/materialField_Color"
                             android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -548,10 +567,11 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
+                            android:textColor="@color/materialField_Color"
                             android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
-                    >
+
 
                     <com.google.android.material.textfield.TextInputLayout
 
@@ -569,6 +589,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
+                            android:textColor="@color/materialField_Color"
                             android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -589,6 +610,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
+                            android:textColor="@color/materialField_Color"
                             android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -616,6 +638,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
+                            android:textColor="@color/materialField_Color"
                             android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -636,6 +659,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
+                            android:textColor="@color/materialField_Color"
                             android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -656,6 +680,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
+                            android:textColor="@color/materialField_Color"
                             android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -676,6 +701,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
+                            android:textColor="@color/materialField_Color"
                             android:textSize="22dp" />
 
 
@@ -697,6 +723,7 @@
                             android:hint="0"
                             android:inputType="numberSigned"
                             android:minEms="2"
+                            android:textColor="@color/materialField_Color"
                             android:textSize="22dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -715,7 +742,6 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="110dp"
         android:layout_height="55dp"
-
         android:background="@android:color/transparent"
         android:hint="Name"
         app:errorEnabled="true"
@@ -771,6 +797,7 @@
                         android:layout_marginStart="2dp"
                         android:layout_marginEnd="2dp"
                         android:layout_weight="1"
+                        android:backgroundTint="@color/button_backgroundTint"
                         android:onClick="Numpad"
                         android:text="1" />
 
@@ -781,6 +808,7 @@
                         android:layout_marginStart="2dp"
                         android:layout_marginEnd="2dp"
                         android:layout_weight="1"
+                        android:backgroundTint="@color/button_backgroundTint"
                         android:onClick="Numpad"
                         android:text="2" />
 
@@ -791,6 +819,7 @@
                         android:layout_marginStart="2dp"
                         android:layout_marginEnd="2dp"
                         android:layout_weight="1"
+                        android:backgroundTint="@color/button_backgroundTint"
                         android:onClick="Numpad"
                         android:text="3" />
 
@@ -809,6 +838,7 @@
                         android:layout_marginStart="2dp"
                         android:layout_marginEnd="2dp"
                         android:layout_weight="1"
+                        android:backgroundTint="@color/button_backgroundTint"
                         android:onClick="Numpad"
                         android:text="4" />
 
@@ -819,6 +849,7 @@
                         android:layout_marginStart="2dp"
                         android:layout_marginEnd="2dp"
                         android:layout_weight="1"
+                        android:backgroundTint="@color/button_backgroundTint"
                         android:onClick="Numpad"
                         android:text="5" />
 
@@ -829,6 +860,7 @@
                         android:layout_marginStart="2dp"
                         android:layout_marginEnd="2dp"
                         android:layout_weight="1"
+                        android:backgroundTint="@color/button_backgroundTint"
                         android:onClick="Numpad"
                         android:text="6" />
 
@@ -847,6 +879,7 @@
                         android:layout_marginStart="2dp"
                         android:layout_marginEnd="2dp"
                         android:layout_weight="1"
+                        android:backgroundTint="@color/button_backgroundTint"
                         android:onClick="Numpad"
                         android:text="7" />
 
@@ -857,6 +890,7 @@
                         android:layout_marginStart="2dp"
                         android:layout_marginEnd="2dp"
                         android:layout_weight="1"
+                        android:backgroundTint="@color/button_backgroundTint"
                         android:onClick="Numpad"
                         android:text="8" />
 
@@ -867,6 +901,7 @@
                         android:layout_marginStart="2dp"
                         android:layout_marginEnd="2dp"
                         android:layout_weight="1"
+                        android:backgroundTint="@color/button_backgroundTint"
                         android:onClick="Numpad"
                         android:text="9" />
 
@@ -885,6 +920,7 @@
                         android:layout_marginStart="2dp"
                         android:layout_marginEnd="2dp"
                         android:layout_weight="1"
+                        android:backgroundTint="@color/button_backgroundTint"
                         android:onClick="Numpad"
                         android:text="." />
 
@@ -895,6 +931,7 @@
                         android:layout_marginStart="2dp"
                         android:layout_marginEnd="2dp"
                         android:layout_weight="1"
+                        android:backgroundTint="@color/button_backgroundTint"
                         android:onClick="Numpad"
                         android:text="0" />
 
@@ -905,6 +942,7 @@
                         android:layout_marginStart="2dp"
                         android:layout_marginEnd="2dp"
                         android:layout_weight="1"
+                        android:backgroundTint="@color/button_backgroundTint"
                         android:onClick="Numpad"
                         android:text="—" />
 
