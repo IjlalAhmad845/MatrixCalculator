@@ -1,0 +1,2 @@
+# Matrix Calculator
+This is the prior app that I have created before my New Matrix calculator, all the code is very messy because I have created this with my basic knowledge on android. After Completing my Android Roadmap I recreated this app with   more features, better UI and functionality which is currently published on [PlayStore](https://play.google.com/store/apps/details?id=com.ByteMechanics.matscape).
